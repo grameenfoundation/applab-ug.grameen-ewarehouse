@@ -1,0 +1,6 @@
+<!--(c) Copyright 2013 Grameen Foundation USA. All rights reserved-->
+<apex:page tabStyle="SurveyManager__tab" standardController="gfsurveys__Survey__c"
+    sidebar="false" extensions="gfsurveys.SurveyPreviewController" showHeader="false">
+    <apex:composition template="gfsurveys__SurveyPreview"/>
+    <apex:outputField rendered="false" value="{!gfsurveys__Survey__c.gfsurveys__IsPPI__c}"/>
+</apex:page>

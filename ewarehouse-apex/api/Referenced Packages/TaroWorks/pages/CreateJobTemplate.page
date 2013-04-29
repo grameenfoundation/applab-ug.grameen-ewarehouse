@@ -1,0 +1,21 @@
+<!--(c) Copyright 2013 Grameen Foundation USA. All rights reserved-->
+<apex:page standardController="gfsurveys__JobTemplate__c" extensions="gfsurveys.CreateJobTemplateController" id="page">
+    <apex:sectionHeader title="{!$Label.JOB_TEMPLATE_EDIT}" subtitle="{!IF(gfsurveys__JobTemplate__c.Id != null, gfsurveys__JobTemplate__c.Name, $Label.CREATE_JOB_TEMPLATE_TITLE)}"/>
+
+    <apex:pageMessages />
+
+    <apex:form >
+        <apex:pageBlock id="jobData" mode="edit" title="{!$Label.JOB_TEMPLATE_EDIT}">
+            <apex:pageBlockSection columns="1" title="{!$Label.GENERAL}" collapsible="false" id="generalData">
+                <apex:inputField id="name" value="{!gfsurveys__JobTemplate__c.Name}" required="true"/>
+                <apex:inputTextarea id="instructions" rows="4" cols="60" value="{!gfsurveys__JobTemplate__c.gfsurveys__Instructions__c}"/>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton id="btnSave" action="{!save}" value="{!$Label.SAVE}" />
+                <apex:commandButton id="btnSaveAndNew" action="{!saveAndNew}" value="{!$Label.SAVE_AND_NEW}" />
+                <apex:commandButton id="btnCancel" value="{!$Label.CANCEL}" immediate="true" action="{!URLFOR($Action.JobTemplate__c.List, $ObjectType.JobTemplate__c)}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

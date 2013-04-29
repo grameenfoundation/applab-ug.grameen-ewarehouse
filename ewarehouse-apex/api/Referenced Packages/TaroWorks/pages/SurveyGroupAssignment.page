@@ -1,0 +1,166 @@
+<!--(c) Copyright 2013 Grameen Foundation USA. All rights reserved-->
+<apex:page controller="gfsurveys.SurveyGroupAssignmentController" tabStyle="gfsurveys__ContactGroup__c" sidebar="false">
+    <apex:includeScript value="{!$Resource.gfsurveys__jquery}" />
+    <apex:includeScript value="{!$Resource.gfsurveys__json2min}" />
+    <apex:includeScript value="{!$Resource.gfsurveys__jqueryui}" />
+    <apex:includeScript value="{!$Resource.gfsurveys__jquery_validate}" />
+    <apex:includeScript value="{!$Resource.gfsurveys__js_utils}" />
+    <c:blockOverlay label="{!$Label.LOADING_GROUP_DETAILS}..." />
+    <style type="text/css">
+        .whiteCol{
+            background-color:white;
+        }
+        .grayCol{
+            background-color:#f1f1f1 ;
+        }
+        .grayCol td,.whiteCol td{
+            border-left:1px solid black!important;
+        }
+        .tableHeader{
+            background:#ccc!important;
+        }
+        .tableHeader th{
+            border-left:1px solid black!important;
+        }
+        .buttons{
+            float:right;
+        }
+
+        #GroupDetail {
+            position: absolute;
+            _position: absolute; /* hack for internet explorer 6*/
+            top: -1%;
+            left: -1%;
+            z-index: 99999999;
+            border-radius:5px;
+            background-color:white;
+            width:80%;
+            margin-left:10%;
+            margin-right:10%;
+
+            padding-bottom:20px;
+        }
+        a{
+            cursor: pointer;
+        }
+        .mruOverDetail{
+            padding: 3px 6px 5px;
+            margin: -12px 0 0 -11px;
+            background: transparent url(/img/sprites/hover_sprite.png) 15px -29px no-repeat;
+        }
+        .groupLink{
+            color:blue!important;
+            text-decoration:underline!important;
+        }
+    </style>
+    <script>
+        function ShowDetails(Id){
+            $('[id$=":groupIdToDisplay"]').val(Id);
+            ShowDetailAction();
+        }
+
+        //create a format function for strings
+        String.prototype.format = function(args) {
+            return this.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined'
+                                            ? args[number]
+                                            : match;
+            });
+        };
+
+        /*
+        * Inspect unassignment group is commited
+        * and generate confirmation message before saving all.
+        * (Related IDALMSA-2472)
+        */
+        function inspectUnassignGroup(){
+            var warning_unassign_op = $('.warning_unassign_op');
+            var unassign_op = $.parseJSON(warning_unassign_op.text());
+
+            var strMessage = '';
+            var strMsgAffectedGroupSubmission = (unassign_op['affectedGroupSubmissionNames'].length)
+                                                    ? '{!$Label.UNASSIGN_GROUP_AFFECTED_SUBMISSION}'.format([unassign_op['affectedGroupSubmissionNames']])
+                                                    : '';
+
+            if (unassign_op['unassignAnyGroup'] || unassign_op['affectedGroupSubmissionNames'].length){
+
+                strMessage = '{!$Label.UNASSIGN_ANY_GROUP_CONFIRMATION}'.format(['\n' + strMsgAffectedGroupSubmission]);
+            }
+
+            var canContinue = true;
+
+            if (strMessage.length > 0){
+                canContinue = confirm(strMessage);
+            }
+
+            if (canContinue){
+                blockPage();
+
+                SaveAction(canContinue.toString());
+            }
+        }
+    </script>
+    <apex:sectionHeader subtitle="{!surveyName}" title="{!$Label.SURVEY_GROUP_TITLE}" />
+    <apex:pageMessages />
+    <apex:outputText id="warning_unassign_op" styleClass="hidden warning_unassign_op" value="{!unassignGroups}"/>
+    <div style="margin-bottom:5px">
+        &nbsp;«&nbsp;<a class="groupLink" href="{!$Page.SurveyManager}">{!$Label.SURVEY_HEADER_BACKTOMANAGER}</a>
+    </div>
+    <apex:outputPanel rendered="{!NOT(missingId)}" >
+        <apex:pageBlock mode="edit" title="{!$Label.SURVEY_GROUP_TITLE}" >
+            <table style="margin: auto;margin-top:30px;margin-bottom:30px;width: 96%;">
+                <tr>
+                    <td style="vertical-align: top;width:30px">
+                        <div>
+                            <h2>{!$Label.SURVEY_GROUP_SELECT_GROUP}</h2>
+                        </div>
+                    </td>
+                    <td  style="vertical-align: top;width: 88px;">
+                        <apex:form >
+                            <apex:pageBlocktable value="{!groupsList}" var="group" rules="cols" style="width:440px;" id="contactGroups" >
+                               <apex:column style="width:20px;text-align:center" title="Select">
+                                   <apex:inputCheckbox value="{!group.isSelected}"/>
+                               </apex:column>
+                               <apex:column style="width:150px">
+                                   <apex:facet name="header">
+                                       <h1>{!$ObjectType.gfsurveys__ContactGroup__c.Fields.Name.Label}</h1>
+                                   </apex:facet>
+                                   <c:miniDetailLayout subject="{!group.Id}"><a class="groupLink" onclick="blockPage();ShowDetails('{!group.Id}');"> {!group.Name}</a></c:miniDetailLayout>
+                               </apex:column>
+                               <apex:column style="width:90px" title="Members">
+                                   <apex:facet name="header">
+                                       <h1>{!$ObjectType.gfsurveys__ContactGroupMember__c.Label}</h1>
+                                   </apex:facet>
+                                    <apex:outputText escape="false" value="{!group.Members}" />
+                               </apex:column>
+                            </apex:pageBlocktable>
+                            <apex:actionFunction name="Assign" action="{!Assign}" reRender="warning_unassign_op" onComplete="inspectUnassignGroup();"/>
+                            <apex:actionFunction name="SaveAction" action="{!Save}" reRender="warning_unassign_op">
+                                <apex:param name="confirmationDelete" value=""/>
+                            </apex:actionFunction>
+                         </apex:form>
+                     </td>
+                 </tr>
+            </table>
+           </apex:pageBlock>
+           <div id="buttons" class="buttons">
+            <button type="button" onClick="Assign();">{!$Label.ASSIGN}</button>&nbsp;&nbsp;
+        </div>
+        <apex:outputpanel id="GroupDetailPanel">
+            <apex:outputPanel rendered="{!showDetails}">
+                <script>
+                    $('#GroupDetail').fadeIn(300);
+                </script>
+                <div id="GroupDetail" class="Custom15Tab bPageBlock" style="display:none">
+                    <apex:detail rendered="{!showDetails}" subject="{!groupIdToDisplay}" relatedList="true" inlineEdit="true"/>
+                    <input style="float: right;margin-right: 20px;width: 104px;" type="button" class="btn" onclick="$('#GroupDetail').fadeOut(300);unblockPage();HideDetails();" value="{!$Label.GENERAL_CLOSE}"/>
+                </div>
+            </apex:outputPanel>
+        </apex:outputpanel>
+        <apex:form >
+            <apex:actionFunction action="{!ShowDetails}" onComplete="$('#popup').hide();" name="ShowDetailAction" rerender="GroupDetailPanel" />
+            <apex:actionFunction action="{!HideDetails}" name="HideDetails" rerender="GroupDetailPanel" />
+            <apex:inputHidden id="groupIdToDisplay" value="{!groupIdToDisplay}"/>
+        </apex:form>
+    </apex:outputPanel>
+</apex:page>

@@ -28,9 +28,9 @@ class Authenticator {
 
     val clientId = "3MVG9A2kN3Bn17htzxn0E6oDR.cevoUhYYcTZJ.Bx9X4ohd5yMgb.dtzYdw29iz58bd9yUzZQdAEijjBNAa3M"
     val clientSecret = "3649899522752974225"
-    val userName = "oskar@himmelreich-it.com"
-    val password = "19Wolfs92Klem!"
-    val securityToken = "MUols8jDHasp9lGEiJHSs1Zh"
+    val userName = "salesforce@himmelreich-it.com"
+    val password = "20RabbitsForLunch!"
+    val securityToken = "seklW0ZhnGZjWEJF0oAvnGGo"
 
     def sfHost = host("login.salesforce.com") / "services" / "oauth2" / "token" secure
 

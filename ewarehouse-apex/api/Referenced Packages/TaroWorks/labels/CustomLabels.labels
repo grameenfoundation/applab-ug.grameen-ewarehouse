@@ -1,0 +1,3395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ACTION</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ACTION</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>ACTIONS</fullName>
+        <categories>Manager,SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ACTIONS</shortDescription>
+        <value>Actions</value>
+    </labels>
+    <labels>
+        <fullName>ACTIVATE</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ACTIVATE</shortDescription>
+        <value>Activate</value>
+    </labels>
+    <labels>
+        <fullName>ACTIVATE_SURVEY_CONFIRM_MSG</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ACTIVATE_SURVEY_CONFIRM_MSG</shortDescription>
+        <value>There is at least one active survey.&lt;br /&gt; Do you want to continue anyway?</value>
+    </labels>
+    <labels>
+        <fullName>ADD</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ADD</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>ADD_MEMBER</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ADD_MEMBER</shortDescription>
+        <value>Add Member</value>
+    </labels>
+    <labels>
+        <fullName>ADD_SURVEY</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ADD_SURVEY</shortDescription>
+        <value>Add Survey</value>
+    </labels>
+    <labels>
+        <fullName>ALL</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>All label</shortDescription>
+        <value>All</value>
+    </labels>
+    <labels>
+        <fullName>ANY</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Any label</shortDescription>
+        <value>Any</value>
+    </labels>
+    <labels>
+        <fullName>ASSIGN</fullName>
+        <categories>Button,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit survey</shortDescription>
+        <value>Assign</value>
+    </labels>
+    <labels>
+        <fullName>ASSIGNED_SURVEYS</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ASSIGNED_SURVEYS</shortDescription>
+        <value>Assigned surveys</value>
+    </labels>
+    <labels>
+        <fullName>ASSIGNED_TO_THIS_GROUP</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ASSIGNED_TO_THIS_GROUP</shortDescription>
+        <value>Assigned to this group</value>
+    </labels>
+    <labels>
+        <fullName>BASED_NUMERIC_FROM</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BASED_NUMERIC_FROM</shortDescription>
+        <value>Based on numeric value from:</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ALERT_USED_CONDITION</fullName>
+        <categories>Alert,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>condition used in a previous final Question alert</shortDescription>
+        <value>These conditions are used to end the survey on {0}.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_CANNOTSAVEWHILE</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You can not save a survey while editing something</shortDescription>
+        <value>Cannot save while {0} are being {1}.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_CONCURRENTSAVE</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Concurrent Save Error</shortDescription>
+        <value>The survey was modified by someone else. Please refresh the page and re do your work.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_INACTIVEGROUP</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Publish a survey in an inactive group</shortDescription>
+        <value>Cannot publish a survey in an inactive group.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_INTERVIEWEE_MAPPING</fullName>
+        <categories>Error,Builder,Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Interviewee set more than once in Survey Mapping</shortDescription>
+        <value>Cannot set more than one Survey Mapping as Interviewee</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_INVALIDURL</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid url</shortDescription>
+        <value>Invalid URL</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_MOBILESURVEY_MAPPING</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid mapped object</shortDescription>
+        <value>Cannot map to a mobile surveys object</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_NONEDITABLEQUESTION</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot edit a non-editable quiestion</shortDescription>
+        <value>This question is not editable</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_NONREMOVABLEQUESTION</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot delete a non-editable question</shortDescription>
+        <value>This question is not editable, so it cannot be removed</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_NONREMOVABLESECTION</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot delete a section with non-editable questions inside</shortDescription>
+        <value>This Section cannot be removed, it contains non-editable questions</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_QUESTION_NOTDRAFTSURVEY</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>BUILDER_ERR_QUESTION_NOTDRAFTSURVEY</shortDescription>
+        <value>This question can not be edited: the survey is not in Draft status</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_READONLYSURVEY</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You can not modify this survey. You have not permission.</shortDescription>
+        <value>You do not have sufficient privilege to modify this survey.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_ERR_SURVEYALREADYPUBLISHED</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>You can not modify a published survey</shortDescription>
+        <value>The survey has been published already, you can not save it.</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_LBL_NONEDITABLEQUESTION</fullName>
+        <categories>Label,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Set question as non-editable, label in surveyQuestion</shortDescription>
+        <value>You cannot edit this template question</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_LBL_NONEDITABLESECTION</fullName>
+        <categories>Label,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Set section as non-editable, label in surveyQuestion</shortDescription>
+        <value>This section is not remote editable</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_LBL_USEASINTERVIEWEE</fullName>
+        <categories>Label,Builder,Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Use as Interviewee label in surveyMapping</shortDescription>
+        <value>Use as Interviewee</value>
+    </labels>
+    <labels>
+        <fullName>BUILDER_REFRESH_PAGE_MSG</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Refresh page confirmation msg</shortDescription>
+        <value>The survey was modified by someone else. \nDo you want to refresh the page now?</value>
+    </labels>
+    <labels>
+        <fullName>CANCEL</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>cancel label</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_ADD_FINAL_TO_REPEATED</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_ADD_FINAL_TO_REPEATED</shortDescription>
+        <value>Cannot add an end of survey question into a repeated section</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_FINAL_TO_REPEATED</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_MOVE_FINAL_TO_REPEATED</shortDescription>
+        <value>Cannot move an end of survey question into a repeated section</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_QUESTION_AS_INTERVIEWEE_IN_REPEATED_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_MOVE_QUESTION_AS_INTERVIEWEE_IN_REPEATED_MESSAGE</shortDescription>
+        <value>Cannot move this question mapped to a contact and used as interviewee inside a repeated section</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_QUESTION_RELATED_IN_REPEATED_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_MOVE_QUESTION_RELATED_IN_REPEATED_MESSAGE</shortDescription>
+        <value>Cannot move this number question related inside a repeated section</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_QUESTION_RELATED_REPEAT_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_MOVE_QUESTION_RELATED_REPEAT_MESSAGE</shortDescription>
+        <value>Cannot move because this number question is related to {0}</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_REPEATED_RELATED_QUESTION_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CANNOT_MOVE_REPEATED_RELATED_QUESTION_MESSAGE</shortDescription>
+        <value>Cannot move because this section is related to {0}</value>
+    </labels>
+    <labels>
+        <fullName>CANNOT_MOVE_SECTION_WITH_RELATED_QUESTION_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_CANNOT_MOVE_SECTION_WITH_RELATED_QUESTION_MESSAGE</shortDescription>
+        <value>Cannot move because this section contains {0} and is related to {1}</value>
+    </labels>
+    <labels>
+        <fullName>CLONE_SURVEY_NAME</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clone survey prefix</shortDescription>
+        <value>CLONE</value>
+    </labels>
+    <labels>
+        <fullName>CONFIRMATION_MSG</fullName>
+        <categories>Question,SimpleCancel</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Option in question error</shortDescription>
+        <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>CONFIRM_DELETE_CONTACT_GROUP</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CONFIRM_DELETE_CONTACT_GROUP</shortDescription>
+        <value>The group that you are about to delete has at least one active survey. Do you want to delete it anyway?</value>
+    </labels>
+    <labels>
+        <fullName>CONTINUE</fullName>
+        <categories>LookupTables</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Continue label</shortDescription>
+        <value>Continue</value>
+    </labels>
+    <labels>
+        <fullName>CREATE</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Create label</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_ERR_NAMETOOLONG</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_ERR_NAMETOOLONG</shortDescription>
+        <value>The title is too long. Please enter another</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_ERR_NOLIBRARYSELECTED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_ERR_NOLIBRARYSELECTED</shortDescription>
+        <value>Please select a library to open</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_ERR_NOSURVEYSELECTED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_ERR_NOSURVEYSELECTED</shortDescription>
+        <value>Please select a Survey to clone</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_FROM_PPI</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_FROM_PPI</shortDescription>
+        <value>Create From PPI Template</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_LABEL_LIBRARY</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_LABEL_LIBRARY</shortDescription>
+        <value>Download survey template</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_LABEL_NOLIBRARY</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_LABEL_NOLIBRARY</shortDescription>
+        <value>--No Libraries Defined--</value>
+    </labels>
+    <labels>
+        <fullName>CREATESURVEY_LABEL_SELECTLIBRARY</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATESURVEY_LABEL_SELECTLIBRARY</shortDescription>
+        <value>--Select A Library--</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_JOB_TEMPLATE_TITLE</fullName>
+        <categories>Jobs</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Create New job template title</shortDescription>
+        <value>New Job Template</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_BLANK</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Blank survey option label</shortDescription>
+        <value>Blank survey</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_DEFAULT_VALUE_SELECT</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Placeholder for select combo</shortDescription>
+        <value>Select a Survey</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_FROM_EXISTING</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>From existing survey option label</shortDescription>
+        <value>Clone existing survey</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_HEADER_TITLE</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>subtitle label</shortDescription>
+        <value>Create new survey</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_PPI</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PPI survey option label</shortDescription>
+        <value>PPI Survey</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_SELECT_ONE</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATE_SURVEY_SELECT_ONE</shortDescription>
+        <value>Select One</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_TITLE</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title label</shortDescription>
+        <value>Start with</value>
+    </labels>
+    <labels>
+        <fullName>CREATE_SURVEY_TOO_MANY_PPI</fullName>
+        <categories>CreateSurvey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CREATE_SURVEY_TOO_MANY_PPI</shortDescription>
+        <value>You can only add one PPI template per survey. Please re-select your templates to include in this survey</value>
+    </labels>
+    <labels>
+        <fullName>DEACTIVATE</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>DEACTIVATE</shortDescription>
+        <value>Deactivate</value>
+    </labels>
+    <labels>
+        <fullName>DELETE</fullName>
+        <categories>Question,Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete label</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>DISCARD</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Discard option label</shortDescription>
+        <value>Discard</value>
+    </labels>
+    <labels>
+        <fullName>DONE</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Done Label</shortDescription>
+        <value>Done</value>
+    </labels>
+    <labels>
+        <fullName>EDIT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Option in question error</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>END_OF_SURVEY_INFO</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>End of Survey Info</shortDescription>
+        <value>This is an end of survey field type</value>
+    </labels>
+    <labels>
+        <fullName>FILTER</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>filter label</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Simple &apos;General&apos; word</shortDescription>
+        <value>General</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_CLOSE</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Simple &apos;Close&apos; word</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_DELETING</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_DELETING</shortDescription>
+        <value>Deleting</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_DISTRIBUTING</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_DISTRIBUTING</shortDescription>
+        <value>Distributing</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_EDITED</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Simple &apos;edited&apos; word</shortDescription>
+        <value>edited</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_ERR_ERROR</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_ERR_ERROR</shortDescription>
+        <value>Error:</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_LATEST_VERSION</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_LATEST_VERSION</shortDescription>
+        <value>Latest Version</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_OF</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_OF</shortDescription>
+        <value>of</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_PLEASE_SELECT_A</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_PLEASE_SELECT_A</shortDescription>
+        <value>Please select a</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_PPI_TEMPLATE</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_PPI_TEMPLATE</shortDescription>
+        <value>PPI Template</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_REFRESH</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_REFRESH</shortDescription>
+        <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_SHOW_ALL</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_SHOW_ALL</shortDescription>
+        <value>Show All</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_SOURCE_LIBRARY</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_SOURCE_LIBRARY</shortDescription>
+        <value>Source Library</value>
+    </labels>
+    <labels>
+        <fullName>GENERAL_TEMPLATE</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GENERAL_TEMPLATE</shortDescription>
+        <value>Template</value>
+    </labels>
+    <labels>
+        <fullName>GROUPEDIT_ERROR_NOT_ASSIGNED_SURVEY</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GROUPEDIT_ERROR_NOT_ASSIGNED_SURVEY</shortDescription>
+        <value>This group don&apos;t have any survey assigned. To add surveys you have to activate the group</value>
+    </labels>
+    <labels>
+        <fullName>GROUPLIST_ERR_ACTIVATE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GROUPLIST_ERR_ACTIVATE</shortDescription>
+        <value>At least one group must be selected to activate</value>
+    </labels>
+    <labels>
+        <fullName>GROUPLIST_ERR_DEACTIVATE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GROUPLIST_ERR_DEACTIVATE</shortDescription>
+        <value>At least one group must be selected to deactivate</value>
+    </labels>
+    <labels>
+        <fullName>GROUP_DELETE</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GROUP_DELETE</shortDescription>
+        <value>Group delete</value>
+    </labels>
+    <labels>
+        <fullName>GROUP_EDIT</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>GROUP_EDIT</shortDescription>
+        <value>Group Edit</value>
+    </labels>
+    <labels>
+        <fullName>HOME</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Home label</shortDescription>
+        <value>Home</value>
+    </labels>
+    <labels>
+        <fullName>INFORMATION</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>INFORMATION</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>INTEGER_RELATED_REPEAT_SECTION_MESSAGE_DELETE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>INTEGER_RELATED_REPEAT_SECTION_MESSAGE_DELETE</shortDescription>
+        <value>This question is related to a repeated section if you remove it, the relationship will be removed too</value>
+    </labels>
+    <labels>
+        <fullName>IS_ANSWERED</fullName>
+        <categories>Survey,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IS_ANSWERED</shortDescription>
+        <value>Is Answered</value>
+    </labels>
+    <labels>
+        <fullName>IS_NOT</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Negate label</shortDescription>
+        <value>Is not</value>
+    </labels>
+    <labels>
+        <fullName>IS_NOT_ANSWERED</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IS_NOT_ANSWERED</shortDescription>
+        <value>Is Not Answered</value>
+    </labels>
+    <labels>
+        <fullName>JOB_TEMPLATE_EDIT</fullName>
+        <categories>Jobs</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Job Template edit title</shortDescription>
+        <value>Job Template Edit</value>
+    </labels>
+    <labels>
+        <fullName>LOADING</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOADING</shortDescription>
+        <value>Loading</value>
+    </labels>
+    <labels>
+        <fullName>LOADING_GROUP_DETAILS</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOADING_GROUP_DETAILS</shortDescription>
+        <value>Loading Group Details</value>
+    </labels>
+    <labels>
+        <fullName>LOGIC_MESSAGE_HIDE_ALL</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOGIC_MESSAGE_HIDE_ALL</shortDescription>
+        <value>Hide this when all of the following conditions are satisfied</value>
+    </labels>
+    <labels>
+        <fullName>LOGIC_MESSAGE_HIDE_ANY</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOGIC_MESSAGE_HIDE_ANY</shortDescription>
+        <value>Hide this when any of the following conditions are satisfied</value>
+    </labels>
+    <labels>
+        <fullName>LOGIC_MESSAGE_SHOW_ALL</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOGIC_MESSAGE_SHOW_ALL</shortDescription>
+        <value>Show this when all of the following conditions are satisfied</value>
+    </labels>
+    <labels>
+        <fullName>LOGIC_MESSAGE_SHOW_ANY</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOGIC_MESSAGE_SHOW_ANY</shortDescription>
+        <value>Show this when any of the following conditions are satisfied</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_ERRORATCOLLINE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_ERRORATCOLLINE</shortDescription>
+        <value>There is an error at column {0} of line {1}: {2}. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_FILE_SIZE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_FILE_SIZE</shortDescription>
+        <value>The file exceeds the maximum size allowed</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_NAMETOOLONG</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_NAMETOOLONG</shortDescription>
+        <value>There is an error in the file. {0} is too long for a table name. The max length is {1}. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_NONUTF8FILE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_NONUTF8FILE</shortDescription>
+        <value>The file is not in UTF-8 format and contains special characters. It must be converted to be able upload it.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_RANGEINTERSECTED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_RANGEINTERSECTED</shortDescription>
+        <value>The range from {0} to {1} is intersected with a previous one. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_REPEATEDTABLENAME</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_REPEATEDTABLENAME</shortDescription>
+        <value>There is an error in the file. Some table names are repeated. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_SELECTFILE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_SELECTFILE</shortDescription>
+        <value>Please select a file to upload.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_VALUECANTBECONVERTED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_VALUECANTBECONVERTED</shortDescription>
+        <value>There is an error in the file. The value at column {0} of line {1} cannot be converted to integer. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_WRONGCOLUMNCOUNTAT</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_WRONGCOLUMNCOUNTAT</shortDescription>
+        <value>There is an error in the file. Wrong column count at line {0}. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_WRONGFIELD</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_WRONGCOLUMNCOUNTAT</shortDescription>
+        <value>There is an error in the file. Wrong field specified at line {0}. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_ERR_WRONGRANGE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>LOOKUP_ERR_WRONGRANGE</shortDescription>
+        <value>The range from {0} to {1} is wrong. Fix the error and try again.</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_LABEL</fullName>
+        <categories>Lookup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Lookup</shortDescription>
+        <value>Lookup</value>
+    </labels>
+    <labels>
+        <fullName>LOOKUP_UPLOAD_MSG</fullName>
+        <categories>Lookup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Upload file label</shortDescription>
+        <value>Upload a Poverty Line Table:</value>
+    </labels>
+    <labels>
+        <fullName>MASTER_DETAIL_LABEL</fullName>
+        <categories>Lookup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Master-Detail</shortDescription>
+        <value>Master-Detail</value>
+    </labels>
+    <labels>
+        <fullName>MEMBER</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MEMBER</shortDescription>
+        <value>Member</value>
+    </labels>
+    <labels>
+        <fullName>MOVED</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>MOVED</shortDescription>
+        <value>Moved</value>
+    </labels>
+    <labels>
+        <fullName>NEW_GROUP</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>New Group</shortDescription>
+        <value>New Group</value>
+    </labels>
+    <labels>
+        <fullName>NEXT_PAGE</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Next page label</shortDescription>
+        <value>Next Page&gt;</value>
+    </labels>
+    <labels>
+        <fullName>NON_MEMBER</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NON_MEMBER</shortDescription>
+        <value>Non member</value>
+    </labels>
+    <labels>
+        <fullName>NOT</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Negate label</shortDescription>
+        <value>not</value>
+    </labels>
+    <labels>
+        <fullName>OK</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>OK</shortDescription>
+        <value>Ok</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_FIRSTPAGE</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_FIRSTPAGE</shortDescription>
+        <value>First Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_GETTINGFIRST</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_GETTINGFIRST</shortDescription>
+        <value>Getting First Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_GETTINGLAST</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_GETTINGLAST</shortDescription>
+        <value>Getting Last Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_GETTINGNEXT</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_GETTINGNEXT</shortDescription>
+        <value>Getting Next Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_GETTINGPREVIOUS</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_GETTINGPREVIOUS</shortDescription>
+        <value>Getting Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_LASTPAGE</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_LASTPAGE</shortDescription>
+        <value>Last Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_NEXTPAGE</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_NEXTPAGE</shortDescription>
+        <value>Next Page</value>
+    </labels>
+    <labels>
+        <fullName>PAGINATION_PREVIOUSPAGE</fullName>
+        <categories>Pagination</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PAGINATION_PREVIOUSPAGE</shortDescription>
+        <value>Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>PLEASE_TYPE_FILTER</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PLEASE_TYPE_FILTER</shortDescription>
+        <value>Please type the filter</value>
+    </labels>
+    <labels>
+        <fullName>PLEASE_TYPE_NUMBER</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PLEASE_TYPE_NUMBER</shortDescription>
+        <value>Please type the number</value>
+    </labels>
+    <labels>
+        <fullName>PREVIEW</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>PREVIEW</shortDescription>
+        <value>Preview</value>
+    </labels>
+    <labels>
+        <fullName>PREV_PAGE</fullName>
+        <categories>Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Prev page label</shortDescription>
+        <value>&lt;Previous Page</value>
+    </labels>
+    <labels>
+        <fullName>PUBLISH</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Publish label</shortDescription>
+        <value>Publish</value>
+    </labels>
+    <labels>
+        <fullName>QUESTIONS</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Questions</shortDescription>
+        <value>Questions</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_ADD_OPTION</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add another option</shortDescription>
+        <value>Add another option</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_AND_SECTION</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Question and Section</shortDescription>
+        <value>Question and Section</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_ERR_CANTEDIT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_ERR_CANTEDIT</shortDescription>
+        <value>This is not an editable question</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_ERR_SECTIONCANTEDIT</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_ERR_SECTIONCANTEDIT</shortDescription>
+        <value>This section cannot be removed, contains at least one question that it is not editable</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_ERR_WRONGORDER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_ERR_WRONGORDER</shortDescription>
+        <value>An error was found while saving this survey. Please check that all questions you have added are still in the survey</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_ERR_WRONGORDERTRIGGER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_ERR_WRONGORDER</shortDescription>
+        <value>Question {0} Id = {1} and Quesiton {2} Id = {3} Share parent Id= {4} and Position {5}. To fix this error go to Question Builder tab</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_SKIPLOGIC_BEHAVIOR_HIDE</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_SKIPLOGIC_BEHAVIOR_HIDE</shortDescription>
+        <value>Hide</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_SKIPLOGIC_BEHAVIOR_SHOW</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_SKIPLOGIC_BEHAVIOR_SHOW</shortDescription>
+        <value>Show</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_BARCODE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_BARCODE</shortDescription>
+        <value>Barcode</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_CHECKBOX</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_CHECKBOX</shortDescription>
+        <value>Multiple select</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_DATE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_DATE</shortDescription>
+        <value>Date only</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_DATETIME</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_DATETIME</shortDescription>
+        <value>Date and time</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_NUMBER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_NUMBER</shortDescription>
+        <value>Number</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_NUMBER_CANNOT_BE_CHANGED_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_NUMBER_CANNOT_BE_CHANGED_MESSAGE</shortDescription>
+        <value>Cannot change the type to decimal because this question is related to a repeated section</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_NUMBER_DECIMAL</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_NUMBER_DECIMAL</shortDescription>
+        <value>Decimal number</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_NUMBER_INTEGER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_NUMBER_INTEGER</shortDescription>
+        <value>Whole number</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_RADIO</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_RADIO</shortDescription>
+        <value>Single select</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_REPEAT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_REPEAT</shortDescription>
+        <value>Repeat</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_SECTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_SECTION</shortDescription>
+        <value>Section</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_STATIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_STATIC</shortDescription>
+        <value>Static content</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_TEXT_LONG</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_TEXT_LONG</shortDescription>
+        <value>Long</value>
+    </labels>
+    <labels>
+        <fullName>QUESTION_TYPE_TEXT_SHORT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_TEXT_SHORT</shortDescription>
+        <value>Short</value>
+    </labels>
+    <labels>
+        <fullName>QUICK_SAVE</fullName>
+        <categories>EditXform</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick save button label</shortDescription>
+        <value>Quick Save</value>
+    </labels>
+    <labels>
+        <fullName>REMOVE</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REMOVE</shortDescription>
+        <value>Remove</value>
+    </labels>
+    <labels>
+        <fullName>REPEAT_RELATED_INTEGER_QUESTION_MESSAGE_DELETE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>REPEAT_RELATED_INTEGER_QUESTION_MESSAGE_DELETE</shortDescription>
+        <value>This section is related to a number question if you remove it, the relationship will be removed too</value>
+    </labels>
+    <labels>
+        <fullName>SAVE</fullName>
+        <categories>Scoring,Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save label</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>SAVE_AND_CONTINUE</fullName>
+        <categories>Scoring,Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Save and Continue label</shortDescription>
+        <value>Save and Continue</value>
+    </labels>
+    <labels>
+        <fullName>SAVE_AND_NEW</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SAVE_AND_NEW</shortDescription>
+        <value>Save and new</value>
+    </labels>
+    <labels>
+        <fullName>SAVING</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SAVING</shortDescription>
+        <value>Saving</value>
+    </labels>
+    <labels>
+        <fullName>SCORE_ERR_CANTEDITDISTRUBUTEDPPISCORE</fullName>
+        <categories>Error,Score</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot edit a ppi score if is a distributed survey</shortDescription>
+        <value>PPI score cannot be edited in a distributed survey</value>
+    </labels>
+    <labels>
+        <fullName>SECTIONS</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add section regular or repeated</shortDescription>
+        <value>Section</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section repeated type</shortDescription>
+        <value>Section repeated</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT_BASED</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Repeat based on a numeric value from the picklist</shortDescription>
+        <value>Based on numeric value from</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT_SET_TIMES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Set times to repeat the section</shortDescription>
+        <value>Set Repeat Times</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT_SPECIFIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Repeat specific times</shortDescription>
+        <value>times</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT_UNDEFINED</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Repeat undefined times</shortDescription>
+        <value>Undefined</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_REPEAT_UNDER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Nest this section under a value from the picklist</shortDescription>
+        <value>Nest this section under</value>
+    </labels>
+    <labels>
+        <fullName>SECTION_WITH_RELATED_INTEGER_QUESTION_MESSAGE_DELETE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SECTION_WITH_RELATED_INTEGER_QUESTION_MESSAGE_DELETE</shortDescription>
+        <value>This section contains a number question related to a repeated section if you remove it, the relationship will be removed too</value>
+    </labels>
+    <labels>
+        <fullName>SELECT</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SELECT</shortDescription>
+        <value>Select</value>
+    </labels>
+    <labels>
+        <fullName>SET_TO_DEFAULT</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>set to default label</shortDescription>
+        <value>Set to Default</value>
+    </labels>
+    <labels>
+        <fullName>SHOW_ALL_QUESTIONS_DISABLE_MESSAGE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Disable &quot;Show all questions in same page&quot; option.</shortDescription>
+        <value>There is logic dependence among questions in this section.</value>
+    </labels>
+    <labels>
+        <fullName>SIMPLE_CANCEL_CANCEL</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>set to default label</shortDescription>
+        <value>No, wait!</value>
+    </labels>
+    <labels>
+        <fullName>SIMPLE_CANCEL_CONFIRM</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>set to default label</shortDescription>
+        <value>Yes, I&apos;m sure</value>
+    </labels>
+    <labels>
+        <fullName>SIMPLE_CANCEL_UNSAVED</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>set to default label</shortDescription>
+        <value>You will lose all unsaved changes.</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_EQUAL</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SKIPLOGIC_CONDITION_EQUAL</shortDescription>
+        <value>is</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_GREATER</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SKIPLOGIC_CONDITION_GREATER</shortDescription>
+        <value>greater than</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_ISANSWERED</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SKIPLOGIC_CONDITION_ISANSWERED</shortDescription>
+        <value>Answered</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_LESSER</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SKIPLOGIC_CONDITION_LESSER</shortDescription>
+        <value>lesser than</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_NOT_ANSWERED</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SKIPLOGIC_CONDITION_NOT_ANSWERED</shortDescription>
+        <value>Is Not Answered</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_NOT_GREATER_THAN</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IS_NOT_GREATER_THAN</shortDescription>
+        <value>Is not Greater than</value>
+    </labels>
+    <labels>
+        <fullName>SKIPLOGIC_CONDITION_NOT_LESSER_THAN</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>IS_NOT_LESSER_THAN</shortDescription>
+        <value>Is not Lesser Than</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_EMPTYREQUIREDFIELD</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty value in required field</shortDescription>
+        <value>Cannot submit, the answer is empty and is mapped to a required field</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_EMPTYXML</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Send sunbmission of survey with an empty xml</shortDescription>
+        <value>Submission XML was not found in the header.</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_INVALIDAUTHENTICATIONLOGIN</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Fail login</shortDescription>
+        <value>Invalid Username or Password</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_INVALIDDEVICELOGIN</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Wrong device</shortDescription>
+        <value>Invalid device</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_INVALIDSURVEYXML</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>The survey is in an inactive status</shortDescription>
+        <value>This Survey is no longer available to receive answers.</value>
+    </labels>
+    <labels>
+        <fullName>SUBMISSION_ERR_MAPPEDOBJECTNOTFOUND</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SUBMISSION_ERR_MAPPEDOBJECTNOTFOUND</shortDescription>
+        <value>Unable to find SObject for API name: {0}.</value>
+    </labels>
+    <labels>
+        <fullName>SUBMIT_ERR_ODKINACTIVEGROUP</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Send sunbmission of survey with an inactive group</shortDescription>
+        <value>Cannot submit, the survey do not have asossiated group with your username</value>
+    </labels>
+    <labels>
+        <fullName>SURVEYLIBRARY_GRAMEEN_DESCRIPTION</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEYLIBRARY_GRAMEEN_DESCRIPTION</shortDescription>
+        <value>PPI Library</value>
+    </labels>
+    <labels>
+        <fullName>SURVEYMAPPING_CONFIRM_ASSIGN_INTERVIEWEE</fullName>
+        <categories>Confirmation,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEYMAPPING_CONFIRMATION_SET_INTERVIEWEE</shortDescription>
+        <value>Selecting this contact as Interviewee will disable the previous selection from survey settings. Do you want to do it anyway</value>
+    </labels>
+    <labels>
+        <fullName>SURVEYMAPPING_ERR_PAGEERRORS</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEYMAPPING_ERR_PAGEERRORS</shortDescription>
+        <value>There are errors in the page. Please check and save again.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEYVERSION_ERR_CANNOTGOBACKTODRAFT</fullName>
+        <categories>SurveyVersion</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEYVERSION_ERR_CANNOTGOBACKTODRAFT</shortDescription>
+        <value>A version cannot be back to Draft after it has been published.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_OPTIONS</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_OPTIONS</shortDescription>
+        <value>failed to clone options</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_PPI_DATA</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_PPI_DATA</shortDescription>
+        <value>Failed to clone PPI Data</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_QUESTIONS</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_QUESTIONS</shortDescription>
+        <value>Failed to clone questions</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_SCORE_GROUPS</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_SCORE_GROUPS</shortDescription>
+        <value>Failed to clone score groups</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_SCORE_VALUES</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_SCORE_VALUES</shortDescription>
+        <value>Failed to clone score values</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_CLONE_FAIL_SKIP_CONDITIONS</fullName>
+        <categories>SurveyClone</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_CLONE_FAIL_SKIP_CONDITIONS</shortDescription>
+        <value>Failed to clone skip conditions</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_CANNOTDELETEPUBLISHED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error when try to delete a published survey</shortDescription>
+        <value>Cannot delete a published survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_CANTPUBLISHWITHSTATUS</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_CANTPUBLISHWITHSTATUS</shortDescription>
+        <value>Can not publish a Survey with status: {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_DOESNTEXISTSURVEYID</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_DOESNTEXISTSURVEYID</shortDescription>
+        <value>Does not exist surveyId: {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_DUPLICATE_ALIAS</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_DUPLICATE_ALIAS</shortDescription>
+        <value>Error: Alias of Survey must be unique. Please enter another Alias</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_EMPTYDOC</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Empty xform</shortDescription>
+        <value>Document does not contain any content.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_ID_NOT_FOUND</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error finding a Survey</shortDescription>
+        <value>The Survey does not exist or was deleted</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_INVALIDCOUNTRYCODE</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_INVALIDCOUNTRYCODE</shortDescription>
+        <value>Invalid country code: {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_INVALIDLANGUAGECODE</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_INVALIDLANGUAGECODE</shortDescription>
+        <value>Invalid language code: {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_NODOC</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Survey without xform</shortDescription>
+        <value>No XForm found for this survey.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_NOSURVEY</fullName>
+        <categories>Error,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No survey selected tu export</shortDescription>
+        <value>There is no survey to export.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_NOSURVEYSELECTED</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_NOSURVEYSELECTED</shortDescription>
+        <value>You must select an existing survey to be able to clone it</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_NULLREFERENCE</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_NULLREFERENCE</shortDescription>
+        <value>Null reference to Survey.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_PPIUNIQUENAME</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_PPIUNIQUENAME</shortDescription>
+        <value>There is already a PPI Survey for this Country, Year and Language. Please select another country, year or language</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_UNIQUETITLE</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_UNIQUETITLE</shortDescription>
+        <value>Title of Survey must be unique. Please enter another Title.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_ERR_WRONGSURVEYID</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_ERR_WRONGSURVEYID</shortDescription>
+        <value>The selected survey Id is invalid.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_GROUP_SELECT_GROUP</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select group to assign</shortDescription>
+        <value>Select Group</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_GROUP_TITLE</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Survey group assignment page title</shortDescription>
+        <value>Contact group assignment</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_BACKTOMANAGER</fullName>
+        <categories>Header,Manager,editXform</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>link label to go back to the survey manager</shortDescription>
+        <value>&lt;&lt; Back to Survey Manager</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_FIELD_MAPPING</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Field Mapping tables option in survey header</shortDescription>
+        <value>FIELD MAPPING</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_LOGIC</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Logic option in survey header</shortDescription>
+        <value>LOGIC</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_LOOKUP_TABLES</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Lookup tables option in survey header</shortDescription>
+        <value>LOOKUP TABLES</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_PREVIEW</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Preview tables option in survey header</shortDescription>
+        <value>PREVIEW</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_QUESTION_BUILDER</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Question builder option in survey header</shortDescription>
+        <value>QUESTION BUILDER</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_SCORING</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Scoring option in survey header</shortDescription>
+        <value>SCORING</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_SETTING</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Setting option in survey header</shortDescription>
+        <value>SETTING</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_HEADER_UNSAVED_CHANGES</fullName>
+        <categories>Header,Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>unsaved changes message popup</shortDescription>
+        <value>You did not save changes yet, what do you want to do?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_INFO_TITLE</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_INFO_TITLE</shortDescription>
+        <value>Survey Info</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LABEL_RELEASEDTOLIBRARY</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LABEL_RELEASEDTOLIBRARY</shortDescription>
+        <value>Released to Library:</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ALL_LIBRARY</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ALL_LIBRARY</shortDescription>
+        <value>All Libraries</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_ACTIONS</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_ACTIONS</shortDescription>
+        <value>Actions</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_CREATED_BY</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_CREATED_BY</shortDescription>
+        <value>Created By</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_CREATED_DATE</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_CREATED_DATE</shortDescription>
+        <value>Created Date</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_DESC</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_DESC</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_LAST_MOD_DATE</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_LAST_MOD_DATE</shortDescription>
+        <value>Lat Modified Date</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_NAME</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_NAME</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_COLUMN_HEADER_VERSION</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_COLUMN_HEADER_VERSION</shortDescription>
+        <value>Version</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_DOWNLOAD</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_DOWNLOAD</shortDescription>
+        <value>An error has occurred when downloading this survey. If this persists contact support</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_FAILEDREBUILD</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_FAILEDREBUILD</shortDescription>
+        <value>Failed to rebuild the survey from remote server</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_NOCONTENT</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_NOCONTENT</shortDescription>
+        <value>The content that you have requested no longer exists on the remote server</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_NOEXIST</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_NOEXIST</shortDescription>
+        <value>The library no longer exists</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_NOTFOUND</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_NOTFOUND</shortDescription>
+        <value>The resource you have tried to access was not found on the remote server</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_ERR_TOOBIG</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_ERR_TOOBIG</shortDescription>
+        <value>This survey is too big to be downloaded. Operation cancelled</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_CREATED_BY</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_CREATED_BY</shortDescription>
+        <value>Created By</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_DOWNLOAD</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_DOWNLOAD</shortDescription>
+        <value>Download</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_DOWNLOADING</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_DOWNLOADING</shortDescription>
+        <value>Downloading Survey...</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_GETPREVIEW</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_GETPREVIEW</shortDescription>
+        <value>Getting Preview...</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_LIBRARYLINK</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_LIBRARYLINK</shortDescription>
+        <value>Return To Remote Library</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_MANAGERLINK</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_MANAGERLINK</shortDescription>
+        <value>Return To Survey Library</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_PREVIEW</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_PREVIEW</shortDescription>
+        <value>Preview</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_SURVEYSETTINGS</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_SURVEYSETTINGS</shortDescription>
+        <value>Survey Settings</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_LABEL_TITLE</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_LABEL_TITLE</shortDescription>
+        <value>Remote Library</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LIBRARY_MSG_SUCCESS</fullName>
+        <categories>SurveyLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_LIBRARY_MSG_SUCCESS</shortDescription>
+        <value>You can now use {0}. This survey will be available and can be accessed from the Survey Manager. You may move question positions, but you can not add new questions or remove the original one. Please check back for regular updates</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ADD_CONDITION</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add condition button label</shortDescription>
+        <value>Add Condition</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ALWAYS_SHOW</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Always Show Label</shortDescription>
+        <value>Always Show</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ERR_INVALID</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error message not a valid value</shortDescription>
+        <value>Please enter a valid value!</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ERR_NOT_NUM</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error not numerical value</shortDescription>
+        <value>Please enter a numeric value!</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ERR_QUOTES</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error message</shortDescription>
+        <value>Single quotes are not supported.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_ERR_REQUIRED</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error not numerical value</shortDescription>
+        <value>This field is required</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_NO_QUESTION_SECTION</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Done Label</shortDescription>
+        <value>Can\&apos;t save while section {0} has no questions.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_LOGIC_WHEN_CONDITIONS</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>when label</shortDescription>
+        <value>{0} when {1} of the following is true.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER</fullName>
+        <categories>General</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_MANAGER</shortDescription>
+        <value>Survey Manager</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_CLONE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Clone option label</shortDescription>
+        <value>Clone</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_DISTRIBUTE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Distribute option label</shortDescription>
+        <value>Release to Library</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_DO_MORE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Do more action label</shortDescription>
+        <value>More Actions...</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_EDIT_XFORM</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit XForm option label</shortDescription>
+        <value>Edit XForm</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_EXPORT_CSV</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Export to csv option label</shortDescription>
+        <value>Export to CSV</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ACTIONS_VIEW_XFORM</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>View XForm option label</shortDescription>
+        <value>View XForm</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ALERT_CLONE_ALERT</fullName>
+        <categories>Popup,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>message in the confirmation of cloning</shortDescription>
+        <value>Clone this survey?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ALERT_CLONE_ASSIGNMENTS</fullName>
+        <categories>Checkbox,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>checkbox to clone assignments along with the survey</shortDescription>
+        <value>Clone Group Assignments</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ALERT_CLONE_SURVEY</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>confirmation of cloning a survey</shortDescription>
+        <value>Clone Survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_CLOSE_SURVEY</fullName>
+        <categories>Action,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Close survey</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_COL_OWNER</fullName>
+        <categories>Column,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Column name of the owner of the survey</shortDescription>
+        <value>Created by</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_CONFIRM_EDIT_CUSTOM</fullName>
+        <categories>Confirmation,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Concurrent Save Error</shortDescription>
+        <value>This survey has a custom XForm. Customizations will be lost if the survey is edited. Do you want edit the survey anyway?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_EDIT_SURVEY</fullName>
+        <categories>Button,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Edit survey</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_ERR_NOGROUPSELECTED</fullName>
+        <categories>Alert,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>message to alert at least one group must be selected</shortDescription>
+        <value>At least one group must be selected to publish this survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_FAILED_CLONE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_MANAGER_FAILED_CLONE</shortDescription>
+        <value>An error has occurred whilst cloning these {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_FAILED_DISTRIBUTION</fullName>
+        <categories>Action,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_MANAGER_FAILED_DISTRIBUTION</shortDescription>
+        <value>An error occurred when trying to distribute {0} {1}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_MSG_CONFIRM_CLOSE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Distribute option label</shortDescription>
+        <value>You are about to close {0} survey. IMPORTANT: After the survey is closed, people will no longer be able to respond to this survey!</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_MSG_CONFIRM_DELETE</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Distribute option label</shortDescription>
+        <value>You are about to delete the survey. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_MSG_CONFIRM_PUBLISH</fullName>
+        <categories>Confirm,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Confirm message to publish a certain survey</shortDescription>
+        <value>You are about to publish {0} IMPORTANT: Make sure you have all of your questions finalized. Once the survey is published and you begin collection responses to a survey, you will not be able to go back and edit it.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_NEW_SURVEY</fullName>
+        <categories>Button,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>create new survey button</shortDescription>
+        <value>New</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_PUBLISH_SURVEY</fullName>
+        <categories>Button,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Publish survey</shortDescription>
+        <value>Publish</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MANAGER_SUCCESSFUL_DISTRIBUTION</fullName>
+        <categories>Actions,Manager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_MANAGER_SUCCESSFUL_DISTRIBUTION</shortDescription>
+        <value>You have successfully distributed {0} {1}.
+It is now available to connected orgs</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_ANOTHER_RELATION_IS_SETTED</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Another relation is already set on this field.</shortDescription>
+        <value>Another relation is already set on this field.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CANT_ADD_COLUMN</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Can&apos;t add a column when there is already an empty column</shortDescription>
+        <value>There is an empty column, use that one, or remove it to create a new one</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CANT_MAP_REPEATED</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Can&apos;t map a question if is already mapped to another repeated section</shortDescription>
+        <value>This object is mapped to questions in a different repeated section</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CHANGE</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Change</shortDescription>
+        <value>Change</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CIRCULAR_CASE_CHECKBOX</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Using this contact as respondent would create a circular dependency</shortDescription>
+        <value>Using this contact as respondent would create a circular dependency</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CIRCULAR_CASE_REPEATED</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Cannot set this respondent, because it would create a circular dependency</shortDescription>
+        <value>Mapping respondent to this object would create a circular dependency</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CIRCULAR_DEPENDENCY</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Can&apos;t add a relation because it will cause a circular dependency</shortDescription>
+        <value>Cannot set this relation because it would create a circular dependency</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_CONFIRM_REMOVE_COL</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Confirm when removing a column</shortDescription>
+        <value>Are you sure you want to remove this column?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_DESCRIPTION</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Field Mapping description</shortDescription>
+        <value>Map your survey fields (or questions) with object&apos;s field of your salesforce account to allow automatic create/insert or update record operation into the mapped object&apos;s field.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_DIFFERENT_REPEAT_INTERVIEWEE</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Set interviewee would create a wrong relation.</shortDescription>
+        <value>Checking this contact as interviewee would create a relation between objects associated to different repeat sections.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_DIFFERENT_REPEAT_SECTIONS</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>These objects are associated to different repeat sections.</shortDescription>
+        <value>These objects are associated to different repeat sections.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_DIFFERENT_REPEAT_SPECIAL</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message to display when setting a respondent would create a wrong relation</shortDescription>
+        <value>Mapping this field would create a relation between objects associated to different repeat sections.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_ERROR_REQUIRED_NOT_PRESENT</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message to show to the user when a required field is not present</shortDescription>
+        <value>The following fields are required for: \n\r{0}The missing Field could be unavailable if there is no Question that matches its type.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_FIELD_ALREADY_ON_RELATION</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Displayed when a field is repeated because a relation is set.</shortDescription>
+        <value>a relation with {0}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_FIELD_MAPPING_FOR_END_SURVEY</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show on a end of survey content question</shortDescription>
+        <value>Field Mapping is not allowed for End of survey questions</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_FIELD_MAPPING_FOR_STATIC</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show on a static content question</shortDescription>
+        <value>Field Mapping is not allowed for Static Content questions</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_ID_FIELD_CANNOT_BE_SET</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when an Id field cannot be set</shortDescription>
+        <value>This Id Field cannot be set, because an ancestor of this object is mapped to a repeat section</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_MATCHING_FIELD</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Matching field</shortDescription>
+        <value>Id Field:</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_OBJECT</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Object</shortDescription>
+        <value>Object:</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_OBJECT_REQ_DATA</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Each single required field not present</shortDescription>
+        <value>{0} Object: ({1}) \n\r</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REMOVE_COL</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Remove column label</shortDescription>
+        <value>Remove this column</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REPEATED_FIELDS</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Show when fields are repeated</shortDescription>
+        <value>The Field &quot;{0}&quot; is already selected in {1}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REPEAT_MESSAGE</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show in the survey mapping when mapping to repeat.</shortDescription>
+        <value>Repeats on</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REPEAT_OBJECT_WILL_UNSET_ID</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when mapping to repeat that will unset id fields.</shortDescription>
+        <value>Mapping this object will unset the Id fields of the descendants, continue?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REQ_FIELD</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>this field is requiered message</shortDescription>
+        <value>This field is required. Question will be required as well.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REQ_FIELD_MIGHT_BE_UNAVAILABLE</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Required fields might be unavailable.</shortDescription>
+        <value>The missing Field could be unavailable if there is no Question that matches its type.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_REQ_FIELD_MISSING</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>One or more required fields are missing.</shortDescription>
+        <value>The following fields are required for {0}: {1}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SELECT_OBJECTS_AND_FIELDS</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Select objects and fields</shortDescription>
+        <value>Select Objects and Fields</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SET_INTERVIEWEE_WILL_UNSET_ID</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when setting interviewee checkbox (will unset id fields).</shortDescription>
+        <value>Setting this object as interviewee will remove Id fields of its descendants. Do you want to continue?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SET_INTERVIEWEE_WILL_UNSET_RESPONDENT</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when setting interviewee checkbox will unset respondent.</shortDescription>
+        <value>Setting this object as interviewee will unset respondent field. Do you want to continue?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SET_RELATION</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Set relationship</shortDescription>
+        <value>Set relationship</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SET_RELATION_WILL_UNSET_ID</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when mapping to repeat that will unset id fields.</shortDescription>
+        <value>The Id field of the child object would be no longer valid and will be unset. Continue?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SET_RESPONDENT_WILL_UNSET_ID</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text to show when setting respondent (will unset id fields).</shortDescription>
+        <value>Mapping respondent to this object will remove this object Id field and/or its descendants. Do you want to continue?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_SUBMISSION_DATA</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Submission Data header</shortDescription>
+        <value>Submission Data</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_TITLE</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Publish survey</shortDescription>
+        <value>Field Mapping</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MAPPING_WILL_REMOVE_ID</fullName>
+        <categories>Mapping</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>When the user set a repeated question that removes id field</shortDescription>
+        <value>This will remove the current Id, are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_MSG_PUBLISHINGSURVEY</fullName>
+        <categories>Message</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_MSG_PUBLISHINGSURVEY</shortDescription>
+        <value>Your survey will be published to the selected groups</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_PREVIEW_PRINT</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_PREVIEW_PRINT</shortDescription>
+        <value>Print</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_PREVIEW_TITLE</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_PREVIEW_TITLE</shortDescription>
+        <value>Survey Preview</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ADD_SECTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add condition button label</shortDescription>
+        <value>Add Section</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_CONDITION_DISPLAY</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Condition description</shortDescription>
+        <value>Condition: When {0} {1} {2} in {3}</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_AFFECTEDLOGIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add condition button label</shortDescription>
+        <value>Deleting this question will make some conditions invalid and will be deleted as well. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_ALLCONDITIONS</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message question will delete their scorings as well</shortDescription>
+        <value>This option has at least one score value, one PPI score value and one skip logic previously assigned. Deleting the option will erase its score values(s), PPI score value(s) and its skip logic(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_LOGIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete option with skip logic msg</shortDescription>
+        <value>This option has at least one skip logic previously assigned. Deleting the option will erase its skip logic(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_LOGICNPPISCORE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message question will delete their scorings as well</shortDescription>
+        <value>This option has at least one PPI score value and one skip logic previously assigned. Deleting the option will erase its PPI score value(s) and its skip logic(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_PPISCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a option with scores msg</shortDescription>
+        <value>This option has at least one PPI score value previously assigned. Deleting the option will erase its PPI score value(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_SCORELOGIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message question will delete their scorings as well</shortDescription>
+        <value>This option has at least one score value and one skip logic previously assigned. Deleting the option will erase its score values(s) and its skip logic(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_SCORENPPISCORE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message question will delete their scorings as well</shortDescription>
+        <value>This option has at least one score value and one PPI score value previously assigned. Deleting the option will erase its score values(s) and its PPI score value(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_OPTION_WITH_SCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a option with scores msg</shortDescription>
+        <value>This option has at least one score value previously assigned. Deleting the option will erase its score value(s) also. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_QUESTION_WITH_PPISCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a question with ppi scores msg</shortDescription>
+        <value>Deleting this question will make some options PPI scores invalid and will be deleted as well.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_QUESTION_WITH_SCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a question with scores msg</shortDescription>
+        <value>Deleting this question will make some options scores invalid and will be deleted as well.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_SECTION_WITH_PPISCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a section with scores msg</shortDescription>
+        <value>This section has at least one question with PPI score value previously assigned.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_DELETE_SECTION_WITH_SCORES</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Delete a section with scores msg</shortDescription>
+        <value>This section has at least one question with score value previously assigned.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_GREATER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error validation in number</shortDescription>
+        <value>Must be greater or equal than {0}.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_INVALID_QUESTION_NAME</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error question names cannot be repeated</shortDescription>
+        <value>Invalid name. It must start with a letter, and contain only letters, numbers and underscores.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_INVALID_VALUE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Invalid value error</shortDescription>
+        <value>Please enter a valid value!</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_LAST_OPTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Last Option in question error</shortDescription>
+        <value>The last option cannot be deleted.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_LOWER_THAN_MINIMUN</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Maximum Lower than minimun error</shortDescription>
+        <value>Must not be lower than minimum.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_MAPPED_QUESTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Mapped question can&apos;t be removed</shortDescription>
+        <value>This question is mapped to a required field and cannot be removed. Please remove the mapping from the Field Mapping tab before deleting this question.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_NO_SECTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error no section in survey</shortDescription>
+        <value>You must create a section first.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_REP_OPTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error options cannot be repeated</shortDescription>
+        <value>Options must not be repeated.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_REP_QUESTION_NAME</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error section and question names cannot be repeated</shortDescription>
+        <value>Questions and section names must not be repeated.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ERR_SECTION_WITHOUT_QUESTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error no question in section</shortDescription>
+        <value>Can\&apos;t save while section \&quot;{0}\&quot; has no questions.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_HINT_PLACEHOLDER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Placeholder for the questions hint input</shortDescription>
+        <value>Enter additional text</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_MOVE_AFFECTEDLOGIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Add condition button label</shortDescription>
+        <value>Moving this question will make some conditions invalid and will be deleted. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_MOVE_NONEDITABLE_AFFECTEDLOGIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_QUESTION_MOVE_NONEDITABLE_AFFECTEDLOGIC</shortDescription>
+        <value>The movement is not permitted for this question because there is an affected and not editable question with logic dependence.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_NAME_PLACEHOLDER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Placeholder for the question name input</shortDescription>
+        <value>Enter question label</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_NEW_SECTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>New Section</shortDescription>
+        <value>New section</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_ONE_SECTION_REQ</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>message when trying to delete the last section</shortDescription>
+        <value>At least one section is required.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_SECTION_NAME</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>section Name Label</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_STATIC_CONTENT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for the content field in a static content question</shortDescription>
+        <value>Content</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_STATIC_HINT_PLACEHOLDER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Placeholder for the static questions hint input</shortDescription>
+        <value>Enter content text</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TIP_QUESTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error question names cannot be repeated</shortDescription>
+        <value>Question code is used for reference  and won\&apos;t be shown to respondent/device. The name must be unique, begin with a letter and use only alphanumeric characters and underscores.The name cannot end with an underscore or have two consecutive underscores</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_BARCODE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Barcode question</shortDescription>
+        <value>Barcode</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_DATE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Date question</shortDescription>
+        <value>Date Time</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_FINAL</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>End of Survey</shortDescription>
+        <value>End of Survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_FREE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Free Text question</shortDescription>
+        <value>Free Text</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_MULTI</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Multi Select question</shortDescription>
+        <value>Multi Select</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_NUMBER</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Number question</shortDescription>
+        <value>Number</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_REPEAT</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_QUESTION_TYPE_REPEAT</shortDescription>
+        <value>Repeat</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_SECTION</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>QUESTION_TYPE_SECTION</shortDescription>
+        <value>Section</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_SINGLE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Single select question</shortDescription>
+        <value>Single Select</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_TYPE_STATIC</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Static question</shortDescription>
+        <value>Static content</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_USE_CURRENT_DATE</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error question names cannot be repeated</shortDescription>
+        <value>Set date of the day (taken from device) as initial value</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_QUESTION_USE_CURRENT_DATETIME</fullName>
+        <categories>Question</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error question names cannot be repeated</shortDescription>
+        <value>Set date of the day and current time (taken from device) as initial value</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_ERR_NO_RESULT_SELECTED</fullName>
+        <categories>Error,Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error Alert one survey must be selected</shortDescription>
+        <value>At least one answer must be selected for Export</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_EXPORT_CSV</fullName>
+        <categories>Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Export selected answers button</shortDescription>
+        <value>Export selected answers to CSV</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_JUMP_SURVEY</fullName>
+        <categories>Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Jump to another survey picklist label</shortDescription>
+        <value>Jump to another survey:</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_NUMBER_COLUMN</fullName>
+        <categories>Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Number column</shortDescription>
+        <value>No</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_ROWS_RETRIEVED</fullName>
+        <categories>SurveyResult</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Message to show with the number of subimssions</shortDescription>
+        <value>Loading... {0} rows retrieved.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_SUBMITTED_COLUMN</fullName>
+        <categories>Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Submitted date column</shortDescription>
+        <value>Submitted</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_RESULT_TITLE</fullName>
+        <categories>Result</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Submitted date column</shortDescription>
+        <value>Survey Result</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_CANNOT_ASSIGN_SCORES</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>message to show in the question types that does not support scores</shortDescription>
+        <value>You cannot assign scores to this question type</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_CONFIRM_GROUP_DELETE</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Confirm message to delete a score group</shortDescription>
+        <value>Are you sure you want to delete this group?</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_DEFAULT_GROUP_NAME</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default name of the Scoring groups</shortDescription>
+        <value>Survey Score</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_DESCRIPTION</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Description of Survey Scoring</shortDescription>
+        <value>Scoring (or weighting) is where a numeric value is assigned to each of a question&apos;s answer response options. By assigning a score to each answer option it is  possible to then benefit from score calculation result as part of survey submission data. You can create more than one survey group to calculate multi scores.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_ERR_GROUPS_EDIT</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error trying to save while editing groups</shortDescription>
+        <value>Can\&apos;t save while there are score groups being edited.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_ERR_GROUP_LENGTH</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error invalid group name length</shortDescription>
+        <value>The name of the scoring group must have between 1 and 40 characters.</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_ERR_SCOREVALUEOUTOFRANGE</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error invalid score value</shortDescription>
+        <value>Value must me a number between -100 and 100</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_ERR_USED_NAME</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error invalid score group name</shortDescription>
+        <value>That name is already used for another Score calculation group</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_GROUPS</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Score groups page block title</shortDescription>
+        <value>Score Groups</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SCORING_SCORES_VALUES</fullName>
+        <categories>Scoring</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Score values page block title</shortDescription>
+        <value>Apply Score</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTINGS_SUBTITLE_CLONE_SURVEY</fullName>
+        <categories>Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title for the Survey Settings page</shortDescription>
+        <value>Clone Survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTINGS_SUBTITLE_NEW_BLANK_SURVEY</fullName>
+        <categories>Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title for the Survey Settings page</shortDescription>
+        <value>New Survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTINGS_SUBTITLE_NEW_PPI_SURVEY</fullName>
+        <categories>Builder</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title for the Survey Settings page</shortDescription>
+        <value>New PPI Survey</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_ALIAS_INFO</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default close msg</shortDescription>
+        <value>Create alias if you want to display a different title to your respondent</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_AUTOMATIC_LOCATION</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Get automatic location label</shortDescription>
+        <value>Record location automatically</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_CLOSE_MSG</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default close msg</shortDescription>
+        <value>Thank you for taking the time to complete this survey!</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_CREATE_ALIAS</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Default close msg</shortDescription>
+        <value>Create alias title</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_NO_INTERVIEWEE</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>No interviewee option label</shortDescription>
+        <value>- Do not ask for interviewee -</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_TITLE_AND_ALIAS</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title and alias header</shortDescription>
+        <value>Title and Alias</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_SETTING_USE_AS_TEMPLATE</fullName>
+        <categories>Setting</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Use survey as template label</shortDescription>
+        <value>Use this Survey as Template</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_STATUS_CLOSED</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_STATUS_CLOSED</shortDescription>
+        <value>Closed</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_STATUS_DEPRECATED</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_STATUS_DEPRECATED</shortDescription>
+        <value>Deprecated</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_STATUS_DRAFT</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_STATUS_DRAFT</shortDescription>
+        <value>Draft</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_STATUS_INVALID</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_STATUS_INVALID</shortDescription>
+        <value>Invalid</value>
+    </labels>
+    <labels>
+        <fullName>SURVEY_STATUS_PUBLISHED</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SURVEY_STATUS_PUBLISHED</shortDescription>
+        <value>Published</value>
+    </labels>
+    <labels>
+        <fullName>SYSTEM_ERR_NOLICENSEPERMISSION</fullName>
+        <categories>ErrorMessage</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>SYSTEM_ERR_NOLICENSEPERMISSION</shortDescription>
+        <value>You do not have permissions to create ppi surveys</value>
+    </labels>
+    <labels>
+        <fullName>TEMPLATE_MANAGER</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMPLATE_MANAGER</shortDescription>
+        <value>Template Manager</value>
+    </labels>
+    <labels>
+        <fullName>TEMPLATE_MANAGER_MSG_CONFIRM_DELETE</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMPLATE_MANAGER_MSG_CONFIRM_DELETE</shortDescription>
+        <value>You are about to delete the template. Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>TEMPLATE_MAN_DELETE</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMPLATE_MAN_DELETE</shortDescription>
+        <value>You have successfully deleted template {0}</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_CREATE_NEW_TEMPLATE</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_CREATE_NEW_TEMPLATE</shortDescription>
+        <value>Create New Template</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_CREATE_PPI</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_CREATE_PPI</shortDescription>
+        <value>Create New PPI</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_DOWNLOAD</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_DOWNLOAD</shortDescription>
+        <value>Download Template</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_FAILED_REFRESH</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_FAILED_REFRESH</shortDescription>
+        <value>Failed to refresh template list</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_GETPPI</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_GETPPI</shortDescription>
+        <value>Get PPI</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_GET_NEW</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_GET_NEW</shortDescription>
+        <value>Get New Template</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_INVALID_ACTION</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_INVALID_ACTION</shortDescription>
+        <value>Action selected is invalid. Please try again</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_LOCAL_STATUS</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_LOCAL_STATUS</shortDescription>
+        <value>Local Status</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_REFRESH</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_REFRESH</shortDescription>
+        <value>Refreshing Templates</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_REMOTE_STATUS</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_REMOTE_STATUS</shortDescription>
+        <value>Remote Status</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_SHOW_PPI</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_SHOW_PPI</shortDescription>
+        <value>Show PPI</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_SHOW_TEMP</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_SHOW_TEMP</shortDescription>
+        <value>Show Templates</value>
+    </labels>
+    <labels>
+        <fullName>TEMP_MAN_USE_IT</fullName>
+        <categories>TemplateManager</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>TEMP_MAN_USE_IT</shortDescription>
+        <value>Use It</value>
+    </labels>
+    <labels>
+        <fullName>THIS_WHEN</fullName>
+        <categories>Survey</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>THIS_WHEN</shortDescription>
+        <value>{0} this when {1} of the following conditions are satisfied.</value>
+    </labels>
+    <labels>
+        <fullName>UNASSIGNED_TO_THIS_GROUP</fullName>
+        <categories>Group</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UNASSIGNED_TO_THIS_GROUP</shortDescription>
+        <value>Unassigned to this group</value>
+    </labels>
+    <labels>
+        <fullName>UNASSIGN_ANY_GROUP_CONFIRMATION</fullName>
+        <categories>Confirm,Assignment</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UNASSIGN_ANY_GROUP_CONFIRMATION</shortDescription>
+        <value>Assignments to groups will be deleted. {0} \n\n Are you sure you want to continue?</value>
+    </labels>
+    <labels>
+        <fullName>UNASSIGN_GROUP_AFFECTED_SUBMISSION</fullName>
+        <categories>Confirm,Assignment</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>UNASSIGN_GROUP_AFFECTED_SUBMISSION</shortDescription>
+        <value>These groups {0} already have submissions for this surveys, which will be dissociated from these groups.</value>
+    </labels>
+    <labels>
+        <fullName>UPLOAD_FILE</fullName>
+        <categories>Lookup</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Upload file label</shortDescription>
+        <value>Upload File</value>
+    </labels>
+    <labels>
+        <fullName>VIEW</fullName>
+        <categories>Logic</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>VIEW</shortDescription>
+        <value>View</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,7 @@
+<!--(c) Copyright 2013 Grameen Foundation USA. All rights reserved-->
+<apex:page controller="gfsurveys.XFormCreator" action="{!createDocument}" >
+ <apex:form >
+     <strong> <apex:outputlabel value="{!Message}"></apex:outputlabel></strong>
+     <apex:outputLink value="{!url}" rendered="{!url != ''}">DOWNLOAD </apex:outputLink>
+ </apex:form>
+</apex:page>
