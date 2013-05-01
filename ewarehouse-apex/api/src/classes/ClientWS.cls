@@ -1,13 +1,7 @@
 @RestResource(urlMapping='/ewarehouse/client/*')
 global class ClientWS extends EwarehouseServiceBase {
 	
-	static EwarehouseDataSource.IEwarehouseDataSource dataSource = new EwarehouseDataSource();
-	
-	public static void setDataSource(EwarehouseDataSource.IEwarehouseDataSource sDataSource){
-		dataSource = sDataSource;
-	}
-	
- 	@HttpGet
+	@HttpGet
     global static EwarehouseServiceBase.ServiceResultResponse getClient() {
     	
     	Map<String, String> params = null;
@@ -24,7 +18,7 @@ global class ClientWS extends EwarehouseServiceBase {
         
         List<Farmer__c> lstClient;
         try {
-        	lstClient = dataSource.getFarmer(id);
+        	lstClient = EwarehouseServiceBase.dataSource.getFarmer(id);
         }
         catch(Exception e){
         	system.debug('ERROR: ' + e);
@@ -72,7 +66,7 @@ global class ClientWS extends EwarehouseServiceBase {
 		List<Farmer__c> lstClient = null;
 		
 		try {
-			lstClient = dataSource.getFarmer(id);
+			lstClient = EwarehouseServiceBase.dataSource.getFarmer(id);
 		}
 		catch(Exception e){
 			system.debug('EXCEPTION: ' + e);
@@ -92,7 +86,7 @@ global class ClientWS extends EwarehouseServiceBase {
        	// save the update
        	Database.SaveResult results;
        	try {
-       		results = dataSource.updateFarmer(clObj);
+       		results = EwarehouseServiceBase.dataSource.updateFarmer(clObj);
         }
        	catch(Exception e){
        		system.debug('ERROR: ' + e);
@@ -109,9 +103,7 @@ global class ClientWS extends EwarehouseServiceBase {
 			system.debug('ERROR: ' + results.getErrors());
 			return new DmlErrorResponse('We could update client with the gived id: ['+ id +']', results.getErrors());
 		}
-		
 	}
-	
 	
 	global class ClientResponse extends ServiceResultResponse {
 		public ClientResponse(Client client){
@@ -122,30 +114,5 @@ global class ClientWS extends EwarehouseServiceBase {
 		
 		public Client client;
 	}
-	/*
-	private static List<Farmer__c> getFarmer(String name){
-		
-		if(Test.isRunningTest()) {
-	        // Cause DMLException
-	        insert new Lead();
-	    }
-		return [SELECT 
-					ID, 
-					Name, 
-					Person__r.First_Name__c,
-					Person__r.Last_Name__c,
-					Person__r.Date_of_Birth__c,
-					Person__r.Mobile_Number__c,
-					Person__r.Phone_Number__c,
-					Person__r.ID_Number__c,
-					Person__r.Village__c,
-					Person__r.District__r.Name,
-					Person__r.City__c,
-					Person__r.Country__r.Name,
-					Person__r.Gender__c
-				FROM Farmer__c WHERE Name = :name];
-		
-	}
-	*/
 	
 }

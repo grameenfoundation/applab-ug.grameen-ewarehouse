@@ -1,5 +1,11 @@
 global abstract with sharing class EwarehouseServiceBase {
 	
+	public static EwarehouseDataSource.IEwarehouseDataSource dataSource = new EwarehouseDataSource();
+	
+	public static void setDataSource(EwarehouseDataSource.IEwarehouseDataSource sDataSource){
+		dataSource = sDataSource;
+	}
+	
 	global abstract with sharing class ServiceResultResponse {
 		public String code;
 		public String description;

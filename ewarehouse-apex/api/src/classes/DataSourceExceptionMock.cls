@@ -11,6 +11,11 @@ public with sharing class DataSourceExceptionMock {
 			throwError();
 			return null;
 		}
+		
+		public List<Farmer__c> getFarmersByStatus(String status){
+			throwError();
+			return null;
+		}
 	}
 	
 	public class UpdateFarmerExceptionMock implements EwarehouseDataSource.IEwarehouseDataSource {
@@ -19,8 +24,14 @@ public with sharing class DataSourceExceptionMock {
 			return ds.getFarmer(name);
 		}
 		
+		public List<Farmer__c> getFarmersByStatus(String status){
+			throwError();
+			return null;
+		}
+		
 		public Database.SaveResult updateFarmer(Farmer__c farmer){
-			return database.insert(new Farmer__c());
+			throwError();
+			return null;
 		}
 	}
 	

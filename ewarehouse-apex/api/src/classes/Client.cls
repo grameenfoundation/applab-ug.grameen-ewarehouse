@@ -1,6 +1,6 @@
 global with sharing class Client {
 	
-	public String id { get; set; }
+	public String Id { get; set; }
 	public String FirstName { get; set; }
     public String LastName;
     public DateTime DateOfBirth { get; set; }
@@ -19,10 +19,11 @@ global with sharing class Client {
     	Person__c personRef = farmer.Person__r;
     	District__c districtRef = personRef.District__r;
     	Country__c countryRef = personRef.Country__r;
+    	
     	// create new client
         Client client = new Client();
     	
-    	client.id = farmer.Name;
+    	client.Id = farmer.Name;
 		client.FirstName = personRef.First_Name__c;
 	    client.LastName = personRef.Last_Name__c;
 	    client.DateOfBirth = personRef.Date_of_Birth__c;

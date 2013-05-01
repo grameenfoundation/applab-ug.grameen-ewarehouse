@@ -1,13 +1,13 @@
 /**
- * This class contains unit tests for validating the behavior of Client REST API
+ * This class contains unit tests for validating the behavior of Clients REST API
  */
 @isTest
-private class ClientWsTest {
+private class ClientsWsTest {
 // TODO create test for no farmer found and no parameter given, check other things that might happen
 
-	private static String testRequestURI = '/services/apexrest/ewarehouse/client';//'https://na15.salesforce.com/services/apexrest/ewarehouse/client'; 
+	private static String testRequestURI = '/services/apexrest/ewarehouse/clients'; 
 
-    static testMethod void getClient() {
+    static testMethod void getClients() {
     	
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -17,20 +17,21 @@ private class ClientWsTest {
     	District__c district = getTestDistrict();
     	insert district;
     	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
+    	// create and insert 2 Persons
+    	Person__c person1 = getTestPerson(country, district);
+    	Person__c person2 = getTestPerson(country, district);
+    	person2.First_Name__c = 'John';
+    	person2.Last_Name__c = 'Lennon';
+    	insert person1;
+    	insert person2;
     	
     	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
+    	Farmer__c farmer1 = getTestFarmer(person1);
+    	Farmer__c farmer2 = getTestFarmer(person2);
+    	farmer2.Name = '2eyUUD';
+    	insert farmer1;
+    	insert farmer2;
     	
-    	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
- 		
- 		system.debug('Farmer Id=' + id);
- 		
  		// ready to start the test
  		test.startTest();
     	
@@ -42,12 +43,12 @@ private class ClientWsTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
 		// set as parameter the just stored id
-		req.addParameter('Id', id);
+		req.addParameter('Status', 'Processed');
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		ClientWS.ClientResponse result = (ClientWS.ClientResponse) ClientWS.getClient();
+		ClientsWS.ClientsResponse result = (ClientsWS.ClientsResponse) ClientsWS.getClients();
 		
 		test.stopTest();
 		
@@ -55,22 +56,34 @@ private class ClientWsTest {
 		
 		System.assertEquals('200',result.code);
 		System.assertEquals('OK',result.description);
-		System.assertEquals('Jane',result.client.FirstName);
-		System.assertEquals('Fonda',result.client.LastName);
-		System.assertEquals(date.newinstance(1937, 12, 21),result.client.DateOfBirth);
-		System.assertEquals('+254123456789',result.client.MobileNumber);
-		System.assertEquals('+254987654321',result.client.PhoneNumber);
-		System.assertEquals('Female',result.client.Gender);
-		System.assertEquals('Kisumu',result.client.Village);
-		System.assertEquals('Kisumu city',result.client.City);
-		System.assertEquals('Isiolo',result.client.District);
-		System.assertEquals('Kenya',result.client.Country);
-		System.assertEquals('ID0987654321',result.client.IDNumber);
+		System.assertEquals('Jane',result.clients[0].FirstName);
+		System.assertEquals('Fonda',result.clients[0].LastName);
+		System.assertEquals(date.newinstance(1937, 12, 21),result.clients[0].DateOfBirth);
+		System.assertEquals('+254123456789',result.clients[0].MobileNumber);
+		System.assertEquals('+254987654321',result.clients[0].PhoneNumber);
+		System.assertEquals('Female',result.clients[0].Gender);
+		System.assertEquals('Kisumu',result.clients[0].Village);
+		System.assertEquals('Kisumu city',result.clients[0].City);
+		System.assertEquals('Isiolo',result.clients[0].District);
+		System.assertEquals('Kenya',result.clients[0].Country);
+		System.assertEquals('ID0987654321',result.clients[0].IDNumber);
+		
+		System.assertEquals('John',result.clients[1].FirstName);
+		System.assertEquals('Lennon',result.clients[1].LastName);
+		System.assertEquals(date.newinstance(1937, 12, 21),result.clients[1].DateOfBirth);
+		System.assertEquals('+254123456789',result.clients[1].MobileNumber);
+		System.assertEquals('+254987654321',result.clients[1].PhoneNumber);
+		System.assertEquals('Female',result.clients[1].Gender);
+		System.assertEquals('Kisumu',result.clients[1].Village);
+		System.assertEquals('Kisumu city',result.clients[1].City);
+		System.assertEquals('Isiolo',result.clients[1].District);
+		System.assertEquals('Kenya',result.clients[1].Country);
+		System.assertEquals('ID0987654321',result.clients[1].IDNumber);
 		
 		System.debug('Test finished');
     }
     
-     static testMethod void getClientDMLException() {
+    static testMethod void getClientDMLException() {
      	
      	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
@@ -87,12 +100,12 @@ private class ClientWsTest {
 		req.httpMethod = 'GET';
 		
 		// set as parameter the just stored id
-		req.addParameter('Id', 'dummy');
+		req.addParameter('Status', 'dummy');
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientWS.getClient();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientsWS.getClients();
 		
 		test.stopTest();
 	
@@ -121,19 +134,42 @@ private class ClientWsTest {
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) ClientWS.getClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) ClientsWS.getClients();
 		
 		test.stopTest();
 	
 		// assert error returned
 		System.assertEquals('400',result.code);
-		System.assertEquals('We could find required parameter [Id]', result.description);
+		System.assertEquals('We could find required parameter [Status]', result.description);
 		
 		System.debug('Test finished');
     }
     
-    static testMethod void getClientNotExist() {
+    static testMethod void getNoClientsReturned() {
 
+ 		// create and insert country
+    	Country__c country = getTestCountry();
+    	insert country;
+    	
+    	// create and insert district
+    	District__c district = getTestDistrict();
+    	insert district;
+    	
+    	// create and insert 2 Persons
+    	Person__c person1 = getTestPerson(country, district);
+    	Person__c person2 = getTestPerson(country, district);
+    	person2.First_Name__c = 'John';
+    	person2.Last_Name__c = 'Lennon';
+    	insert person1;
+    	insert person2;
+    	
+    	// with the person id, create and insert a Farmer
+    	Farmer__c farmer1 = getTestFarmer(person1);
+    	Farmer__c farmer2 = getTestFarmer(person2);
+    	farmer2.Name = '2eyUUD';
+    	insert farmer1;
+    	insert farmer2;
+    	
  		// ready to start the test
  		test.startTest();
     	
@@ -145,24 +181,91 @@ private class ClientWsTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
 		// set as parameter the just stored id
-		req.addParameter('Id', 'NOTEXISTING');
+		req.addParameter('Status', 'Duplicate');
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// get an error response instead of client response
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) ClientWS.getClient();
+		// load the results in the client (normally converted to JSON via API)
+		ClientsWS.ClientsResponse result = (ClientsWS.ClientsResponse) ClientsWS.getClients();
 		
 		test.stopTest();
 		
-
-		// assert error returned
-		System.assertEquals('400',result.code);
-		System.assertEquals('We could find a client with the gived Id: [NOTEXISTING]',result.description);
+		// assert what was stored
 		
+		System.assertEquals('200',result.code);
+		System.assertEquals('OK',result.description);
+		System.assertEquals(0,result.clients.size());
 		System.debug('Test finished');
     	
     }
     
+     static testMethod void getOneClientsReturned() {
+
+ 		// create and insert country
+    	Country__c country = getTestCountry();
+    	insert country;
+    	
+    	// create and insert district
+    	District__c district = getTestDistrict();
+    	insert district;
+    	
+    	// create and insert 2 Persons
+    	Person__c person1 = getTestPerson(country, district);
+    	Person__c person2 = getTestPerson(country, district);
+    	person2.First_Name__c = 'John';
+    	person2.Last_Name__c = 'Lennon';
+    	insert person1;
+    	insert person2;
+    	
+    	// with the person id, create and insert a Farmer
+    	Farmer__c farmer1 = getTestFarmer(person1);
+    	Farmer__c farmer2 = getTestFarmer(person2);
+    	farmer2.Name = '2eyUUD';
+    	farmer2.Status__c = 'Duplicate';
+    	insert farmer1;
+    	insert farmer2;
+    	
+ 		// ready to start the test
+ 		test.startTest();
+    	
+    	// create request and response
+    	RestRequest req = new RestRequest(); 
+		RestResponse res = new RestResponse();
+ 
+ 		// do the request
+		req.requestURI = testRequestURI;
+		req.httpMethod = 'GET';
+		// set as parameter the just stored id
+		req.addParameter('Status', 'Duplicate');
+		RestContext.request = req;
+		RestContext.response = res;
+		
+		// load the results in the client (normally converted to JSON via API)
+		ClientsWS.ClientsResponse result = (ClientsWS.ClientsResponse) ClientsWS.getClients();
+		
+		test.stopTest();
+		
+		// assert what was stored
+		
+		System.assertEquals('200',result.code);
+		System.assertEquals('OK',result.description);
+		System.assertEquals(1,result.clients.size());
+		System.assertEquals('John',result.clients[0].FirstName);
+		System.assertEquals('Lennon',result.clients[0].LastName);
+		System.assertEquals(date.newinstance(1937, 12, 21),result.clients[0].DateOfBirth);
+		System.assertEquals('+254123456789',result.clients[0].MobileNumber);
+		System.assertEquals('+254987654321',result.clients[0].PhoneNumber);
+		System.assertEquals('Female',result.clients[0].Gender);
+		System.assertEquals('Kisumu',result.clients[0].Village);
+		System.assertEquals('Kisumu city',result.clients[0].City);
+		System.assertEquals('Isiolo',result.clients[0].District);
+		System.assertEquals('Kenya',result.clients[0].Country);
+		System.assertEquals('ID0987654321',result.clients[0].IDNumber);
+		
+		System.debug('Test finished');
+    	
+    }
+    /*
     static testMethod void updateClient() {
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -276,7 +379,7 @@ private class ClientWsTest {
     
     static testMethod void updateClientDMLException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerExceptionMock());
+     	ClientWS.setDataSource(new DataSourceExceptionMock.UpdateFarmerExceptionMock());
      	
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -322,7 +425,7 @@ private class ClientWsTest {
 		// assert error returned
 		System.assertEquals('400',result.code);
 		
-		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
+		ClientWS.setDataSource(new EwarehouseDataSource());
 		
 		System.debug('Test finished');
  		
@@ -330,7 +433,7 @@ private class ClientWsTest {
     
     static testMethod void updateClientGetException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	ClientWS.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -358,7 +461,7 @@ private class ClientWsTest {
 		System.debug('Test finished');
 		
 		// reset the datasource
-		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
+		ClientWS.setDataSource(new EwarehouseDataSource());
  		
     }
     
@@ -421,7 +524,7 @@ private class ClientWsTest {
 		System.debug('Test finished');
  		
     }
-    
+    */
     
     static District__c getTestDistrict(){
     	District__c district = new District__c();
@@ -460,6 +563,7 @@ private class ClientWsTest {
     	Farmer__c farmer = new Farmer__c();
     	farmer.Name = '3eyUUD';
     	farmer.Person__c = person.Id;
+    	farmer.Status__c = 'Processed';
     	return farmer;
     }
 }
