@@ -21,7 +21,7 @@ class ClientService (val apiSession: ApiSession) {
 
     def getClient(id: String) : Option[ClientResponse] =  {
         val parameters = Map[String, String](
-            "id" -> id
+            "Id" -> id
         )
         val jsonResult = new ApexApiRequest(Authenticator.getSession.get).get(clientRequest, parameters)
         val myObject = jsonResult.get.convertTo[ClientResponse]
@@ -33,8 +33,8 @@ class ClientService (val apiSession: ApiSession) {
     def updateClient(updateClient: UpdateClient) : Option[ClientResponse] = {
 
         val parameters = Map[String, String](
-            "id" -> updateClient.id,
-            "status" -> updateClient.status
+            "Id" -> updateClient.id,
+            "Status" -> updateClient.status
         )
 
         val jsonResult = new ApexApiRequest(Authenticator.getSession.get).patch(clientRequest, parameters)

@@ -18,7 +18,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
     val logger = LoggerFactory.getLogger(classOf[ApexApiRequest])
 
-    def requestHost = host(apiSession.instanceUrl.replace("https://", "")) / "services" / "apexrest" secure
+    def requestHost = host(apiSession.instanceUrl.replace("https://", "")) / "services" / "apexrest" / "ewarehouse" secure
 
     //def buildRequest
 
