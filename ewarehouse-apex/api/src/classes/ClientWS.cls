@@ -1,56 +1,36 @@
 @RestResource(urlMapping='/client/*')
 global class ClientWS extends ServiceResponses {
-
+	
  	@HttpGet
-    global static ServiceResultResponse getClient() {
+    global static ServiceResponses.ServiceResultResponse getClient() {
     	
+    	Map<String, String> params = null;
+		
 		// get the id from the request parameter
-        String id = RestContext.request.params.get('id');
+		String id = RestContext.request.params.get('id');
+		
+		if(id == null){
+			System.debug('ERROR: request param [id] should not be null');
+			return new ErrorResponse('400', 'We could find required parameter [id]');
+		}
+        
         system.debug('id = ' + id);
-        
-        /*
-        id: String,
-                  FirstName: String,
-                  LastName: String,
-                  DateOfBirth: String,
-                  PhoneNumber: String,
-                  MobileNumber: String,
-                  IDNumber: String,
-                  Gender: String,
-                  Address1: String,
-                  Address2: String,
-                  City: String,
-                  Country: String
-        */
-        
-        // check PhoneNumber
-        // Person__c.IDNumber,
-		// Person__c.Address1,
-		// Person__c.Address2,
-		// Person__c.City,
-																		
-        List<Farmer__c> lstClient= [SELECT 
-									ID, 
-									Name, 
-									Person__r.First_Name__c,
-									Person__r.Last_Name__c,
-									Person__r.Date_of_Birth__c,
-									Person__r.Contact__r.Phone, 
-									Person__r.Mobile_Number__c,
-									Person__r.Gender__c,
-									Person__r.Country__c
-								FROM Farmer__c WHERE Id = :id];
+        																
+        List<Farmer__c> lstClient = getFarmer(id);
 		
 		if (lstClient.size() > 0)
 		{
+			// TODO catch of not able to get the farmer to a client object
 			Farmer__c clObj = lstClient.get(0);
-			return Client.fromFarmer(clObj);
+			return new ClientWS.ClientResponse('200', 'OK', Client.fromFarmer(clObj));
 		}
-		return null;
-        
-	
+		else{
+			System.debug('no Farmer found with ID:' + id);
+			return new ErrorResponse('400', 'We could find a client with the gived id: ['+id+']');
+		}
 	}
-	
+
+	/*
 	@HttpPatch
 	global static String updateClient(){
 		
@@ -63,18 +43,12 @@ global class ClientWS extends ServiceResponses {
 		system.debug(updateClient);
 		
 		// get the appropriate client
-		List<eu_himmit__Client__c> lstClient= [SELECT 
-									ID, 
-									Name, 
-									eu_himmit__Date_of_birth__c,
-									eu_himmit__Time_authorized__c,
-									eu_himmit__Married__c
-								FROM eu_himmit__Client__c WHERE Id = :updateClient.id];
+		List<Farmer__c> lstClient= getFarmer(updateClient.id);
 		
 		// check if the client exists
 		if (lstClient.size() > 0)
 		{
-			eu_himmit__Client__c clObj = lstClient.get(0);
+			Farmer__c clObj = lstClient.get(0);
 	        
 	        clObj.Name = updateClient.name;
 	        clObj.eu_himmit__Date_of_birth__c = updateClient.dateOfBirth;
@@ -90,4 +64,36 @@ global class ClientWS extends ServiceResponses {
 		}
 		return 'error';
 	}
+	*/
+	
+	global class ClientResponse extends ServiceResultResponse {
+		public ClientResponse(String code, String description, Client client){
+			this.code = code;
+			this.description = description;
+			this.client = client;
+		}
+		
+		public Client client;
+	}
+	
+	private static List<Farmer__c> getFarmer(String name){
+		return [SELECT 
+					ID, 
+					Name, 
+					Person__r.First_Name__c,
+					Person__r.Last_Name__c,
+					Person__r.Date_of_Birth__c,
+					Person__r.Mobile_Number__c,
+					Person__r.Phone_Number__c,
+					Person__r.ID_Number__c,
+					Person__r.Village__c,
+					Person__r.District__r.Name,
+					Person__r.City__c,
+					Person__r.Country__r.Name,
+					Person__r.Gender__c
+				FROM Farmer__c WHERE Name = :name];
+
+	}
+	
+	
 }

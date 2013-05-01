@@ -18,7 +18,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
     val logger = LoggerFactory.getLogger(classOf[ApexApiRequest])
 
-    def requestHost = host(apiSession.instanceUrl.replace("https://", "")) / "services" / "apexrest" / "eu_himmit" secure
+    def requestHost = host(apiSession.instanceUrl.replace("https://", "")) / "services" / "apexrest" secure
 
     //def buildRequest
 
@@ -29,7 +29,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
         def requestType = requestObject.GET
 
-        doRequest(requestType, parameters)
+        doRequest(requestType, parameters, true)
     }
 
     def patch(objectType: String, parameters: Map[String, String]) = {
@@ -41,7 +41,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
         doRequest(requestType, parameters)
     }
 
-    def doRequest(requestType: RequestBuilder, parameters: Map[String, String]) : Option[JsValue] = {
+    def doRequest(requestType: RequestBuilder, parameters: Map[String, String], get: Boolean = false) : Option[JsValue] = {
 
         // add Headers
         def requestAddHeaders =
@@ -52,9 +52,15 @@ class ApexApiRequest (val apiSession: ApiSession) {
         // push the parameters in the body as JSON
         def jsonBody = JSONObject(parameters).toString()
         logger.debug(jsonBody)
-        def requestBody = requestAddHeaders.setBody(jsonBody)
 
-        val request= requestBody
+        // when method is GET add parameters as query, otherwise add them as JSON in the body
+        def request =
+            if(get)
+                requestAddHeaders <<?  parameters
+            else
+                requestAddHeaders.setBody(jsonBody)
+
+        //val request= requestBody
         // do the request
         val response = Http(request > as.String)
 

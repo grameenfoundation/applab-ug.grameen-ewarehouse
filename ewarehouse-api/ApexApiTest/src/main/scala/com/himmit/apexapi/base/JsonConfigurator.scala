@@ -13,6 +13,7 @@ import com.himmit.apexapi.parameter._
 object JsonConfigurator extends DefaultJsonProtocol {
     implicit val clientFormat = jsonFormat12(Client)
     implicit val loanFormat = jsonFormat5(Loan);
+
     implicit val updateClientFormat = jsonFormat(UpdateClient, "id", "status")
     implicit val clientResponseFormat = jsonFormat(ClientResponse, "code", "description", "client")
     implicit val clientsResponseFormat = jsonFormat(ClientsResponse, "code", "description", "clients")

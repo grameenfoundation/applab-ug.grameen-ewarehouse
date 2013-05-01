@@ -8,16 +8,16 @@ import java.util.Date
  * Time: 16:48
  */
 case class Client(id: String,
-                  FirstName: String,
-                  LastName: String,
-                  DateOfBirth: String,
-                  PhoneNumber: String,
-                  MobileNumber: String,
-                  IDNumber: String,
-                  Gender: String,
-                  Address1: String,
-                  Address2: String,
-                  City: String,
-                  Country: String) {
+                  FirstName: Option[String],
+                  LastName: Option[String],
+                  DateOfBirth: Option[String],
+                  PhoneNumber: Option[String],
+                  MobileNumber: Option[String],
+                  IDNumber: Option[String],
+                  Gender: Option[String],
+                  Village: Option[String],
+                  District: Option[String],
+                  City: Option[String],
+                  Country: Option[String]) {
 
 }

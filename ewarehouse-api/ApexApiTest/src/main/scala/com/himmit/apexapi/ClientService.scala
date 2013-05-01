@@ -7,6 +7,7 @@ import com.himmit.apexapi._
 import com.himmit.apexapi.response.ClientResponse
 import com.himmit.apexapi.parameter.UpdateClient
 import com.himmit.apexapi.base.ApexApiRequest
+import com.himmit.apexapi.base.JsonConfigurator._
 
 
 /**
