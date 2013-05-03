@@ -49,6 +49,26 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 	public Database.SaveResult updateFarmer(Farmer__c farmer){
 		return Database.update(farmer);
 	}
+	
+	public Farmer__c[] getFarmers(Set<String> farmerIds){
+		String q = 'SELECT Id, Name, Status__c FROM Farmer__C WHERE Name IN :farmerIds';
+		return Database.query(q);
+	}
+	
+	public List<Loan__c> getLoan(String id){
+		// Select the client by status 
+		return [SELECT 
+					Id, 
+					Name, 
+					Amount_Applied_For__c,
+					Amount_Approved__c,
+					Application_Date__c,
+					Currency__c,
+					Decision_Date__c,
+					Farmer__r.Name,
+					Status__c
+				FROM Loan__c WHERE Id = :id];
+	}
 		
 	/*
 	 * Interface for accessing SalesForce objects for the e-Warehouse
@@ -63,6 +83,11 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		// update a farmer, currently only used to update the Status
 		Database.SaveResult updateFarmer(Farmer__c farmer);
 		
+		// runs a dynamic query and returns the associated objects
+		Farmer__c[] getFarmers(Set<String> farmerIds);
+		
+		// get loan by specific id
+		List<Loan__c> getLoan(String id);
 	}
 	
 	

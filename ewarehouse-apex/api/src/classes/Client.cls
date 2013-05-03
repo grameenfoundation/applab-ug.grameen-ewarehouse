@@ -3,7 +3,7 @@ global with sharing class Client {
 	public String Id { get; set; }
 	public String FirstName { get; set; }
     public String LastName;
-    public DateTime DateOfBirth { get; set; }
+    public Date DateOfBirth { get; set; }
     public String PhoneNumber { get; set; }
     public String MobileNumber { get; set; }
     public String IDNumber { get; set; }
@@ -24,17 +24,25 @@ global with sharing class Client {
         Client client = new Client();
     	
     	client.Id = farmer.Name;
-		client.FirstName = personRef.First_Name__c;
-	    client.LastName = personRef.Last_Name__c;
-	    client.DateOfBirth = personRef.Date_of_Birth__c;
-	    client.PhoneNumber = personRef.Phone_Number__c;
-	    client.MobileNumber = personRef.Mobile_Number__c;
-	    client.IDNumber = personRef.ID_Number__c;
-	    client.Gender = personRef.Gender__c;
-	    client.Village = personRef.Village__c;
-	    client.District = districtRef.Name;
-	    client.City = personRef.City__c;
-	    client.Country = countryRef.Name;
+    	
+    	// take the information from the referenced objects when they are available
+    	if(personRef != null){
+    		client.FirstName = personRef.First_Name__c;
+		    client.LastName = personRef.Last_Name__c;
+		    client.DateOfBirth = personRef.Date_of_Birth__c;
+		    client.PhoneNumber = personRef.Phone_Number__c;
+		    client.MobileNumber = personRef.Mobile_Number__c;
+		    client.IDNumber = personRef.ID_Number__c;
+		    client.Gender = personRef.Gender__c;
+		    client.Village = personRef.Village__c;
+		    client.City = personRef.City__c;
+    	}
+    	
+    	if(districtRef != null)
+			client.District = districtRef.Name;
+			
+		if(countryRef != null)
+	    	client.Country = countryRef.Name;
 	    
 		System.debug(client);
 		

@@ -7,7 +7,7 @@ import java.util.Date
  * Date: 27/04/13
  * Time: 16:48
  */
-case class Client(id: String,
+case class Client(Id: String,
                   FirstName: Option[String],
                   LastName: Option[String],
                   DateOfBirth: Option[String],

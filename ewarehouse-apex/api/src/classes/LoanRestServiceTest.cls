@@ -1,13 +1,12 @@
 /**
- * This class contains unit tests for validating the behavior of Client REST API
+ * This class contains unit tests for validating the behavior of Loan REST API
  */
 @isTest
-private class ClientWsTest {
-// TODO create test for no farmer found and no parameter given, check other things that might happen
+private class LoanRestServiceTest {
 
-	private static String testRequestURI = '/services/apexrest/ewarehouse/client';//'https://na15.salesforce.com/services/apexrest/ewarehouse/client'; 
+	private static String testRequestURI = '/services/apexrest/ewarehouse/loan';//'https://na15.salesforce.com/services/apexrest/ewarehouse/client'; 
 
-    static testMethod void getClient() {
+    static testMethod void getLoan() {
     	
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -26,10 +25,15 @@ private class ClientWsTest {
     	Farmer__c farmer = getTestFarmer(person);
     	insert farmer;
     	
+    	// create a loan
+    	Loan__c loan = getLoan(farmer);
+    	insert loan;
+    	
     	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
+    	String farmerId = farmer.Name;
+    	String id = loan.Id; 
  		
- 		system.debug('Farmer Id=' + id);
+ 		system.debug('Loan Id=' + id);
  		
  		// ready to start the test
  		test.startTest();
@@ -41,13 +45,14 @@ private class ClientWsTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
+		
 		// set as parameter the just stored id
 		req.addParameter('Id', id);
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		ClientWS.ClientResponse result = (ClientWS.ClientResponse) ClientWS.getClient();
+		LoanRestService.LoanResponse result = (LoanRestService.LoanResponse) LoanRestService.getLoan();
 		
 		test.stopTest();
 		
@@ -55,22 +60,18 @@ private class ClientWsTest {
 		
 		System.assertEquals('200',result.code);
 		System.assertEquals('OK',result.description);
-		System.assertEquals('Jane',result.client.FirstName);
-		System.assertEquals('Fonda',result.client.LastName);
-		System.assertEquals(date.newinstance(1937, 12, 21),result.client.DateOfBirth);
-		System.assertEquals('+254123456789',result.client.MobileNumber);
-		System.assertEquals('+254987654321',result.client.PhoneNumber);
-		System.assertEquals('Female',result.client.Gender);
-		System.assertEquals('Kisumu',result.client.Village);
-		System.assertEquals('Kisumu city',result.client.City);
-		System.assertEquals('Isiolo',result.client.District);
-		System.assertEquals('Kenya',result.client.Country);
-		System.assertEquals('ID0987654321',result.client.IDNumber);
+
+		System.assertEquals(130000,result.loan.AmountApplied);
+		System.assertEquals(120000,result.loan.AmountApproved);
+		System.assertEquals(date.newinstance(2013, 4, 30),result.loan.ApplicationDate);
+		System.assertEquals(date.newinstance(2013, 5, 1),result.loan.DecisionDate);
+		System.assertEquals('Applied',result.loan.Status);
+		System.assertEquals(farmerId,result.loan.FarmerId);
 		
 		System.debug('Test finished');
     }
     
-     static testMethod void getClientDMLException() {
+    static testMethod void getClientDMLException() {
      	
      	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
@@ -92,7 +93,7 @@ private class ClientWsTest {
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientWS.getClient();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) LoanRestService.getLoan();
 		
 		test.stopTest();
 	
@@ -121,7 +122,7 @@ private class ClientWsTest {
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) ClientWS.getClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) LoanRestService.getLoan();
 		
 		test.stopTest();
 	
@@ -150,19 +151,19 @@ private class ClientWsTest {
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) ClientWS.getClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) LoanRestService.getLoan();
 		
 		test.stopTest();
 		
 
 		// assert error returned
 		System.assertEquals('400',result.code);
-		System.assertEquals('We could not find a client with the gived Id: [NOTEXISTING]',result.description);
+		System.assertEquals('We could not find a loan with the gived Id: [NOTEXISTING]',result.description);
 		
 		System.debug('Test finished');
     	
     }
-    
+    /*
     static testMethod void updateClient() {
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -422,7 +423,7 @@ private class ClientWsTest {
  		
     }
     
-    
+    */
     static District__c getTestDistrict(){
     	District__c district = new District__c();
     	district.Name = 'Isiolo';
@@ -461,5 +462,20 @@ private class ClientWsTest {
     	farmer.Name = '3eyUUD';
     	farmer.Person__c = person.Id;
     	return farmer;
+    }
+    
+    static Loan__c getLoan(Farmer__c farmer){
+    	
+    	Loan__c loan = new Loan__c();
+		loan.Amount_Applied_For__c = 130000;
+		loan.Amount_Approved__c = 120000;
+		loan.Application_Date__c = date.newinstance(2013, 4, 30);
+		loan.Decision_Date__c = date.newinstance(2013, 5, 1);
+		loan.Status__c = 'Applied';
+		loan.Currency__c = 'KES';
+		loan.Farmer__c = farmer.Id;	
+    	
+		return loan;
+    	
     }
 }

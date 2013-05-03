@@ -3,11 +3,13 @@ package com.himmit.apexapi
 import org.slf4j.LoggerFactory
 import com.himmit.apexapi.authentication._
 import spray.json._
+import DefaultJsonProtocol._
 import com.himmit.apexapi._
-import com.himmit.apexapi.response.ClientResponse
+import com.himmit.apexapi.response._
 import com.himmit.apexapi.parameter.UpdateClient
 import com.himmit.apexapi.base.ApexApiRequest
 import com.himmit.apexapi.base.JsonConfigurator._
+import scala.util.parsing.json.JSONObject
 
 
 /**
@@ -16,14 +18,16 @@ import com.himmit.apexapi.base.JsonConfigurator._
  * Time: 10:00
  */
 class ClientService (val apiSession: ApiSession) {
+    val request = new ApexApiRequest(Authenticator.getSession.get)
 
     val clientRequest = "client"
+    val clientsRequest = "clients"
 
     def getClient(id: String) : Option[ClientResponse] =  {
         val parameters = Map[String, String](
             "Id" -> id
         )
-        val jsonResult = new ApexApiRequest(Authenticator.getSession.get).get(clientRequest, parameters)
+        val jsonResult = request.get(clientRequest, parameters)
         val myObject = jsonResult.get.convertTo[ClientResponse]
 
         return Some(myObject)
@@ -33,15 +37,37 @@ class ClientService (val apiSession: ApiSession) {
     def updateClient(updateClient: UpdateClient) : Option[ClientResponse] = {
 
         val parameters = Map[String, String](
-            "Id" -> updateClient.id,
-            "Status" -> updateClient.status
+            "Id" -> updateClient.Id,
+            "Status" -> updateClient.Status
         )
 
-        val jsonResult = new ApexApiRequest(Authenticator.getSession.get).patch(clientRequest, parameters)
+        val jsonResult = request.patch(clientRequest, parameters)
         val myObject = jsonResult.get.convertTo[ClientResponse]
 
         return Some(myObject)
 
+    }
+
+    def getClients(status: String) : ClientsResponse =  {
+
+        val parameters = Map[String, String](
+            "Status" -> status
+        )
+
+        val jsonResult = request.get(clientsRequest, parameters)
+        val myObject = jsonResult.get.convertTo[ClientsResponse]
+
+        return myObject
+    }
+
+    def updateClients(updateClients: Array[UpdateClient]) : ClientsResponse =  {
+
+        val json = updateClients.toJson
+
+        val jsonResult = request.patch(clientsRequest, json.toString)
+        val myObject = jsonResult.get.convertTo[ClientsResponse]
+
+        return myObject
     }
 
 }

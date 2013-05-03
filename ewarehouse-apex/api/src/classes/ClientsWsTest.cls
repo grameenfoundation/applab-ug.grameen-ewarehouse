@@ -117,7 +117,7 @@ private class ClientsWsTest {
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
      }
     
-    static testMethod void getClientNoIdParam() {
+    static testMethod void getClientNoStatusParam() {
     	// ready to start the test
  		test.startTest();
     	
@@ -265,7 +265,7 @@ private class ClientsWsTest {
 		System.debug('Test finished');
     	
     }
-    /*
+    
     static testMethod void updateClient() {
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -275,20 +275,22 @@ private class ClientsWsTest {
     	District__c district = getTestDistrict();
     	insert district;
     	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
+    	// create and insert 2 Persons
+    	Person__c person1 = getTestPerson(country, district);
+    	Person__c person2 = getTestPerson(country, district);
+    	person2.First_Name__c = 'John';
+    	person2.Last_Name__c = 'Lennon';
+    	insert person1;
+    	insert person2;
     	
     	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
+    	Farmer__c farmer1 = getTestFarmer(person1);
+    	Farmer__c farmer2 = getTestFarmer(person2);
+    	farmer2.Name = '2eyUUD';
     	
-    	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
+    	insert farmer1;
+    	insert farmer2;
     	
- 		system.debug('farmer id=' + id);
- 		
  		test.startTest();
 
 		// create request and response
@@ -298,38 +300,44 @@ private class ClientsWsTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Id":"'+id+'","Status":"Processed"}');
+		req.requestBody = Blob.valueOf('[{"Id":"'+farmer1.Name+'","Status":"Duplicate"},{"Id":"'+farmer2.Name+'","Status":"Failed"}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse)ClientsWS.updateClients();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('200', result.code);
-		System.assertEquals('Updated: client id ['+id+'], status: [Processed]', result.description);
+		System.assertEquals('Update success', result.description);
 		
-		List<Farmer__c> lstFarmer = [SELECT 
+		List<Farmer__c> lstFarmer1 = [SELECT 
 										ID, 
 										Name, 
 										Status__c
-									FROM Farmer__c WHERE Name = :id];
+									FROM Farmer__c WHERE Name = :farmer1.Name];
 		
-		System.assertEquals(1, lstFarmer.size());
-		
-		Farmer__c clObj = lstFarmer.get(0);
+		System.assertEquals(1, lstFarmer1.size());
+		System.assertEquals('Duplicate', lstFarmer1.get(0).Status__c);
         
-        System.assertEquals('Processed', clObj.Status__c);
+        List<Farmer__c> lstFarmer2 = [SELECT 
+										ID, 
+										Name, 
+										Status__c
+									FROM Farmer__c WHERE Name = :farmer2.Name];
+		
+		System.assertEquals(1, lstFarmer2.size());
+		System.assertEquals('Failed', lstFarmer2.get(0).Status__c);
        
 		System.debug('Test finished');
  		
     }
     
-    static testMethod void updateClientNotExists() {
-    	// create and insert country
+    static testMethod void updateClientsNotExists() {
+		// create and insert country
     	Country__c country = getTestCountry();
     	insert country;
     	
@@ -337,20 +345,22 @@ private class ClientsWsTest {
     	District__c district = getTestDistrict();
     	insert district;
     	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
+    	// create and insert 2 Persons
+    	Person__c person1 = getTestPerson(country, district);
+    	Person__c person2 = getTestPerson(country, district);
+    	person2.First_Name__c = 'John';
+    	person2.Last_Name__c = 'Lennon';
+    	insert person1;
+    	insert person2;
     	
     	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
+    	Farmer__c farmer1 = getTestFarmer(person1);
+    	Farmer__c farmer2 = getTestFarmer(person2);
+    	farmer2.Name = '2eyUUD';
     	
-    	// get the newly inserted farmer id (name field), but create an error
-    	String id = farmer.Name + 'oeps'; 
+    	insert farmer1;
+    	insert farmer2;
     	
- 		system.debug('farmer id=' + id);
- 		
  		test.startTest();
 
 		// create request and response
@@ -360,49 +370,77 @@ private class ClientsWsTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Id":"'+id+'","Status":"Processed"}');
+		req.requestBody = Blob.valueOf('[{"Id":"'+farmer1.Name+'","Status":"Duplicate"},{"Id":"2eyUUE","Status":"Failed"}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.ErrorMapResponse result = (EwarehouseServiceBase.ErrorMapResponse)ClientsWS.updateClients();
 		
 		test.stopTest();
 		
-		// assert error returned
-		System.assertEquals('400',result.code);
-	   
+		// assert what was stored
+		System.assertEquals('400', result.code);
+		System.assertEquals('Not all IDs where found as client, attached Ids not updated.', result.description);
+		
+		// assert that the farmers are the same for the not updated farmers
+		List<Farmer__c> lstFarmer1 = [SELECT 
+										ID, 
+										Name, 
+										Status__c
+									FROM Farmer__c WHERE Name = :farmer1.Name];
+		
+		System.assertEquals(1, lstFarmer1.size());
+		System.assertEquals('Duplicate', lstFarmer1.get(0).Status__c);
+        
+        // farmer 2 was not updated, the Id was wrong
+        List<Farmer__c> lstFarmer2 = [SELECT 
+										ID, 
+										Name, 
+										Status__c
+									FROM Farmer__c WHERE Name = :farmer2.Name];
+		
+		System.assertEquals(1, lstFarmer2.size());
+		System.assertEquals('Processed', lstFarmer2.get(0).Status__c);
+       
 		System.debug('Test finished');
  		
     }
     
-    static testMethod void updateClientDMLException() {
-    	// set the datasource to mock
-     	ClientWS.setDataSource(new DataSourceExceptionMock.UpdateFarmerExceptionMock());
-     	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+     static testMethod void updateClientsNoIdParam() {
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
-    	
-    	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
-    	
- 		system.debug('farmer id=' + id);
+ 		test.startTest();
+
+		// create request and response
+    	RestRequest req = new RestRequest(); 
+		RestResponse res = new RestResponse();
+ 
+ 		// do the request
+		// do the request
+		req.requestURI = testRequestURI;
+		req.httpMethod = 'PATCH';
+		// error in the JSON last Id wrong
+		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Duplicate"},{"Ids":"dummy","Status":"Failed"}]}');
+		
+		RestContext.request = req;
+		RestContext.response = res;
+		
+		// retrieve an error
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientsWS.updateClients();
+		
+		test.stopTest();
+		
+		// assert what was stored
+		System.assertEquals('400', result.code);
+		System.assertEquals('JSON ERROR: We could find required parameter [Id] in one of the objects', result.description);
+		
+		System.debug('Test finished');
  		
+    }
+    
+    static testMethod void updateClientsNoStatusParam() {
+    	
  		test.startTest();
 
 		// create request and response
@@ -412,28 +450,29 @@ private class ClientsWsTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Id":"'+id+'","Status":"Processed"}');
+		// error in the JSON, last Status wrong
+		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Duplicate"},{"Id":"dummy","Statqs":"Failed"}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse)ClientWS.updateClient();
+		// retrieve an error
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientsWS.updateClients();
 		
 		test.stopTest();
 		
-		// assert error returned
+		// assert what was stored
 		System.assertEquals('400',result.code);
+		System.assertEquals('JSON ERROR: We could find required parameter [Status] in one of the objects', result.description);
 		
-		ClientWS.setDataSource(new EwarehouseDataSource());
-		
+       
 		System.debug('Test finished');
  		
     }
     
     static testMethod void updateClientGetException() {
     	// set the datasource to mock
-     	ClientWS.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -445,13 +484,13 @@ private class ClientsWsTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Id":"dummy","Status":"Processed"}');
+		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Processed"}]');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientWS.updateClient();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientsWS.updateClients();
 		
 		test.stopTest();
 	
@@ -461,71 +500,10 @@ private class ClientsWsTest {
 		System.debug('Test finished');
 		
 		// reset the datasource
-		ClientWS.setDataSource(new EwarehouseDataSource());
+		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
  		
     }
-    
-    static testMethod void updateClientNoIdParam() {
-    	
- 		test.startTest();
-
-		// create request and response
-    	RestRequest req = new RestRequest(); 
-		RestResponse res = new RestResponse();
- 
- 		// do the request
-		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Status":"Processed"}');
-		
-		RestContext.request = req;
-		RestContext.response = res;
-		
-		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
-		
-		test.stopTest();
-		
-		// assert what was stored
-		System.assertEquals('400',result.code);
-		System.assertEquals('We could find required parameter [Id]', result.description);
-		
-       
-		System.debug('Test finished');
- 		
-    }
-    
-    static testMethod void updateClientNoStatusParam() {
-    	
- 		test.startTest();
-
-		// create request and response
-    	RestRequest req = new RestRequest(); 
-		RestResponse res = new RestResponse();
- 
- 		// do the request
-		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('{"Id":"whatever"}');
-		
-		RestContext.request = req;
-		RestContext.response = res;
-		
-		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
-		
-		test.stopTest();
-		
-		// assert what was stored
-		System.assertEquals('400',result.code);
-		System.assertEquals('We could find required parameter [Status]', result.description);
-		
-       
-		System.debug('Test finished');
- 		
-    }
-    */
-    
+        
     static District__c getTestDistrict(){
     	District__c district = new District__c();
     	district.Name = 'Isiolo';

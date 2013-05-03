@@ -27,13 +27,12 @@ global class ClientWS extends EwarehouseServiceBase {
 		
 		if (lstClient.size() > 0)
 		{
-			// TODO catch of not able to get the farmer to a client object
 			Farmer__c clObj = lstClient.get(0);
 			return new ClientWS.ClientResponse(Client.fromFarmer(clObj));
 		}
 		else{
 			System.debug('no Farmer found with Id:' + id);
-			return new ErrorResponse('We could find a client with the gived Id: ['+id+']');
+			return new ErrorResponse('We could not find a client with the gived Id: ['+id+']');
 		}
 	}
 

@@ -29,7 +29,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
         def requestType = requestObject.GET
 
-        doRequest(requestType, parameters, true)
+        doRequest(requestType, parameters, get = true)
     }
 
     def patch(objectType: String, parameters: Map[String, String]) = {
@@ -41,7 +41,23 @@ class ApexApiRequest (val apiSession: ApiSession) {
         doRequest(requestType, parameters)
     }
 
-    def doRequest(requestType: RequestBuilder, parameters: Map[String, String], get: Boolean = false) : Option[JsValue] = {
+    def patch(objectType: String, json: String) = {
+
+        logger.info("Build PATCH request for [%s]", objectType)
+        def requestObject = requestHost / objectType
+        def requestType = requestObject.PATCH
+
+        logger.debug(json)
+
+        doRequest(requestType = requestType, body = json)
+    }
+
+    def doRequest(requestType: RequestBuilder, parameters: Map[String, String] = null, body: String = null, get: Boolean = false) : Option[JsValue] = {
+
+        // check requirements
+        if(parameters != null && body != null){
+            throw new Exception("Set either the parameters or body parameter of the method but not both")
+        }
 
         // add Headers
         def requestAddHeaders =
@@ -50,7 +66,11 @@ class ApexApiRequest (val apiSession: ApiSession) {
                 .addHeader("content-type", "application/x-www-form-urlencoded")
 
         // push the parameters in the body as JSON
-        def jsonBody = JSONObject(parameters).toString()
+        def jsonBody =
+            if(parameters != null)
+                JSONObject(parameters).toString()
+            else
+                body
         logger.debug(jsonBody)
 
         // when method is GET add parameters as query, otherwise add them as JSON in the body

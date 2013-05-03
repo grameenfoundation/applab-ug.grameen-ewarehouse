@@ -47,8 +47,10 @@ class Authenticator {
     def authenticate(): Option[ApiSession] = {
 
         val response = Http(request > as.String)
+        val jsonResponse = response()
+        logger.debug(jsonResponse);
 
-        val result = JSON.parseFull(response())
+        val result = JSON.parseFull(jsonResponse)
 
         if(result == None)
             return None

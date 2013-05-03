@@ -27,6 +27,17 @@ global abstract with sharing class EwarehouseServiceBase {
 			this.description = description;
 		}
 	}
+
+	global class ErrorMapResponse extends ServiceResultResponse {
+		
+		public ErrorMapResponse(String description, Map<String, String> objects){
+			this.code = '400';
+			this.description = description;
+			this.objects = objects;
+		}
+		
+		public Map<String, String> objects;
+	}
 	
 	global class ExceptionResponse extends ServiceResultResponse {
 		
@@ -37,7 +48,7 @@ global abstract with sharing class EwarehouseServiceBase {
 	}
 	
 	
-	
+	// do not know how to get the DmlException, bad for testing, good in general
 	global class DmlErrorResponse extends ServiceResultResponse {
 		
 		public DmlErrorResponse(String description, Database.Error[] errors){
@@ -50,7 +61,6 @@ global abstract with sharing class EwarehouseServiceBase {
 	}
 	
 	
-	
 	public static String getParameter(Map<String, String> parameters, String key){
 		String value = null;
 		if(parameters.containsKey(key)){
@@ -60,6 +70,5 @@ global abstract with sharing class EwarehouseServiceBase {
 	
 		System.debug('ERROR: request param ['+key+'] cannot be found');
 		return null;
-	
 	}
 }
