@@ -19,10 +19,13 @@ object JsonConfigurator extends DefaultJsonProtocol with CollectionFormats{
     implicit val clientFormat = jsonFormat12(Client)
     implicit val loanFormat = jsonFormat7(Loan);
     implicit val updateClientFormat = jsonFormat(UpdateClient, "Id", "Status")
+    implicit val updateLoanFormat = jsonFormat(UpdateLoan, "Id", "Status")
 
     implicit val updateClientArrayFormat = arrayFormat[UpdateClient]
+    implicit val updateLoanArrayFormat = arrayFormat[UpdateLoan]
 
     implicit val clientResponseFormat = jsonFormat(ClientResponse, "code", "description", "client")
     implicit val loanResponseFormat = jsonFormat(LoanResponse, "code", "description", "loan")
     implicit val clientsResponseFormat = jsonFormat(ClientsResponse, "code", "description", "clients")
+    implicit val loansResponseFormat = jsonFormat(LoansResponse, "code", "description", "loans")
 }

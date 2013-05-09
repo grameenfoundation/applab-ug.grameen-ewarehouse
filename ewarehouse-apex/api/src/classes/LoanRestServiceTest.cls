@@ -4,7 +4,7 @@
 @isTest
 private class LoanRestServiceTest {
 
-	private static String testRequestURI = '/services/apexrest/ewarehouse/loan';//'https://na15.salesforce.com/services/apexrest/ewarehouse/client'; 
+	private static String testRequestURI = '/services/apexrest/ewarehouse/loan'; //'https://na15.salesforce.com/services/apexrest/ewarehouse/client'; 
 
     static testMethod void getLoan() {
     	
@@ -71,7 +71,7 @@ private class LoanRestServiceTest {
 		System.debug('Test finished');
     }
     
-    static testMethod void getClientDMLException() {
+    static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
@@ -105,7 +105,7 @@ private class LoanRestServiceTest {
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
      }
     
-    static testMethod void getClientNoIdParam() {
+    static testMethod void getLoanNoIdParam() {
     	// ready to start the test
  		test.startTest();
     	
@@ -133,7 +133,7 @@ private class LoanRestServiceTest {
 		System.debug('Test finished');
     }
     
-    static testMethod void getClientNotExist() {
+    static testMethod void getLoanNotExist() {
 
  		// ready to start the test
  		test.startTest();
@@ -163,8 +163,8 @@ private class LoanRestServiceTest {
 		System.debug('Test finished');
     	
     }
-    /*
-    static testMethod void updateClient() {
+
+    static testMethod void updateLoan() {
     	// create and insert country
     	Country__c country = getTestCountry();
     	insert country;
@@ -181,11 +181,16 @@ private class LoanRestServiceTest {
     	// with the person id, create and insert a Farmer
     	Farmer__c farmer = getTestFarmer(person);
     	insert farmer;
+    
+    	// create a loan
+    	Loan__c loan = getLoan(farmer);
+    	insert loan;
     	
     	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
-    	
- 		system.debug('farmer id=' + id);
+    	String farmerId = farmer.Name;
+    	String id = loan.Id; 
+ 		
+ 		system.debug('Loan Id=' + id);
  		
  		test.startTest();
 
@@ -201,30 +206,30 @@ private class LoanRestServiceTest {
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse)ClientWS.updateClient();
+		// update the loan
+		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse)LoanRestService.updateLoan();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('200', result.code);
-		System.assertEquals('Updated: client id ['+id+'], status: [Processed]', result.description);
+		System.assertEquals('Updated: Loan Id ['+id+'], Status: [Processed]', result.description);
 		
-		List<Farmer__c> lstFarmer = [SELECT 
+		List<Loan__c> lstLoan = [SELECT 
 										ID, 
-										Name, 
 										Status__c
-									FROM Farmer__c WHERE Name = :id];
+									FROM Loan__c WHERE Id = :id];
 		
-		System.assertEquals(1, lstFarmer.size());
+		System.assertEquals(1, lstLoan.size());
 		
-		Farmer__c clObj = lstFarmer.get(0);
+		Loan__c loanObj = lstLoan.get(0);
         
-        System.assertEquals('Processed', clObj.Status__c);
+        System.assertEquals('Processed', loanObj.Status__c);
        
 		System.debug('Test finished');
  		
     }
+    
     
     static testMethod void updateClientNotExists() {
     	// create and insert country
@@ -244,12 +249,17 @@ private class LoanRestServiceTest {
     	Farmer__c farmer = getTestFarmer(person);
     	insert farmer;
     	
-    	// get the newly inserted farmer id (name field), but create an error
-    	String id = farmer.Name + 'oeps'; 
+    	// create a loan
+    	Loan__c loan = getLoan(farmer);
+    	insert loan;
     	
- 		system.debug('farmer id=' + id);
+    	// get the newly inserted farmer id (name field)
+    	String farmerId = farmer.Name;
+    	String id = loan.Id + 'oeps'; 
  		
- 		test.startTest();
+ 		system.debug('Loan Id=' + id);
+ 	 		
+ 	 	test.startTest();
 
 		// create request and response
     	RestRequest req = new RestRequest(); 
@@ -264,20 +274,21 @@ private class LoanRestServiceTest {
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoanRestService.updateLoan();
 		
 		test.stopTest();
 		
 		// assert error returned
 		System.assertEquals('400',result.code);
+	    System.assertEquals('We could find a loan with the gived id: ['+ id +']',result.description);
 	   
 		System.debug('Test finished');
  		
     }
     
-    static testMethod void updateClientDMLException() {
+    static testMethod void updateLoanDMLException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerLoanExceptionMock());
      	
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -296,10 +307,15 @@ private class LoanRestServiceTest {
     	Farmer__c farmer = getTestFarmer(person);
     	insert farmer;
     	
-    	// get the newly inserted farmer id (name field)
-    	String id = farmer.Name; 
+    	// create a loan
+    	Loan__c loan = getLoan(farmer);
+    	insert loan;
     	
- 		system.debug('farmer id=' + id);
+    	// get the newly inserted farmer id (name field)
+    	String farmerId = farmer.Name;
+    	String id = loan.Id; 
+ 		
+ 		system.debug('Loan Id=' + id);
  		
  		test.startTest();
 
@@ -316,12 +332,13 @@ private class LoanRestServiceTest {
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse)LoanRestService.updateLoan();
 		
 		test.stopTest();
 		
 		// assert error returned
 		System.assertEquals('400',result.code);
+		System.assertEquals('EXCEPTION: System.DmlException: Insert failed. First exception on row 0; first error: REQUIRED_FIELD_MISSING, Required fields are missing: [Person__c]: [Person__c]',result.description);
 		
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
 		
@@ -329,7 +346,7 @@ private class LoanRestServiceTest {
  		
     }
     
-    static testMethod void updateClientGetException() {
+    static testMethod void updateLoanGetException() {
     	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
      	
@@ -349,7 +366,7 @@ private class LoanRestServiceTest {
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) ClientWS.updateClient();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) LoanRestService.updateLoan();
 		
 		test.stopTest();
 	
@@ -363,7 +380,8 @@ private class LoanRestServiceTest {
  		
     }
     
-    static testMethod void updateClientNoIdParam() {
+    
+    static testMethod void updateLoanNoIdParam() {
     	
  		test.startTest();
 
@@ -380,7 +398,7 @@ private class LoanRestServiceTest {
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoanRestService.updateLoan();
 		
 		test.stopTest();
 		
@@ -393,7 +411,7 @@ private class LoanRestServiceTest {
  		
     }
     
-    static testMethod void updateClientNoStatusParam() {
+    static testMethod void updateLoanNoStatusParam() {
     	
  		test.startTest();
 
@@ -410,7 +428,7 @@ private class LoanRestServiceTest {
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)ClientWS.updateClient();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoanRestService.updateLoan();
 		
 		test.stopTest();
 		
@@ -423,7 +441,6 @@ private class LoanRestServiceTest {
  		
     }
     
-    */
     static District__c getTestDistrict(){
     	District__c district = new District__c();
     	district.Name = 'Isiolo';

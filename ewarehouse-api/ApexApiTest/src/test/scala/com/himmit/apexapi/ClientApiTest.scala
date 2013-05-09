@@ -82,7 +82,7 @@ class ClientApiTest  extends FunSpec with ShouldMatchers {
         }
         it("will return a List of two Clients from a Custom APEX API given a Status Procesed"){
 
-            val result = getObject.getClients("Processed")
+            val result = getObject.getClients("Default")
 
             result should not be(null)
             result.clients should not be(None)

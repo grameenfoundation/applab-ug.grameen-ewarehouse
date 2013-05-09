@@ -51,7 +51,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 	}
 	
 	public Farmer__c[] getFarmers(Set<String> farmerIds){
-		String q = 'SELECT Id, Name, Status__c FROM Farmer__C WHERE Name IN :farmerIds';
+		String q = 'SELECT Id, Name, Status__c FROM Farmer__c WHERE Name IN :farmerIds';
 		return Database.query(q);
 	}
 	
@@ -69,6 +69,46 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Status__c
 				FROM Loan__c WHERE Id = :id];
 	}
+	
+	public Database.SaveResult updateLoan(Loan__c loan){
+		return Database.update(loan);
+	}
+	
+	public Loan__c[] getLoansByStatus(String status){
+		// Select the client by status 
+		return [SELECT 
+					Id, 
+					Name, 
+					Amount_Applied_For__c,
+					Amount_Approved__c,
+					Application_Date__c,
+					Currency__c,
+					Decision_Date__c,
+					Farmer__r.Name,
+					Status__c
+				FROM Loan__c WHERE Status__c = :status];
+	}
+	
+	public Loan__c[] getLoans(Set<String> loanIds){
+		String q = 'SELECT Id, Status__c FROM Loan__c WHERE Id IN :loanIds';
+		return Database.query(q);
+	}
+	
+	public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
+		return Database.insert(loanRepayments);
+	}
+	
+	public Loan_Repayment__c[] getLoanRepayments(String loanId){
+		return [SELECT 
+					Id, 
+					Name, 
+					Loan__c,
+					Sale__c,
+					Amount__c,
+					Payment_Date__c,
+					Remarks__c
+				FROM Loan_Repayment__c WHERE Loan__r.Id = :loanId];
+	}
 		
 	/*
 	 * Interface for accessing SalesForce objects for the e-Warehouse
@@ -83,11 +123,26 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		// update a farmer, currently only used to update the Status
 		Database.SaveResult updateFarmer(Farmer__c farmer);
 		
-		// runs a dynamic query and returns the associated objects
+		// runs a dynamic query to get clients and returns the associated objects
 		Farmer__c[] getFarmers(Set<String> farmerIds);
 		
 		// get loan by specific id
 		List<Loan__c> getLoan(String id);
+		
+		// get loans by status
+		Loan__c[] getLoansByStatus(String status);
+		
+		// update a loan
+		Database.SaveResult updateLoan(Loan__c loan);
+		
+		// runs a dynamic query to get loans and returns the associated objects
+		Loan__c[] getLoans(Set<String> loanIds);
+		
+		// add loan repayments to salesforce
+		Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments);
+		
+		// get loan repayments for a specific loan
+		Loan_Repayment__c[] getLoanRepayments(String loanId);
 	}
 	
 	

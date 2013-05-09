@@ -26,9 +26,34 @@ public with sharing class DataSourceExceptionMock {
 			throwError();
 			return null;
 		}
+		
+		public Database.SaveResult updateLoan(Loan__c loan){
+			throwError();
+			return null;
+		}
+		
+		public Loan__c[] getLoansByStatus(String status){
+			throwError();
+			return null;
+		}
+		
+		public Loan__c[] getLoans(Set<String> loanIds){
+			throwError();
+			return null;
+		}
+		
+		public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
+			throwError();
+			return null;
+		}
+		
+		public Loan_Repayment__c[] getLoanRepayments(String loanId){
+			throwError();
+			return null;
+		}
 	}
 	
-	public class UpdateFarmerExceptionMock implements EwarehouseDataSource.IEwarehouseDataSource {
+	public class UpdateFarmerLoanExceptionMock implements EwarehouseDataSource.IEwarehouseDataSource {
 		EwarehouseDataSource ds = new EwarehouseDataSource();
 		public List<Farmer__c> getFarmer(String name){
 			return ds.getFarmer(name);
@@ -50,6 +75,30 @@ public with sharing class DataSourceExceptionMock {
 		}
 		
 		public List<Loan__c> getLoan(String id){
+			return ds.getLoan(id);
+		}
+		
+		public Database.SaveResult updateLoan(Loan__c loan){
+			throwError();
+			return null;
+		}
+		
+		public Loan__c[] getLoansByStatus(String status){
+			throwError();
+			return null;
+		}
+		
+		public Loan__c[] getLoans(Set<String> loanIds){
+			throwError();
+			return null;
+		}
+		
+		public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
+			throwError();
+			return null;
+		}
+		
+		public Loan_Repayment__c[] getLoanRepayments(String loanId){
 			throwError();
 			return null;
 		}

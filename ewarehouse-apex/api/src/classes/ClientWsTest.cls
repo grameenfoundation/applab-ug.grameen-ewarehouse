@@ -276,7 +276,7 @@ private class ClientWsTest {
     
     static testMethod void updateClientDMLException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerLoanExceptionMock());
      	
     	// create and insert country
     	Country__c country = getTestCountry();
