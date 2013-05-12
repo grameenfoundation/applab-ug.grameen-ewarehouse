@@ -44,8 +44,11 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		return new RepaymentResponse(repayments);
 	}
 	
-	@HttpPost
-	global static ServiceResultResponse updateRepayments(){ 
+	@HttpPatch
+	global static ServiceResultResponse addRepayments(){ 
+		
+		// list of repayments to be stored
+		List<Loan_Repayment__c> loanRepayments = new List<Loan_Repayment__c>();
 		
 		// take the client from the parameters
 		String jsonString = RestContext.request.requestBody.toString();	
@@ -54,30 +57,38 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		// parse the client data
 		List<Repayment> repayments = null;
 		try{
-			repayments = (List<Repayment>) JSON.deserialize(jsonString, List<Repayment>.class);	
+			repayments = (List<Repayment>) JSON.deserialize(jsonString, List<Repayment>.class);
+			
+			// Loop through the repayments and convert to SObjects
+			for(Repayment item : repayments){
+				Loan_Repayment__c lr = new Loan_Repayment__c();
+				lr.Amount__c = item.Amount;
+				lr.Payment_Date__c = item.PaymentDate;
+				lr.Remarks__c = item.Remarks;
+				lr.Loan__c = item.LoanId;
+				lr.Sale__c = item.SaleId;
+				loanRepayments.add(lr);
+			}
 		}
 		catch(Exception e){
 			system.debug('EXCEPTION: ' + e);
 	       	return new ExceptionResponse(e);
 		}
 		
-		system.debug(repayments);
-		
-		// Loop through the repayments and convert to SObjects
-		List<Loan_Repayment__c> loanRepayments = new List<Loan_Repayment__c>();
-		for(Repayment item : repayments){
-			Loan_Repayment__c lr = new Loan_Repayment__c();
-			lr.Amount__c = item.Amount;
-			lr.Payment_Date__c = item.PaymentDate;
-			lr.Remarks__c = item.Remarks;
-			lr.Loan__c = item.LoanId;
-			lr.Sale__c = item.SaleId;
+		if(loanRepayments.size() > 9000){
+			return new ErrorResponse('Only 9000 records are allowed in one batch, please split the upload in smaller amounts');
 		}
 		
+		system.debug('Repayments: ' + repayments);
+	
 		// insert the loan repayments
 		Database.Saveresult[] results = null;
 		try {
+			system.debug('tester-start');
 			results = EwarehouseServiceBase.dataSource.addLoanRepayments(loanRepayments);
+			system.debug(results);
+			system.debug('tester-end');
+			
 		}
 		catch(Exception e){
 			system.debug('EXCEPTION: ' + e);
@@ -98,6 +109,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		}
 		// check whether there were errors during posting
 		if(errors){
+			system.debug(errorMessage);
 			return new ErrorResponse('Error while posting loan repayments:\n ' + errorMessage);
 		}
 		

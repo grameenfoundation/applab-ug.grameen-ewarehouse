@@ -22,6 +22,7 @@ class LoanService (val apiSession: ApiSession) {
 
     val loanRequest = "loan"
     val loansRequest = "loans"
+    val repaymentRequest = "repayments"
 
     def getLoan(id: String) : Option[LoanResponse] = {
         val parameters = Map[String, String](
@@ -66,6 +67,18 @@ class LoanService (val apiSession: ApiSession) {
         logger.info(json.toString)
 
         val jsonResult = request.patch(loansRequest, json.toString)
+        val myObject = jsonResult.get.convertTo[LoansResponse]
+
+        return myObject
+    }
+
+
+    def addRepayments(repayments: Array[AddRepayment]) : LoansResponse =  {
+
+        val json = repayments.toJson
+        logger.info(json.toString)
+
+        val jsonResult = request.patch(repaymentRequest, json.toString)
         val myObject = jsonResult.get.convertTo[LoansResponse]
 
         return myObject

@@ -42,7 +42,7 @@ public with sharing class DataSourceExceptionMock {
 			return null;
 		}
 		
-		public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
+		public Database.SaveResult[] addLoanRepayments(Loan_Repayment__c[] loanRepayments){
 			throwError();
 			return null;
 		}
@@ -93,7 +93,7 @@ public with sharing class DataSourceExceptionMock {
 			return null;
 		}
 		
-		public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
+		public Database.SaveResult[] addLoanRepayments(Loan_Repayment__c[] loanRepayments){
 			throwError();
 			return null;
 		}

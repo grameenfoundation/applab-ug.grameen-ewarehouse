@@ -24,17 +24,25 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
     def get(objectType: String, parameters: Map[String, String]) : Option[JsValue] =  {
 
-        logger.info("Build GET request for [%s]", objectType)
+        logger.info("Build GET request", objectType)
         def requestObject = requestHost / objectType
-
         def requestType = requestObject.GET
 
         doRequest(requestType, parameters, get = true)
     }
 
+    def post(objectType: String, json: String) : Option[JsValue] =  {
+
+        logger.info("Build POST request", objectType)
+        def requestObject = requestHost / objectType
+        def requestType = requestObject.POST
+
+        doRequest(requestType = requestType, body = json)
+    }
+
     def patch(objectType: String, parameters: Map[String, String]) = {
 
-        logger.info("Build PATCH request for [%s]", objectType)
+        logger.info("Build PATCH request", objectType)
         def requestObject = requestHost / objectType
         def requestType = requestObject.PATCH
 
@@ -43,7 +51,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
     def patch(objectType: String, json: String) = {
 
-        logger.info("Build PATCH request for [%s]", objectType)
+        logger.info("Build PATCH request", objectType)
         def requestObject = requestHost / objectType
         def requestType = requestObject.PATCH
 
@@ -75,12 +83,16 @@ class ApexApiRequest (val apiSession: ApiSession) {
 
         // when method is GET add parameters as query, otherwise add them as JSON in the body
         def request =
-            if(get)
+            if(get){
+                logger.debug("Add parameters in query string")
                 requestAddHeaders <<?  parameters
-            else
+            }
+            else{
+                logger.debug("Set body of request:" +jsonBody)
                 requestAddHeaders.setBody(jsonBody)
+            }
 
-        //val request= requestBody
+
         // do the request
         val response = Http(request > as.String)
 

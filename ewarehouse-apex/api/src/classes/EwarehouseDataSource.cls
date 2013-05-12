@@ -94,8 +94,15 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		return Database.query(q);
 	}
 	
-	public Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments){
-		return Database.insert(loanRepayments);
+	public Database.SaveResult[] addLoanRepayments(Loan_Repayment__c[] loanRepayments){
+		//List<Database.Saveresult> sr = new List<Database.Saveresult>();
+		system.debug('Loan Repayments: ' + loanRepayments);
+		/*for(Loan_Repayment__c lr : loanRepayments){
+			sr.add(Database.Insert(lr));
+		}
+		system.debug(sr);
+		return sr;//*/
+		return Database.Insert(loanRepayments, true);
 	}
 	
 	public Loan_Repayment__c[] getLoanRepayments(String loanId){
@@ -139,7 +146,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		Loan__c[] getLoans(Set<String> loanIds);
 		
 		// add loan repayments to salesforce
-		Database.SaveResult[] addLoanRepayments(List<Loan_Repayment__c> loanRepayments);
+		Database.SaveResult[] addLoanRepayments(Loan_Repayment__c[] loanRepayments);
 		
 		// get loan repayments for a specific loan
 		Loan_Repayment__c[] getLoanRepayments(String loanId);
