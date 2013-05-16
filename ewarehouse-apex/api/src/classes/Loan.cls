@@ -3,6 +3,7 @@ public with sharing class Loan {
 	public String FarmerId { get; set; }
 	public Decimal AmountApplied { get; set; }
 	public Decimal AmountApproved { get; set; }
+	public Decimal Balance { get; set; }
 	public Date ApplicationDate { get; set; }
 	public Date DecisionDate { get; set; }
 	public String Status { get; set; }
@@ -15,6 +16,7 @@ public with sharing class Loan {
 		l.Id = loan.Id;
 		l.AmountApplied = loan.Amount_Applied_For__c;
 		l.AmountApproved = loan.Amount_Approved__c;
+		l.Balance = loan.Balance__c;
 		l.ApplicationDate = loan.Application_Date__c;
 		l.DecisionDate = loan.Decision_Date__c;
 		l.Status = loan.Status__c;
@@ -24,7 +26,7 @@ public with sharing class Loan {
     		l.FarmerId = farmerRef.Name;	
     	}
     	
-		System.debug(l);
+		system.debug(l);
 		
 		return l;
 

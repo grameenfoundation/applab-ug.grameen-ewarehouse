@@ -1,4 +1,4 @@
-global abstract with sharing class EwarehouseServiceBase {
+global virtual with sharing class EwarehouseServiceBase extends EwarehouseServiceModel{
 	
 	public static EwarehouseDataSource.IEwarehouseDataSource dataSource = new EwarehouseDataSource();
 	
@@ -42,7 +42,7 @@ global abstract with sharing class EwarehouseServiceBase {
 	global class ExceptionResponse extends ServiceResultResponse {
 		
 		public ExceptionResponse(Exception e){
-			this.code = '400';
+			this.code = '500';
 			this.description = 'EXCEPTION: ' + e;
 		}
 	}

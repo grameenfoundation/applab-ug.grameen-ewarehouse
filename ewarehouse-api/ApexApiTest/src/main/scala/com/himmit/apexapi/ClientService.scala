@@ -41,7 +41,7 @@ class ClientService (val apiSession: ApiSession) {
             "Status" -> updateClient.Status
         )
 
-        val jsonResult = request.patch(clientRequest, parameters)
+        val jsonResult = request.post(clientRequest, parameters)
         val myObject = jsonResult.get.convertTo[ClientResponse]
 
         return Some(myObject)
@@ -64,7 +64,7 @@ class ClientService (val apiSession: ApiSession) {
 
         val json = updateClients.toJson
 
-        val jsonResult = request.patch(clientsRequest, json.toString)
+        val jsonResult = request.post(clientsRequest, json.toString)
         val myObject = jsonResult.get.convertTo[ClientsResponse]
 
         return myObject

@@ -130,7 +130,7 @@ private class LoanRepaymentRestServiceTest {
 		test.stopTest();
 	
 		// assert error returned
-		System.assertEquals('400', result.code);
+		System.assertEquals('500', result.code);
 		
 		System.debug('Test finished');
 		
@@ -410,7 +410,7 @@ private class LoanRepaymentRestServiceTest {
 		test.stopTest();
 		
 		// assert what was stored
-		System.assertEquals('400', result.code);
+		System.assertEquals('500', result.code);
 		System.assertEquals('EXCEPTION:', result.description.substring(0, 10));
 		
 		// assert that the farmers are the same for the not updated farmers

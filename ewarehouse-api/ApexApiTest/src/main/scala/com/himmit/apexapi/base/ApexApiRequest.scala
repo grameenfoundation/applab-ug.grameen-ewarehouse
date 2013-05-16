@@ -40,7 +40,16 @@ class ApexApiRequest (val apiSession: ApiSession) {
         doRequest(requestType = requestType, body = json)
     }
 
-    def patch(objectType: String, parameters: Map[String, String]) = {
+    def post(objectType: String, parameters: Map[String, String]) = {
+
+        logger.info("Build POST request", objectType)
+        def requestObject = requestHost / objectType
+        def requestType = requestObject.POST
+
+        doRequest(requestType, parameters)
+    }
+
+    /*def patch(objectType: String, parameters: Map[String, String]) = {
 
         logger.info("Build PATCH request", objectType)
         def requestObject = requestHost / objectType
@@ -58,7 +67,7 @@ class ApexApiRequest (val apiSession: ApiSession) {
         logger.debug(json)
 
         doRequest(requestType = requestType, body = json)
-    }
+    }*/
 
     def doRequest(requestType: RequestBuilder, parameters: Map[String, String] = null, body: String = null, get: Boolean = false) : Option[JsValue] = {
 
@@ -67,11 +76,19 @@ class ApexApiRequest (val apiSession: ApiSession) {
             throw new Exception("Set either the parameters or body parameter of the method but not both")
         }
 
+        def requestAuthentication = requestType.addHeader("Authorization", "Bearer "+apiSession.accessToken)
+
         // add Headers
         def requestAddHeaders =
-            requestType
-                .addHeader("Authorization", "Bearer "+apiSession.accessToken)
-                .addHeader("content-type", "application/x-www-form-urlencoded")
+            if(get){
+                requestAuthentication
+                    .addHeader("content-type", "application/x-www-form-urlencoded")
+            }
+            else{
+                requestAuthentication
+                    .addHeader("content-type", "application/json")
+            }
+
 
         // push the parameters in the body as JSON
         def jsonBody =
@@ -89,7 +106,8 @@ class ApexApiRequest (val apiSession: ApiSession) {
             }
             else{
                 logger.debug("Set body of request:" +jsonBody)
-                requestAddHeaders.setBody(jsonBody)
+                requestAddHeaders << jsonBody
+                //requestAddHeaders.setBody(jsonBody)
             }
 
 

@@ -44,7 +44,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		return new RepaymentResponse(repayments);
 	}
 	
-	@HttpPatch
+	@HttpPost
 	global static ServiceResultResponse addRepayments(){ 
 		
 		// list of repayments to be stored

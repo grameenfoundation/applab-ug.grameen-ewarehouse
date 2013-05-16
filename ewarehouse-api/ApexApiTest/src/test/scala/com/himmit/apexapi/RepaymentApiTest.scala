@@ -39,6 +39,16 @@ class RepaymentApiTest  extends FunSpec with ShouldMatchers {
             resultOption.loans should be(None)
 
             resultOption.code should be("200")
+            resultOption.description should be("Loan repayments posted successfully.")
+        }
+        it("will return repayments from the APEX API given a loan id"){
+
+            val resultOption = getObject.getRepayments(loanId)
+
+            resultOption should not be None
+            resultOption.repayments should not be(None)
+
+            resultOption.code should be("200")
             resultOption.description should be("OK")
         }
     }

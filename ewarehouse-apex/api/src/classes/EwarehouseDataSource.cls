@@ -7,7 +7,6 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 	 * This method returns a Farmer object from SalesForce wuth the appropriate information needed for the Client object
 	 */
 	public List<Farmer__c> getFarmer(String name){
-		
 		// Select the client by name (Farmer ID in SalesForce)
 		return [SELECT 
 					ID, 
@@ -23,12 +22,33 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.City__c,
 					Person__r.Country__r.Name,
 					Person__r.Gender__c
-				FROM Farmer__c WHERE Name = :name];
+				FROM Farmer__c 
+				WHERE Name = :name];
 		
 	}
 	
 	public List<Farmer__c> getFarmersByStatus(String status){
-		// Select the client by status 
+		// Select the client by status
+		// when the service gets a request for a status New we get items with Status New but also empty
+		if(status == 'New'){
+			return [SELECT 
+					ID, 
+					Name, 
+					Person__r.First_Name__c,
+					Person__r.Last_Name__c,
+					Person__r.Date_of_Birth__c,
+					Person__r.Mobile_Number__c,
+					Person__r.Phone_Number__c,
+					Person__r.ID_Number__c,
+					Person__r.Village__c,
+					Person__r.District__r.Name,
+					Person__r.City__c,
+					Person__r.Country__r.Name,
+					Person__r.Gender__c
+				FROM Farmer__c WHERE Status__c = 'New' OR Status__c = ''];
+		}
+		
+		// if not status New, get the other
 		return [SELECT 
 					ID, 
 					Name, 
@@ -62,6 +82,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Name, 
 					Amount_Applied_For__c,
 					Amount_Approved__c,
+					Balance__c,
 					Application_Date__c,
 					Currency__c,
 					Decision_Date__c,
@@ -81,6 +102,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Name, 
 					Amount_Applied_For__c,
 					Amount_Approved__c,
+					Balance__c,
 					Application_Date__c,
 					Currency__c,
 					Decision_Date__c,

@@ -42,7 +42,7 @@ class LoanService (val apiSession: ApiSession) {
             "Status" -> updateLoan.Status
         )
 
-        val jsonResult = request.patch(loanRequest, parameters)
+        val jsonResult = request.post(loanRequest, parameters)
         val myObject = jsonResult.get.convertTo[LoanResponse]
 
         return Some(myObject)
@@ -66,8 +66,20 @@ class LoanService (val apiSession: ApiSession) {
         val json = updateLoans.toJson
         logger.info(json.toString)
 
-        val jsonResult = request.patch(loansRequest, json.toString)
+        val jsonResult = request.post(loansRequest, json.toString)
         val myObject = jsonResult.get.convertTo[LoansResponse]
+
+        return myObject
+    }
+
+    def getRepayments(loanId: String) : RepaymentResponse =  {
+
+        val parameters = Map[String, String](
+            "LoanId" -> loanId
+        )
+
+        val jsonResult = request.get(repaymentRequest, parameters)
+        val myObject = jsonResult.get.convertTo[RepaymentResponse]
 
         return myObject
     }
@@ -78,7 +90,7 @@ class LoanService (val apiSession: ApiSession) {
         val json = repayments.toJson
         logger.info(json.toString)
 
-        val jsonResult = request.patch(repaymentRequest, json.toString)
+        val jsonResult = request.post(repaymentRequest, json.toString)
         val myObject = jsonResult.get.convertTo[LoansResponse]
 
         return myObject

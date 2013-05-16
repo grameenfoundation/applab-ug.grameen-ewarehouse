@@ -109,7 +109,7 @@ private class LoansRestServiceTest {
 		test.stopTest();
 	
 		// assert error returned
-		System.assertEquals('400',result.code);
+		System.assertEquals('500',result.code);
 		
 		System.debug('Test finished');
 		// reset the datasource
@@ -318,8 +318,8 @@ private class LoansRestServiceTest {
  
  		// do the request
 		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default"},{"Id":"'+loanId2+'","Status":"Applied"}]}');
+		req.httpMethod = 'POST';
+		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default", "Balance": 100.02},{"Id":"'+loanId2+'","Status":"Applied", "Balance": 100.03}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
@@ -336,7 +336,8 @@ private class LoansRestServiceTest {
 		
 		List<Loan__c> lstLoan1 = [SELECT 
 										ID, 
-										Status__c
+										Status__c,
+										Balance__c
 									FROM Loan__c WHERE Farmer__c = :farmer1.Id];
 		
 		System.assertEquals(1, lstLoan1.size());
@@ -344,7 +345,8 @@ private class LoansRestServiceTest {
         
         List<Loan__c> lstLoan2 = [SELECT 
 										ID, 
-										Status__c
+										Status__c,
+										Balance__c
 									FROM Loan__c WHERE Farmer__c = :farmer2.Id];
 		
 		System.assertEquals(1, lstLoan2.size());
@@ -398,25 +400,26 @@ private class LoansRestServiceTest {
  
  		// do the request
 		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default"},{"Id":"non-existing","Status":"Default"}]}');
+		req.httpMethod = 'POST';
+		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default", "Balance": 100.02},{"Id":"non-existing","Status":"Default", "Balance": 100.03}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.ErrorMapResponse result = (EwarehouseServiceBase.ErrorMapResponse)LoansRestService.updateLoans();
+		LoansRestService.LoansErrorResponse result = (LoansRestService.LoansErrorResponse)LoansRestService.updateLoans();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('400', result.code);
-		System.assertEquals('Not all IDs where found as client, attached Ids not updated.', result.description);
+		System.assertEquals('Not all IDs where found as loans, attached Ids not updated.', result.description);
 		
 		// assert that the farmers are the same for the not updated farmers
 		List<Loan__c> lstLoan1 = [SELECT 
 										Id, 
-										Status__c
+										Status__c,
+										Balance__c
 									FROM Loan__c WHERE Id = :loanId1];
 		
 		System.assertEquals(1, lstLoan1.size());
@@ -424,7 +427,8 @@ private class LoansRestServiceTest {
         // farmer 2 was not updated, the Id was wrong
         List<Loan__c> lstLoan2 = [SELECT 
 										Id, 
-										Status__c
+										Status__c,
+										Balance__c
 									FROM Loan__c WHERE Id = :loanId2];
 		
 		System.assertEquals(1, lstLoan2.size());
@@ -445,9 +449,10 @@ private class LoansRestServiceTest {
  		// do the request
 		// do the request
 		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
+		req.httpMethod = 'POST';
 		// error in the JSON last Id wrong
-		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Duplicate"},{"Ids":"dummy","Status":"Failed"}]}');
+		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Ids":"dummy","Status":"Failed", "Balance": 100.01}]}';
+		req.requestBody = Blob.valueOf(jsonString);
 		
 		RestContext.request = req;
 		RestContext.response = res;
@@ -459,7 +464,7 @@ private class LoansRestServiceTest {
 		
 		// assert what was stored
 		System.assertEquals('400', result.code);
-		System.assertEquals('JSON ERROR: We could find required parameter [Id] in one of the objects', result.description);
+		System.assertEquals('We could find the property Id in the passed json: ['+ jsonString +']', result.description);
 		
 		System.debug('Test finished');
  		
@@ -475,9 +480,10 @@ private class LoansRestServiceTest {
  
  		// do the request
 		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
+		req.httpMethod = 'POST';
 		// error in the JSON, last Status wrong
-		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Duplicate"},{"Id":"dummy","Statqs":"Failed"}]}');
+		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Id":"dummy","Statqs":"Failed", "Balance": 100.01}]}';
+		req.requestBody = Blob.valueOf(jsonString);
 		
 		RestContext.request = req;
 		RestContext.response = res;
@@ -489,9 +495,40 @@ private class LoansRestServiceTest {
 		
 		// assert what was stored
 		System.assertEquals('400',result.code);
-		System.assertEquals('JSON ERROR: We could find required parameter [Status] in one of the objects', result.description);
+		System.assertEquals('We could find the property Status in the passed json: ['+ jsonString +']', result.description);
 		
        
+		System.debug('Test finished');
+ 		
+    }
+    
+    static testMethod void updateLoansNoBalanceParam() {
+    	
+ 		test.startTest();
+
+		// create request and response
+    	RestRequest req = new RestRequest(); 
+		RestResponse res = new RestResponse();
+ 
+ 		// do the request
+		req.requestURI = testRequestURI;
+		req.httpMethod = 'POST';
+		// error in the JSON, last Balance wrong
+		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Id":"dummy","Status":"Failed", "Bslance": 100.01}]}';
+		req.requestBody = Blob.valueOf(jsonString);
+		
+		RestContext.request = req;
+		RestContext.response = res;
+		
+		// retrieve an error
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoansRestService.updateLoans();
+		
+		test.stopTest();
+		
+		// assert what was stored
+		System.assertEquals('400',result.code);
+		System.assertEquals('We could find the property Balance in the passed json: ['+ jsonString +']', result.description);
+	   
 		System.debug('Test finished');
  		
     }
@@ -509,8 +546,8 @@ private class LoansRestServiceTest {
  
  		// do the request
 		req.requestURI = testRequestURI;
-		req.httpMethod = 'PATCH';
-		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Processed"}]');
+		req.httpMethod = 'POST';
+		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Processed", "Balance":100.01}]');
 		
 		RestContext.request = req;
 		RestContext.response = res;
@@ -521,7 +558,7 @@ private class LoansRestServiceTest {
 		test.stopTest();
 	
 		// assert error returned
-		System.assertEquals('400',result.code);
+		System.assertEquals('500',result.code);
 		
 		System.debug('Test finished');
 		
