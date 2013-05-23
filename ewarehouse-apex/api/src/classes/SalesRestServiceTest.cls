@@ -1,12 +1,12 @@
 /**
- * This class contains unit tests for validating the behavior of Loans REST API
+ * This class contains unit tests for validating the behavior of Sales REST API
  */
 @isTest
-private class LoansRestServiceTest {
+private class SalesRestServiceTest {
 
-	private static String testRequestURI = '/services/apexrest/ewarehouse/loans'; 
+	private static String testRequestURI = '/services/apexrest/ewarehouse/sales'; 
 
-    static testMethod void getLoans() {
+    static testMethod void getSales() {
     	
     	// create and insert country
     	Country__c country = getTestCountry();
@@ -41,6 +41,20 @@ private class LoansRestServiceTest {
     	insert loan1;
     	insert loan2;
     	
+    	Sale__c sale1 = getSale(farmer1);
+    	Sale__c sale2 = getSale(farmer2);
+    	insert sale1;
+    	insert sale2;
+    	
+    	Sale_Farmer__c sf1 = getSaleFarmer(sale1, farmer1);
+    	Sale_Farmer__c sf2 = getSaleFarmer(sale1, farmer2);
+    	Sale_Farmer__c sf3 = getSaleFarmer(sale2, farmer1);
+    	Sale_Farmer__c sf4 = getSaleFarmer(sale2, farmer2);
+    	insert sf1;
+    	insert sf2;
+    	insert sf3;
+    	insert sf4;
+    	
  		// ready to start the test
  		test.startTest();
     	
@@ -51,37 +65,22 @@ private class LoansRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
-		req.addParameter('Status', 'Applied');
+		req.addParameter('Status', 'New');
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the loan (normally converted to JSON via API)
-		LoansRestService.LoansResponse result = (LoansRestService.LoansResponse) LoansRestService.getLoans();
+		SalesRestService.SalesResponse result = (SalesRestService.SalesResponse) SalesRestService.getSales();
 		
 		test.stopTest();
 		
 		// assert what was stored
+		system.debug(result);
 		
-		System.assertEquals('200',result.code);
-		System.assertEquals('OK',result.description);
-		
-		System.assertEquals(130000,result.loans[0].AmountApplied);
-		System.assertEquals(120000,result.loans[0].AmountApproved);
-		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[0].ApplicationDate);
-		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[0].DecisionDate);
-		System.assertEquals('Applied',result.loans[0].Status);
-		System.assertEquals(farmerId1,result.loans[0].FarmerId);
-		
-		System.assertEquals(130000,result.loans[1].AmountApplied);
-		System.assertEquals(120000,result.loans[1].AmountApproved);
-		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[1].ApplicationDate);
-		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[1].DecisionDate);
-		System.assertEquals('Applied',result.loans[1].Status);
-		System.assertEquals(farmerId2,result.loans[1].FarmerId);
 		
 		System.debug('Test finished');
     }
-    
+    /*
     static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
@@ -272,8 +271,9 @@ private class LoansRestServiceTest {
 		System.debug('Test finished');
     	
     }
+    */
     
-    static testMethod void updateLoan() {
+    static testMethod void updateSale() {
     	// create and insert country
     	Country__c country = getTestCountry();
     	insert country;
@@ -305,11 +305,20 @@ private class LoansRestServiceTest {
     	insert loan1;
     	insert loan2;
     	
-    	String farmerId1 = farmer1.Id;
-    	String farmerId2 = farmer2.Id;
-    	String loanId1 = loan1.Id;
-    	String loanId2 = loan2.Id;
+    	Sale__c sale1 = getSale(farmer1);
+    	Sale__c sale2 = getSale(farmer2);
+    	insert sale1;
+    	insert sale2;
     	
+    	Sale_Farmer__c sf1 = getSaleFarmer(sale1, farmer1);
+    	Sale_Farmer__c sf2 = getSaleFarmer(sale1, farmer2);
+    	Sale_Farmer__c sf3 = getSaleFarmer(sale2, farmer1);
+    	Sale_Farmer__c sf4 = getSaleFarmer(sale2, farmer2);
+    	insert sf1;
+    	insert sf2;
+    	insert sf3;
+    	insert sf4;
+    		
  		test.startTest();
 
 		// create request and response
@@ -319,13 +328,13 @@ private class LoansRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
-		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default", "Balance": 100.02},{"Id":"'+loanId2+'","Status":"Applied", "Balance": 100.03}]}');
-		
+        req.requestBody = Blob.valueOf('[{"Id":"'+sale1.Id+'","Status":"Duplicate"},{"Id":"'+sale2.Id+'","Status":"Failed"}]}');
+        
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse) LoansRestService.updateLoans();
+		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse) SalesRestService.updateSales();
 		
 		test.stopTest();
 		
@@ -333,28 +342,26 @@ private class LoansRestServiceTest {
 		System.assertEquals('200', result.code);
 		System.assertEquals('Update success', result.description);
 		
-		List<Loan__c> lstLoan1 = [SELECT 
+		List<Sale__c> lstSale1 = [SELECT 
 										ID, 
-										Status__c,
-										Balance__c
-									FROM Loan__c WHERE Farmer__c = :farmer1.Id];
+										Status__c
+									FROM Sale__c WHERE Id = :sale1.Id];
 		
-		System.assertEquals(1, lstLoan1.size());
-		System.assertEquals('Default', lstLoan1.get(0).Status__c);
+		System.assertEquals(1, lstSale1.size());
+		System.assertEquals('Duplicate', lstSale1.get(0).Status__c);
         
-        List<Loan__c> lstLoan2 = [SELECT 
+        List<Sale__c> lstSale2 = [SELECT 
 										ID, 
-										Status__c,
-										Balance__c
-									FROM Loan__c WHERE Farmer__c = :farmer2.Id];
+										Status__c
+									FROM Sale__c WHERE Id = :sale2.Id];
 		
-		System.assertEquals(1, lstLoan2.size());
-		System.assertEquals('Applied', lstLoan2.get(0).Status__c);
+		System.assertEquals(1, lstSale2.size());
+		System.assertEquals('Failed', lstSale2.get(0).Status__c);
        
 		System.debug('Test finished');
  		
     }
-    
+    /*
     static testMethod void updateLoansNotExists() {
 		// create and insert country
     	Country__c country = getTestCountry();
@@ -565,6 +572,7 @@ private class LoansRestServiceTest {
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
  		
     }
+    */
         
     static District__c getTestDistrict(){
     	District__c district = new District__c();
@@ -620,5 +628,24 @@ private class LoansRestServiceTest {
     	
 		return loan;
     	
+    }
+    
+    static Sale__c getSale(Farmer__c farmer){
+    	Sale__c sale = new Sale__c();
+    	sale.Farmer__c = farmer.Id;
+    	sale.Purchaser_Name__c = 'John the purchaser';
+    	sale.Sale_Date__c = date.newinstance(2013, 4, 30);
+    	sale.Sale_Price__c = 12000.20;
+    	sale.Volume_Sold__c = 10101.01;
+    	sale.Status__c = 'New';
+    	return sale;
+    }
+    
+    static Sale_Farmer__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
+    	Sale_Farmer__c sf = new Sale_Farmer__c();
+    	sf.Amount_Applied__c = 6000.10;
+    	sf.Farmer__c = farmer.Id;
+    	sf.Sale__c = sale.Id;
+    	return sf;
     }
 }

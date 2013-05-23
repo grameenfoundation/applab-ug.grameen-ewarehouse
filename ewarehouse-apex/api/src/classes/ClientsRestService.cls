@@ -48,12 +48,11 @@ global class ClientsRestService extends EwarehouseServiceBase  {
     @HttpPost
     global static EwarehouseServiceBase.ServiceResultResponse updateClients(){ //String id, String status
         
-        // take the client from the parameters
-        String jsonString = RestContext.request.requestBody.toString(); 
+        // take the JSON from the body
+    	String jsonString = RestContext.request.requestBody.toString(); 
         system.debug('json: ' + jsonString);
         
-        // parse the client data
-        //List<Map<String, String>> parameters = (List<Map<String, String>>) JSON.deserialize(jsonString, Map<String, String>.class);
+        // parse the client update data
         List<Map<String, String>> parameters = (List<Map<String, String>>) JSON.deserialize(jsonString, List<Map<String, String>>.class);
         system.debug(parameters);
         

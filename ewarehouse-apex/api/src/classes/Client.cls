@@ -12,6 +12,7 @@ global with sharing class Client {
     public String District { get; set; }
     public String City { get; set; }
     public String Country { get; set; }
+    public String PictureURL { get;set; }
     
     public static Client fromFarmer(Farmer__c farmer){
     	
@@ -36,6 +37,7 @@ global with sharing class Client {
 		    client.Gender = personRef.Gender__c;
 		    client.Village = personRef.Village__c;
 		    client.City = personRef.City__c;
+		    client.PictureURL = personRef.Picture_URL__c;
     	}
     	
     	if(districtRef != null)

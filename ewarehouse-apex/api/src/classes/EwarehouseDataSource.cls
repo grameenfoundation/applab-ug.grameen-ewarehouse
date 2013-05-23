@@ -20,6 +20,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Village__c,
 					Person__r.District__r.Name,
 					Person__r.City__c,
+					Person__r.Picture_URL__c,
 					Person__r.Country__r.Name,
 					Person__r.Gender__c
 				FROM Farmer__c 
@@ -43,6 +44,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Village__c,
 					Person__r.District__r.Name,
 					Person__r.City__c,
+					Person__r.Picture_URL__c,
 					Person__r.Country__r.Name,
 					Person__r.Gender__c
 				FROM Farmer__c WHERE Status__c = 'New' OR Status__c = ''];
@@ -61,6 +63,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Village__c,
 					Person__r.District__r.Name,
 					Person__r.City__c,
+					Person__r.Picture_URL__c,
 					Person__r.Country__r.Name,
 					Person__r.Gender__c
 				FROM Farmer__c WHERE Status__c = :status];
@@ -138,6 +141,35 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Remarks__c
 				FROM Loan_Repayment__c WHERE Loan__r.Id = :loanId];
 	}
+	
+	// retrieve new sales (not synchronized)
+	public Sale__c[] getSales(String status){
+		return [SELECT 
+					Id, 
+					Name, 
+					Sale_Price__c,
+					Sale_Date__c,
+					Volume_Sold__c
+				FROM Sale__c WHERE Status__c = :status];
+	}
+	
+	public Sale_Farmer__c[] getSaleFarmers(String saleId){
+		return [SELECT 
+					Id, 
+					Name, 
+					Amount_Applied__c,
+					Farmer__c
+				FROM Sale_Farmer__c WHERE Sale__c = :saleId];
+	}
+	
+	public Sale__c[] getSales(Set<String> saleIds){
+		String q = 'SELECT Id, Name, Status__c FROM Sale__c WHERE Id IN :saleIds';
+		return Database.query(q);
+	}
+	
+	public Database.SaveResult updateSale(Sale__c sale){
+		return Database.update(sale);
+	}
 		
 	/*
 	 * Interface for accessing SalesForce objects for the e-Warehouse
@@ -172,6 +204,18 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		
 		// get loan repayments for a specific loan
 		Loan_Repayment__c[] getLoanRepayments(String loanId);
+		
+		// retrieve sales by status
+		Sale__c[] getSales(String status);
+		
+		// retrieve the sale/farmer list by Sale Id
+		Sale_Farmer__c[] getSaleFarmers(String saleId);
+		
+		// retrieve a list of Sales with a Set of Ids
+		Sale__c[] getSales(Set<String> saleIds);
+		
+		// update the Sale, currently only used to update the Status
+		Database.SaveResult updateSale(Sale__c sale);
 	}
 	
 	

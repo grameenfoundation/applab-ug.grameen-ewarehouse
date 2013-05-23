@@ -66,6 +66,7 @@ private class ClientRestServiceTest {
         System.assertEquals('Isiolo',result.client.District);
         System.assertEquals('Kenya',result.client.Country);
         System.assertEquals('ID0987654321',result.client.IDNumber);
+        System.assertEquals('Picture.jpg',result.client.PictureURL);
         
         System.debug('Test finished');
     }
@@ -452,6 +453,7 @@ private class ClientRestServiceTest {
         person.District__c = district.Id;
         person.Country__c = country.Id;
         person.ID_Number__c = 'ID0987654321';
+        person.Picture_URL__c = 'Picture.jpg';
         
         return person;
     }

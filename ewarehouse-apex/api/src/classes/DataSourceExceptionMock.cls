@@ -51,6 +51,26 @@ public with sharing class DataSourceExceptionMock {
 			throwError();
 			return null;
 		}
+		
+		public Sale__c[] getSales(String status){
+			throwError();
+			return null;
+		}
+		
+		public Sale_Farmer__c[] getSaleFarmers(String saleId){
+			throwError();
+			return null;
+		}
+		
+		public Sale__c[] getSales(Set<String> saleIds){
+			throwError();
+			return null;
+		}
+		
+		public Database.SaveResult updateSale(Sale__c sale){
+			throwError();
+			return null;
+		}
 	}
 	
 	public class UpdateFarmerLoanExceptionMock implements EwarehouseDataSource.IEwarehouseDataSource {
@@ -99,6 +119,26 @@ public with sharing class DataSourceExceptionMock {
 		}
 		
 		public Loan_Repayment__c[] getLoanRepayments(String loanId){
+			throwError();
+			return null;
+		}
+		
+		public Sale__c[] getSales(String status){
+			throwError();
+			return null;
+		}
+		
+		public Sale_Farmer__c[] getSaleFarmers(String saleId){
+			throwError();
+			return null;
+		}
+		
+		public Sale__c[] getSales(Set<String> saleIds){
+			throwError();
+			return null;
+		}
+		
+		public Database.SaveResult updateSale(Sale__c sale){
 			throwError();
 			return null;
 		}
