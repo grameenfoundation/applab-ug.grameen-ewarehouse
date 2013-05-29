@@ -2,32 +2,16 @@
  * This class contains unit tests for validating the behavior of Client REST API
  */
 @isTest
-private class ClientRestServiceTest {
+public class ClientRestServiceTest {
 // TODO create test for no farmer found and no parameter given, check other things that might happen
 
     private static String testRequestURI = '/services/apexrest/ewarehouse/client';
 
     static testMethod void getClient() {
         
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert a Person
-        Person__c person = getTestPerson(country, district);
-        insert person;
-        system.debug('person id=' + person.Id);
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer = getTestFarmer(person);
-        insert farmer;
-        
+        Map<String, String> ids = DataSourceMock.insertTestData();
         // get the newly inserted farmer id (name field)
-        String id = farmer.Name; 
+        String id = ids.get('farmer1Name');
         
         system.debug('Farmer Id=' + id);
         
@@ -56,17 +40,19 @@ private class ClientRestServiceTest {
         System.assertEquals('200',result.code);
         System.assertEquals('OK',result.description);
         System.assertEquals('Jane',result.client.FirstName);
+        System.assertEquals('The Actrice',result.client.MiddleName);
         System.assertEquals('Fonda',result.client.LastName);
         System.assertEquals(date.newinstance(1937, 12, 21),result.client.DateOfBirth);
         System.assertEquals('+254123456789',result.client.MobileNumber);
-        System.assertEquals('+254987654321',result.client.PhoneNumber);
         System.assertEquals('Female',result.client.Gender);
         System.assertEquals('Kisumu',result.client.Village);
         System.assertEquals('Kisumu city',result.client.City);
-        System.assertEquals('Isiolo',result.client.District);
+        System.assertEquals('Isiolo',result.client.District); 
         System.assertEquals('Kenya',result.client.Country);
         System.assertEquals('ID0987654321',result.client.IDNumber);
-        System.assertEquals('Picture.jpg',result.client.PictureURL);
+        System.assertEquals('http://www.himmelreich-it.com/image.jpg',result.client.PictureURL);
+        System.assertEquals('Ted Turner',result.client.NextOfKin);
+        System.assertEquals('+254123456788',result.client.NextOfKinTelephone);
         
         System.debug('Test finished');
     }
@@ -74,7 +60,7 @@ private class ClientRestServiceTest {
      static testMethod void getClientDMLException() {
         
         // set the datasource to mock
-        EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+        EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
         
         // ready to start the test
         test.startTest();
@@ -165,25 +151,9 @@ private class ClientRestServiceTest {
     }
     
     static testMethod void updateClient() {
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert a Person
-        Person__c person = getTestPerson(country, district);
-        insert person;
-        system.debug('person id=' + person.Id);
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer = getTestFarmer(person);
-        insert farmer;
-        
+         Map<String, String> ids = DataSourceMock.insertTestData();
         // get the newly inserted farmer id (name field)
-        String id = farmer.Name; 
+        String id = ids.get('farmer1Name');
         
         system.debug('farmer id=' + id);
         
@@ -227,25 +197,11 @@ private class ClientRestServiceTest {
     }
     
     static testMethod void updateClientNotExists() {
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
         
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert a Person
-        Person__c person = getTestPerson(country, district);
-        insert person;
-        system.debug('person id=' + person.Id);
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer = getTestFarmer(person);
-        insert farmer;
+        Map<String, String> ids = DataSourceMock.insertTestData();
         
         // get the newly inserted farmer id (name field), but create an error
-        String id = farmer.Name + 'oeps'; 
+        String id = ids.get('farmer1Name') + 'oeps'; 
         
         system.debug('farmer id=' + id);
         
@@ -277,27 +233,11 @@ private class ClientRestServiceTest {
     
     static testMethod void updateClientDMLException() {
         // set the datasource to mock
-        EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerLoanExceptionMock());
+        EwarehouseServiceBase.setDataSource(new DataSourceMock.UpdateFarmerLoanExceptionMock());
         
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert a Person
-        Person__c person = getTestPerson(country, district);
-        insert person;
-        system.debug('person id=' + person.Id);
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer = getTestFarmer(person);
-        insert farmer;
-        
+         Map<String, String> ids = DataSourceMock.insertTestData();
         // get the newly inserted farmer id (name field)
-        String id = farmer.Name; 
+        String id = ids.get('farmer1Name');
         
         system.debug('farmer id=' + id);
         
@@ -331,7 +271,7 @@ private class ClientRestServiceTest {
     
     static testMethod void updateClientGetException() {
         // set the datasource to mock
-        EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+        EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
         
         // start the test
         test.startTest();
@@ -421,47 +361,5 @@ private class ClientRestServiceTest {
        
         System.debug('Test finished');
         
-    }
-    
-    
-    static District__c getTestDistrict(){
-        District__c district = new District__c();
-        district.Name = 'Isiolo';
-        return district;
-    }
-    
-    static Country__c getTestCountry(){
-        Country__c country = new Country__c();
-        country.Name = 'Kenya';
-        country.ISO_Standard_Code__c = 'KE';
-        country.Language__c = 'Swahili';
-        return country;
-    }
-
-    static Person__c getTestPerson(Country__c country, District__c district){
-        
-        Person__c person = new Person__c();
-        
-        person.First_Name__c = 'Jane';
-        person.Last_Name__c = 'Fonda';
-        person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
-        person.Raw_Mobile_Number__c = '+254123456789';
-        person.Phone_Number__c = '+254987654321';
-        person.Gender__c = 'Female';
-        person.Village__c = 'Kisumu';
-        person.City__c = 'Kisumu city';
-        person.District__c = district.Id;
-        person.Country__c = country.Id;
-        person.ID_Number__c = 'ID0987654321';
-        person.Picture_URL__c = 'Picture.jpg';
-        
-        return person;
-    }
-    
-    static Farmer__c getTestFarmer(Person__c person){
-        Farmer__c farmer = new Farmer__c();
-        farmer.Name = '3eyUUD';
-        farmer.Person__c = person.Id;
-        return farmer;
-    }
+    }    
 }

@@ -8,29 +8,8 @@ private class ClientsRestServiceTest{
     private static String testRequestURI = '/services/apexrest/ewarehouse/clients'; 
 
     static testMethod void getClients() {
-        
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        insert farmer1;
-        insert farmer2;
+        // insert test data
+        DataSourceMock.insertTestData();
         
         // ready to start the test
         test.startTest();
@@ -60,7 +39,6 @@ private class ClientsRestServiceTest{
         System.assertEquals('Fonda',result.clients[0].LastName);
         System.assertEquals(date.newinstance(1937, 12, 21),result.clients[0].DateOfBirth);
         System.assertEquals('+254123456789',result.clients[0].MobileNumber);
-        System.assertEquals('+254987654321',result.clients[0].PhoneNumber);
         System.assertEquals('Female',result.clients[0].Gender);
         System.assertEquals('Kisumu',result.clients[0].Village);
         System.assertEquals('Kisumu city',result.clients[0].City);
@@ -72,7 +50,6 @@ private class ClientsRestServiceTest{
         System.assertEquals('Lennon',result.clients[1].LastName);
         System.assertEquals(date.newinstance(1937, 12, 21),result.clients[1].DateOfBirth);
         System.assertEquals('+254123456789',result.clients[1].MobileNumber);
-        System.assertEquals('+254987654321',result.clients[1].PhoneNumber);
         System.assertEquals('Female',result.clients[1].Gender);
         System.assertEquals('Kisumu',result.clients[1].Village);
         System.assertEquals('Kisumu city',result.clients[1].City);
@@ -85,29 +62,12 @@ private class ClientsRestServiceTest{
     
     static testMethod void getNewClients() {
         
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
+        // insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
         
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        farmer2.Status__c = '';
-        insert farmer1;
-        insert farmer2;
+        Farmer__c farmer = [SELECT Status__c FROM Farmer__c WHERE Id = :ids.get('farmer2Id')];
+        farmer.Status__c = 'New';
+        update farmer;
         
         // ready to start the test
         test.startTest();
@@ -135,7 +95,6 @@ private class ClientsRestServiceTest{
         System.assertEquals('Lennon',result.clients[0].LastName);
         System.assertEquals(date.newinstance(1937, 12, 21),result.clients[0].DateOfBirth);
         System.assertEquals('+254123456789',result.clients[0].MobileNumber);
-        System.assertEquals('+254987654321',result.clients[0].PhoneNumber);
         System.assertEquals('Female',result.clients[0].Gender);
         System.assertEquals('Kisumu',result.clients[0].Village);
         System.assertEquals('Kisumu city',result.clients[0].City);
@@ -149,7 +108,7 @@ private class ClientsRestServiceTest{
     static testMethod void getClientDMLException() {
         
         // set the datasource to mock
-        EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+        EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
         
         // ready to start the test
         test.startTest();
@@ -211,28 +170,8 @@ private class ClientsRestServiceTest{
     
     static testMethod void getNoClientsReturned() {
 
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        insert farmer1;
-        insert farmer2;
+        // insert test data
+        DataSourceMock.insertTestData();
         
         // ready to start the test
         test.startTest();
@@ -265,29 +204,12 @@ private class ClientsRestServiceTest{
     
      static testMethod void getOneClientsReturned() {
 
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
+        // insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
         
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        farmer2.Status__c = 'Duplicate';
-        insert farmer1;
-        insert farmer2;
+        Farmer__c farmer = [SELECT Status__c FROM Farmer__c WHERE Id = :ids.get('farmer2Id')];
+        farmer.Status__c = 'Duplicate';
+        update farmer;
         
         // ready to start the test
         test.startTest();
@@ -318,7 +240,6 @@ private class ClientsRestServiceTest{
         System.assertEquals('Lennon',result.clients[0].LastName);
         System.assertEquals(date.newinstance(1937, 12, 21),result.clients[0].DateOfBirth);
         System.assertEquals('+254123456789',result.clients[0].MobileNumber);
-        System.assertEquals('+254987654321',result.clients[0].PhoneNumber);
         System.assertEquals('Female',result.clients[0].Gender);
         System.assertEquals('Kisumu',result.clients[0].Village);
         System.assertEquals('Kisumu city',result.clients[0].City);
@@ -331,29 +252,8 @@ private class ClientsRestServiceTest{
     }
     
     static testMethod void updateClient() {
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
-        
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        
-        insert farmer1;
-        insert farmer2;
+        // insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
         
         test.startTest();
 
@@ -364,7 +264,7 @@ private class ClientsRestServiceTest{
         // do the request
         req.requestURI = testRequestURI;
         req.httpMethod = 'POST';
-        req.requestBody = Blob.valueOf('[{"Id":"'+farmer1.Name+'","Status":"Duplicate"},{"Id":"'+farmer2.Name+'","Status":"Failed"}]}');
+        req.requestBody = Blob.valueOf('[{"Id":"'+ids.get('farmer1Name')+'","Status":"Duplicate"},{"Id":"'+ids.get('farmer2Name')+'","Status":"Failed"}]}');
         
         RestContext.request = req;
         RestContext.response = res;
@@ -382,7 +282,7 @@ private class ClientsRestServiceTest{
                                         ID, 
                                         Name, 
                                         Status__c
-                                    FROM Farmer__c WHERE Name = :farmer1.Name];
+                                    FROM Farmer__c WHERE Name = :ids.get('farmer1Name')];
         
         System.assertEquals(1, lstFarmer1.size());
         System.assertEquals('Duplicate', lstFarmer1.get(0).Status__c);
@@ -391,7 +291,7 @@ private class ClientsRestServiceTest{
                                         ID, 
                                         Name, 
                                         Status__c
-                                    FROM Farmer__c WHERE Name = :farmer2.Name];
+                                    FROM Farmer__c WHERE Name = :ids.get('farmer2Name')];
         
         System.assertEquals(1, lstFarmer2.size());
         System.assertEquals('Failed', lstFarmer2.get(0).Status__c);
@@ -401,29 +301,9 @@ private class ClientsRestServiceTest{
     }
     
     static testMethod void updateClientsNotExists() {
-        // create and insert country
-        Country__c country = getTestCountry();
-        insert country;
         
-        // create and insert district
-        District__c district = getTestDistrict();
-        insert district;
-        
-        // create and insert 2 Persons
-        Person__c person1 = getTestPerson(country, district);
-        Person__c person2 = getTestPerson(country, district);
-        person2.First_Name__c = 'John';
-        person2.Last_Name__c = 'Lennon';
-        insert person1;
-        insert person2;
-        
-        // with the person id, create and insert a Farmer
-        Farmer__c farmer1 = getTestFarmer(person1);
-        Farmer__c farmer2 = getTestFarmer(person2);
-        farmer2.Name = '2eyUUD';
-        
-        insert farmer1;
-        insert farmer2;
+        // insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
         
         test.startTest();
 
@@ -434,7 +314,7 @@ private class ClientsRestServiceTest{
         // do the request
         req.requestURI = testRequestURI;
         req.httpMethod = 'POST';
-        req.requestBody = Blob.valueOf('[{"Id":"'+farmer1.Name+'","Status":"Duplicate"},{"Id":"2eyUUE","Status":"Failed"}]}');
+        req.requestBody = Blob.valueOf('[{"Id":"'+ids.get('farmer1Name')+'","Status":"Duplicate"},{"Id":"2eyUUE","Status":"Failed"}]}');
         
         RestContext.request = req;
         RestContext.response = res;
@@ -453,7 +333,7 @@ private class ClientsRestServiceTest{
                                         ID, 
                                         Name, 
                                         Status__c
-                                    FROM Farmer__c WHERE Name = :farmer1.Name];
+                                    FROM Farmer__c WHERE Name = :ids.get('farmer1Name')];
         
         System.assertEquals(1, lstFarmer1.size());
         System.assertEquals('Duplicate', lstFarmer1.get(0).Status__c);
@@ -463,7 +343,7 @@ private class ClientsRestServiceTest{
                                         ID, 
                                         Name, 
                                         Status__c
-                                    FROM Farmer__c WHERE Name = :farmer2.Name];
+                                    FROM Farmer__c WHERE Name = :ids.get('farmer2Name')];
         
         System.assertEquals(1, lstFarmer2.size());
         System.assertEquals('Processed', lstFarmer2.get(0).Status__c);
@@ -536,7 +416,7 @@ private class ClientsRestServiceTest{
     
     static testMethod void updateClientGetException() {
         // set the datasource to mock
-        EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+        EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
         
         // start the test
         test.startTest();
@@ -566,46 +446,5 @@ private class ClientsRestServiceTest{
         // reset the datasource
         EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
         
-    }
-        
-    static District__c getTestDistrict(){
-        District__c district = new District__c();
-        district.Name = 'Isiolo';
-        return district;
-    }
-    
-    static Country__c getTestCountry(){
-        Country__c country = new Country__c();
-        country.Name = 'Kenya';
-        country.ISO_Standard_Code__c = 'KE';
-        country.Language__c = 'Swahili';
-        return country;
-    }
-
-    static Person__c getTestPerson(Country__c country, District__c district){
-        
-        Person__c person = new Person__c();
-        
-        person.First_Name__c = 'Jane';
-        person.Last_Name__c = 'Fonda';
-        person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
-        person.Raw_Mobile_Number__c = '+254123456789';
-        person.Phone_Number__c = '+254987654321';
-        person.Gender__c = 'Female';
-        person.Village__c = 'Kisumu';
-        person.City__c = 'Kisumu city';
-        person.District__c = district.Id;
-        person.Country__c = country.Id;
-        person.ID_Number__c = 'ID0987654321';
-        
-        return person;
-    }
-    
-    static Farmer__c getTestFarmer(Person__c person){
-        Farmer__c farmer = new Farmer__c();
-        farmer.Name = '3eyUUD';
-        farmer.Person__c = person.Id;
-        farmer.Status__c = 'Processed';
-        return farmer;
-    }
+    }   
 }

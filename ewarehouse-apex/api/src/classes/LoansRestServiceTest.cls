@@ -8,38 +8,8 @@ private class LoansRestServiceTest {
 
     static testMethod void getLoans() {
     	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
+    	//insert testdata
+    	Map<String, String> ids = DataSourceMock.insertTestData();
     	
  		// ready to start the test
  		test.startTest();
@@ -70,14 +40,14 @@ private class LoansRestServiceTest {
 		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[0].ApplicationDate);
 		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[0].DecisionDate);
 		System.assertEquals('Applied',result.loans[0].Status);
-		System.assertEquals(farmerId1,result.loans[0].FarmerId);
+		System.assertEquals(ids.get('farmer1Name'), result.loans[0].FarmerId);
 		
 		System.assertEquals(130000,result.loans[1].AmountApplied);
 		System.assertEquals(120000,result.loans[1].AmountApproved);
 		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[1].ApplicationDate);
 		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[1].DecisionDate);
 		System.assertEquals('Applied',result.loans[1].Status);
-		System.assertEquals(farmerId2,result.loans[1].FarmerId);
+		System.assertEquals(ids.get('farmer2Name'), result.loans[1].FarmerId);
 		
 		System.debug('Test finished');
     }
@@ -85,7 +55,7 @@ private class LoansRestServiceTest {
     static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// ready to start the test
  		test.startTest();
@@ -146,31 +116,10 @@ private class LoansRestServiceTest {
     
     static testMethod void getNoLoansReturned() {
 
- 		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+ 		//insert testdata
+    	//Map<String, String> ids = DataSourceMock.insertTestData();
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
     	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
     	
  		// ready to start the test
  		test.startTest();
@@ -203,38 +152,13 @@ private class LoansRestServiceTest {
     
      static testMethod void getOneLoanReturned() {
 
- 		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+ 		//insert testdata
+    	Map<String, String> ids = DataSourceMock.insertTestData();
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
     	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	loan2.Status__c = 'Default';
-    	insert loan1;
-    	insert loan2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
+    	delete [SELECT Id FROM Loan_Repayment__c WHERE Loan__c = :ids.get('loan2Id')];
+    	//delete [SELECT Id FROM Loan_Repayment__c WHERE Loan__c = :ids.get('loan2Id')];
+    	delete [SELECT Id FROM Loan__c WHERE Id = :ids.get('loan2Id')];
     	
  		// ready to start the test
  		test.startTest();
@@ -267,49 +191,20 @@ private class LoansRestServiceTest {
 		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[0].ApplicationDate);
 		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[0].DecisionDate);
 		System.assertEquals('Applied',result.loans[0].Status);
-		System.assertEquals(farmerId1,result.loans[0].FarmerId);
+		System.assertEquals(ids.get('farmer1Name'),result.loans[0].FarmerId);
 		
 		System.debug('Test finished');
     	
     }
     
     static testMethod void updateLoan() {
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	loan2.Status__c = 'Default';
-    	insert loan1;
-    	insert loan2;
-    	
-    	String farmerId1 = farmer1.Id;
-    	String farmerId2 = farmer2.Id;
-    	String loanId1 = loan1.Id;
-    	String loanId2 = loan2.Id;
-    	
+    	//insert testdata
+    	Map<String, String> ids = DataSourceMock.insertTestData();
+    	String farmerId1 = ids.get('farmer1Id');
+    	String farmerId2 = ids.get('farmer2Id');
+    	String loanId1 = ids.get('loan1Id');
+    	String loanId2 = ids.get('loan2Id');
+    	    	
  		test.startTest();
 
 		// create request and response
@@ -337,7 +232,7 @@ private class LoansRestServiceTest {
 										ID, 
 										Status__c,
 										Balance__c
-									FROM Loan__c WHERE Farmer__c = :farmer1.Id];
+									FROM Loan__c WHERE Farmer__c = :farmerId1];
 		
 		System.assertEquals(1, lstLoan1.size());
 		System.assertEquals('Default', lstLoan1.get(0).Status__c);
@@ -346,7 +241,7 @@ private class LoansRestServiceTest {
 										ID, 
 										Status__c,
 										Balance__c
-									FROM Loan__c WHERE Farmer__c = :farmer2.Id];
+									FROM Loan__c WHERE Farmer__c = :farmerId2];
 		
 		System.assertEquals(1, lstLoan2.size());
 		System.assertEquals('Applied', lstLoan2.get(0).Status__c);
@@ -356,40 +251,13 @@ private class LoansRestServiceTest {
     }
     
     static testMethod void updateLoansNotExists() {
-		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+		//insert testdata
+    	Map<String, String> ids = DataSourceMock.insertTestData();
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	String farmerId1 = farmer1.Id;
-    	String farmerId2 = farmer2.Id;
-    	String loanId1 = loan1.Id;
-    	String loanId2 = loan2.Id;
+    	String farmerId1 = ids.get('farmer1Name');
+    	String farmerId2 = ids.get('farmer2Name');
+    	String loanId1 = ids.get('loan1Id');
+    	String loanId2 = ids.get('loan2Id');
     	
  		test.startTest();
 
@@ -534,7 +402,7 @@ private class LoansRestServiceTest {
     
     static testMethod void updateLoansGetException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -588,7 +456,6 @@ private class LoansRestServiceTest {
     	person.Last_Name__c = 'Fonda';
     	person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
     	person.Raw_Mobile_Number__c = '+254123456789';
-    	person.Phone_Number__c = '+254987654321';
     	person.Gender__c = 'Female';
     	person.Village__c = 'Kisumu';
     	person.City__c = 'Kisumu city';

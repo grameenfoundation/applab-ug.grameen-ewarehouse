@@ -8,30 +8,11 @@ private class LoanRestServiceTest {
 
     static testMethod void getLoan() {
     	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
-    	
-    	// create a loan
-    	Loan__c loan = getLoan(farmer);
-    	insert loan;
-    	
-    	// get the newly inserted farmer id (name field)
-    	String farmerId = farmer.Name;
-    	String id = loan.Id; 
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+    	String farmerId = ids.get('farmer1Name');
+    	String id = ids.get('loan1Id'); 
  		
  		system.debug('Loan Id=' + id);
  		
@@ -75,7 +56,7 @@ private class LoanRestServiceTest {
     static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// ready to start the test
  		test.startTest();
@@ -104,7 +85,7 @@ private class LoanRestServiceTest {
 		System.debug('Test finished');
 		// reset the datasource
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
-     }
+    }
     
     static testMethod void getLoanNoIdParam() {
     	// ready to start the test
@@ -166,30 +147,11 @@ private class LoanRestServiceTest {
     }
 
     static testMethod void updateLoan() {
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
-    
-    	// create a loan
-    	Loan__c loan = getLoan(farmer);
-    	insert loan;
-    	
-    	// get the newly inserted farmer id (name field)
-    	String farmerId = farmer.Name;
-    	String id = loan.Id; 
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+    	String farmerId = ids.get('farmer1Name');
+    	String id = ids.get('loan1Id'); 
  		
  		system.debug('Loan Id=' + id);
  		
@@ -235,30 +197,11 @@ private class LoanRestServiceTest {
     
     
     static testMethod void updateClientNotExists() {
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
-    	
-    	// create a loan
-    	Loan__c loan = getLoan(farmer);
-    	insert loan;
-    	
-    	// get the newly inserted farmer id (name field)
-    	String farmerId = farmer.Name;
-    	String id = loan.Id + 'oeps'; 
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+    	String farmerId = ids.get('farmer1Name');
+    	String id = ids.get('loan1Id') + 'oeps'; 
  		
  		system.debug('Loan Id=' + id);
  	 		
@@ -291,32 +234,13 @@ private class LoanRestServiceTest {
     
     static testMethod void updateLoanDMLException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.UpdateFarmerLoanExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.UpdateFarmerLoanExceptionMock());
      	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person = getTestPerson(country, district);
-    	insert person;
-    	system.debug('person id=' + person.Id);
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer = getTestFarmer(person);
-    	insert farmer;
-    	
-    	// create a loan
-    	Loan__c loan = getLoan(farmer);
-    	insert loan;
-    	
-    	// get the newly inserted farmer id (name field)
-    	String farmerId = farmer.Name;
-    	String id = loan.Id; 
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+    	String farmerId = ids.get('farmer1Name');
+    	String id = ids.get('loan1Id'); 
  		
  		system.debug('Loan Id=' + id);
  		
@@ -351,7 +275,7 @@ private class LoanRestServiceTest {
     
     static testMethod void updateLoanGetException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -385,7 +309,7 @@ private class LoanRestServiceTest {
     
     static testMethod void updateLoanBalanceParseException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -419,7 +343,7 @@ private class LoanRestServiceTest {
     
     static testMethod void updateLoanBalanceEmptyException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -542,65 +466,8 @@ private class LoanRestServiceTest {
 		// assert what was stored
 		System.assertEquals('400',result.code);
 		System.assertEquals('We could find the property Balance in the passed json: ['+ jsonString +']', result.description);
-		
-       
+	   
 		System.debug('Test finished');
  		
-    }
-    
-    static District__c getTestDistrict(){
-    	District__c district = new District__c();
-    	district.Name = 'Isiolo';
-    	return district;
-    }
-    
-    static Country__c getTestCountry(){
-    	Country__c country = new Country__c();
-    	country.Name = 'Kenya';
-    	country.ISO_Standard_Code__c = 'KE';
-    	country.Language__c = 'Swahili';
-    	return country;
-    }
-
-    static Person__c getTestPerson(Country__c country, District__c district){
-    	
-    	Person__c person = new Person__c();
-    	
-    	person.First_Name__c = 'Jane';
-    	person.Last_Name__c = 'Fonda';
-    	person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
-    	person.Raw_Mobile_Number__c = '+254123456789';
-    	person.Phone_Number__c = '+254987654321';
-    	person.Gender__c = 'Female';
-    	person.Village__c = 'Kisumu';
-    	person.City__c = 'Kisumu city';
-    	person.District__c = district.Id;
-    	person.Country__c = country.Id;
-    	person.ID_Number__c = 'ID0987654321';
-    	
-    	return person;
-    }
-    
-    static Farmer__c getTestFarmer(Person__c person){
-    	Farmer__c farmer = new Farmer__c();
-    	farmer.Name = '3eyUUD';
-    	farmer.Person__c = person.Id;
-    	return farmer;
-    }
-    
-    static Loan__c getLoan(Farmer__c farmer){
-    	
-    	Loan__c loan = new Loan__c();
-		loan.Amount_Applied_For__c = 130000;
-		loan.Amount_Approved__c = 120000;
-		loan.Balance__c = 120000;
-		loan.Application_Date__c = date.newinstance(2013, 4, 30);
-		loan.Decision_Date__c = date.newinstance(2013, 5, 1);
-		loan.Status__c = 'Applied';
-		loan.Currency__c = 'KES';
-		loan.Farmer__c = farmer.Id;	
-    	
-		return loan;
-    	
     }
 }

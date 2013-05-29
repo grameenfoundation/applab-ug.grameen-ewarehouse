@@ -8,58 +8,8 @@ private class LoanRepaymentRestServiceTest {
 
     static testMethod void getLoanRepayments() {
     	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	// create sales
-    	Sale__c sale1_1 = getSale(farmer1);
-    	Sale__c sale1_2 = getSale(farmer1);
-    	Sale__c sale2_1 = getSale(farmer2);
-    	Sale__c sale2_2 = getSale(farmer2);
-    	insert sale1_1;
-    	insert sale1_2;
-    	insert sale2_1;
-    	insert sale2_2;
-    	
-    	// create loan repayments
-    	Loan_Repayment__c loanRepayment1_1 = getLoanRepayment(loan1, sale1_1);
-    	Loan_Repayment__c loanRepayment1_2 = getLoanRepayment(loan1, sale1_2);
-    	Loan_Repayment__c loanRepayment2_1 = getLoanRepayment(loan2, sale2_1);
-    	Loan_Repayment__c loanRepayment2_2 = getLoanRepayment(loan2, sale2_2);
-    	insert loanRepayment1_1;
-    	insert loanRepayment1_2;
-    	insert loanRepayment2_1;
-    	insert loanRepayment2_2;    	
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();    	
     	
  		// ready to start the test
  		test.startTest();
@@ -71,7 +21,7 @@ private class LoanRepaymentRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
-		req.addParameter('LoanId', loan1.Id);
+		req.addParameter('LoanId', ids.get('loan1Id'));
 		RestContext.request = req;
 		RestContext.response = res;
 		
@@ -86,16 +36,16 @@ private class LoanRepaymentRestServiceTest {
 		System.assertEquals('200',result.code);
 		System.assertEquals('OK',result.description);
 		
-		System.assertEquals(loanRepayment1_1.Amount__c, result.repayments[0].Amount);
-		System.assertEquals(loanRepayment1_1.Payment_Date__c, result.repayments[0].PaymentDate);
-		System.assertEquals(loanRepayment1_1.Remarks__c, result.repayments[0].Remarks);
-		System.assertEquals(loan1.Id, result.repayments[0].LoanId);
+		System.assertEquals(1500.00, result.repayments[0].Amount);
+		System.assertEquals(date.newinstance(2013, 4, 30), result.repayments[0].PaymentDate);
+		System.assertEquals('reason', result.repayments[0].Remarks);
+		System.assertEquals(ids.get('loan1Id'), result.repayments[0].LoanId);
 		//System.assertEquals(sale1_1.Id, result.repayments[0].SaleId);
 		
-		System.assertEquals(loanRepayment1_2.Amount__c, result.repayments[1].Amount);
-		System.assertEquals(loanRepayment1_2.Payment_Date__c, result.repayments[1].PaymentDate);
-		System.assertEquals(loanRepayment1_2.Remarks__c, result.repayments[1].Remarks);
-		System.assertEquals(loan1.Id, result.repayments[1].LoanId);
+		System.assertEquals(1500.00, result.repayments[1].Amount);
+		System.assertEquals(date.newinstance(2013, 4, 30), result.repayments[1].PaymentDate);
+		System.assertEquals('reason', result.repayments[1].Remarks);
+		System.assertEquals(ids.get('loan1Id'), result.repayments[1].LoanId);
 		//System.assertEquals(sale1_2.Id, result.repayments[1].SaleId);
 		
 		
@@ -106,7 +56,7 @@ private class LoanRepaymentRestServiceTest {
     static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// ready to start the test
  		test.startTest();
@@ -169,58 +119,8 @@ private class LoanRepaymentRestServiceTest {
     
     static testMethod void getNoLoanRepaymentsReturned() {
 
- 		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	// create sales
-    	Sale__c sale1_1 = getSale(farmer1);
-    	Sale__c sale1_2 = getSale(farmer1);
-    	Sale__c sale2_1 = getSale(farmer2);
-    	Sale__c sale2_2 = getSale(farmer2);
-    	insert sale1_1;
-    	insert sale1_2;
-    	insert sale2_1;
-    	insert sale2_2;
-    	
-    	// create loan repayments
-    	Loan_Repayment__c loanRepayment1_1 = getLoanRepayment(loan1, sale1_1);
-    	Loan_Repayment__c loanRepayment1_2 = getLoanRepayment(loan1, sale1_2);
-    	Loan_Repayment__c loanRepayment2_1 = getLoanRepayment(loan2, sale2_1);
-    	Loan_Repayment__c loanRepayment2_2 = getLoanRepayment(loan2, sale2_2);
-    	insert loanRepayment1_1;
-    	insert loanRepayment1_2;
-    	insert loanRepayment2_1;
-    	insert loanRepayment2_2;
+ 		// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
     	
  		// ready to start the test
  		test.startTest();
@@ -233,7 +133,7 @@ private class LoanRepaymentRestServiceTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
 		// set as parameter the just stored id
-		req.addParameter('LoanId', loan1.Id + 'nop');
+		req.addParameter('LoanId', ids.get('loan1Id') + 'nop');
 		RestContext.request = req;
 		RestContext.response = res;
 		
@@ -254,61 +154,10 @@ private class LoanRepaymentRestServiceTest {
     
     
     static testMethod void addLoanRepayment() {
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	// create sales
-    	Sale__c sale1_1 = getSale(farmer1);
-    	Sale__c sale1_2 = getSale(farmer1);
-    	Sale__c sale2_1 = getSale(farmer2);
-    	Sale__c sale2_2 = getSale(farmer2);
-    	insert sale1_1;
-    	insert sale1_2;
-    	insert sale2_1;
-    	insert sale2_2;
-    	
-    	/*// create loan repayments
-    	Loan_Repayment__c loanRepayment1_1 = getLoanRepayment(loan1, sale1_1);
-    	Loan_Repayment__c loanRepayment1_2 = getLoanRepayment(loan1, sale1_2);
-    	Loan_Repayment__c loanRepayment2_1 = getLoanRepayment(loan2, sale2_1);
-    	Loan_Repayment__c loanRepayment2_2 = getLoanRepayment(loan2, sale2_2);
-    	insert loanRepayment1_1;
-    	insert loanRepayment1_2;
-    	insert loanRepayment2_1;
-    	insert loanRepayment2_2;
-    	*/
-    	
-    	String json = '[{"LoanId" : "'+loan1.Id+'","SaleId" : "'+sale1_1.Id+'","Amount" : "130000","Remarks" : "Loan re-payment completed","PaymentDate" : "2013-04-17"}]';
+    	String json = '[{"LoanId" : "'+ids.get('loan1Id')+'","SaleId" : "'+ids.get('sale1_1Id')+'","Amount" : "130000","Remarks" : "Loan re-payment completed","PaymentDate" : "2013-04-17"}]';
     	
  		test.startTest();
 
@@ -324,6 +173,9 @@ private class LoanRepaymentRestServiceTest {
 		RestContext.request = req;
 		RestContext.response = res;
 		
+		// assert that the loan1 has two loan repayments as precheck
+		List<Loan_Repayment__c> lr1p = EwarehouseServiceBase.dataSource.getLoanRepayments(ids.get('loan1Id'));
+		System.assertEquals(2, lr1p.size());
 		// load the results in the client (normally converted to JSON via API)
 		EwarehouseServiceBase.SuccessResponse result = (EwarehouseServiceBase.SuccessResponse) LoanRepaymentRestService.addRepayments();
 		
@@ -333,62 +185,21 @@ private class LoanRepaymentRestServiceTest {
 		System.assertEquals('200', result.code);
 		System.assertEquals('Loan repayments posted successfully.', result.description);
 		
-		// assert that the loan1 has one loan repayment are the same for the not updated farmers
-		List<Loan_Repayment__c> lr1 = EwarehouseServiceBase.dataSource.getLoanRepayments(loan1.Id);
+		// assert that the loan1 has three loan repayments
+		List<Loan_Repayment__c> lr1 = EwarehouseServiceBase.dataSource.getLoanRepayments(ids.get('loan1Id'));
 		
-		System.assertEquals(1, lr1.size());
+		System.assertEquals(3, lr1.size());
        
 		System.debug('Test finished');
  		
     }
     
     static testMethod void addRepaymentsLoansNotExists() {
-		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+		// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	// create sales
-    	Sale__c sale1_1 = getSale(farmer1);
-    	Sale__c sale1_2 = getSale(farmer1);
-    	Sale__c sale2_1 = getSale(farmer2);
-    	Sale__c sale2_2 = getSale(farmer2);
-    	insert sale1_1;
-    	insert sale1_2;
-    	insert sale2_1;
-    	insert sale2_2;
-    	
-    	
-    	String json = '[{"LoanId" : "a1Oi00000001qsk","SaleId" : "'+sale1_1.Id+'","Amount" : "130000","Remarks" : "Loan re-payment completed","PaymentDate" : "2013-04-17"}]';
-    	
+    	String json = '[{"LoanId" : "a1Oi00000001qsk","SaleId" : "'+ids.get('sale1_1Id')+'","Amount" : "130000","Remarks" : "Loan re-payment completed","PaymentDate" : "2013-04-17"}]';
     	
  		test.startTest();
 
@@ -404,102 +215,25 @@ private class LoanRepaymentRestServiceTest {
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the client (normally converted to JSON via API)
+		// load the results (normally converted to JSON via API)
 		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse)LoanRepaymentRestService.addRepayments();
 		
 		test.stopTest();
 		
-		// assert what was stored
+		// assert an error, the payment was to a non-existing loan
 		System.assertEquals('500', result.code);
 		System.assertEquals('EXCEPTION:', result.description.substring(0, 10));
 		
-		// assert that the farmers are the same for the not updated farmers
+		// check if there are indeed no new payments
 		List<Loan_Repayment__c> lr1 = [SELECT 
 										Id
-									FROM Loan_Repayment__c WHERE Loan__c = :loan1.Id];
+									FROM Loan_Repayment__c WHERE Loan__c = :ids.get('loan1Id')];
 		
-		System.assertEquals(0, lr1.size());
+		// only the 2 existing loans should exist
+		System.assertEquals(2, lr1.size());
 		
 		System.debug('Test finished');
  		
     }
     
-    static District__c getTestDistrict(){
-    	District__c district = new District__c();
-    	district.Name = 'Isiolo';
-    	return district;
-    }
-    
-    static Country__c getTestCountry(){
-    	Country__c country = new Country__c();
-    	country.Name = 'Kenya';
-    	country.ISO_Standard_Code__c = 'KE';
-    	country.Language__c = 'Swahili';
-    	return country;
-    }
-
-    static Person__c getTestPerson(Country__c country, District__c district){
-    	
-    	Person__c person = new Person__c();
-    	
-    	person.First_Name__c = 'Jane';
-    	person.Last_Name__c = 'Fonda';
-    	person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
-    	person.Raw_Mobile_Number__c = '+254123456789';
-    	person.Phone_Number__c = '+254987654321';
-    	person.Gender__c = 'Female';
-    	person.Village__c = 'Kisumu';
-    	person.City__c = 'Kisumu city';
-    	person.District__c = district.Id;
-    	person.Country__c = country.Id;
-    	person.ID_Number__c = 'ID0987654321';
-    	
-    	return person;
-    }
-    
-    static Farmer__c getTestFarmer(Person__c person){
-    	Farmer__c farmer = new Farmer__c();
-    	farmer.Name = '3eyUUD';
-    	farmer.Person__c = person.Id;
-    	farmer.Status__c = 'Processed';
-    	return farmer;
-    }
-    
-    static Loan__c getLoan(Farmer__c farmer){
-    	
-    	Loan__c loan = new Loan__c();
-		loan.Amount_Applied_For__c = 130000;
-		loan.Amount_Approved__c = 120000;
-		loan.Application_Date__c = date.newinstance(2013, 4, 30);
-		loan.Decision_Date__c = date.newinstance(2013, 5, 1);
-		loan.Status__c = 'Applied';
-		loan.Currency__c = 'KES';
-		loan.Farmer__c = farmer.Id;	
-    	
-		return loan;
-    	
-    }
-    
-    static Sale__c getSale(Farmer__c farmer){
-    	Sale__c sale = new Sale__c();
-    	sale.Farmer__c = farmer.Id;
-    	sale.Sale_Price__c = 1500.00;
-    	sale.Purchaser_Name__c = 'John Doe';
-		
-		return sale;
-    	
-    }
-    
-    static Loan_Repayment__c getLoanRepayment(Loan__c loan, Sale__c sale){
-
-    	Loan_Repayment__c lr = new Loan_Repayment__c();
-    	lr.Amount__c = 1500.00;
-		lr.Payment_Date__c = date.newinstance(2013, 4, 30);
-		lr.Remarks__c = 'reason';
-		lr.Loan__c = loan.Id;
-		lr.Sale__c = sale.Id;
-		
-		return lr;
-    	
-    }
 }

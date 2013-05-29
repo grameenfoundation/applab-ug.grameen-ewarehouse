@@ -8,52 +8,8 @@ private class SalesRestServiceTest {
 
     static testMethod void getSales() {
     	
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert a Person
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	insert person1;
-    	person2.First_Name__c = 'Jon';
-    	person2.Last_Name__c = 'Stewart';
-    	insert person2;
-    	
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	insert farmer1;
-    	farmer2.Name = '2eyUUD';
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	Sale__c sale1 = getSale(farmer1);
-    	Sale__c sale2 = getSale(farmer2);
-    	insert sale1;
-    	insert sale2;
-    	
-    	Sale_Farmer__c sf1 = getSaleFarmer(sale1, farmer1);
-    	Sale_Farmer__c sf2 = getSaleFarmer(sale1, farmer2);
-    	Sale_Farmer__c sf3 = getSaleFarmer(sale2, farmer1);
-    	Sale_Farmer__c sf4 = getSaleFarmer(sale2, farmer2);
-    	insert sf1;
-    	insert sf2;
-    	insert sf3;
-    	insert sf4;
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
     	
  		// ready to start the test
  		test.startTest();
@@ -84,7 +40,7 @@ private class SalesRestServiceTest {
     static testMethod void getLoanDMLException() {
      	
      	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// ready to start the test
  		test.startTest();
@@ -274,50 +230,8 @@ private class SalesRestServiceTest {
     */
     
     static testMethod void updateSale() {
-    	// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	loan2.Status__c = 'Default';
-    	insert loan1;
-    	insert loan2;
-    	
-    	Sale__c sale1 = getSale(farmer1);
-    	Sale__c sale2 = getSale(farmer2);
-    	insert sale1;
-    	insert sale2;
-    	
-    	Sale_Farmer__c sf1 = getSaleFarmer(sale1, farmer1);
-    	Sale_Farmer__c sf2 = getSaleFarmer(sale1, farmer2);
-    	Sale_Farmer__c sf3 = getSaleFarmer(sale2, farmer1);
-    	Sale_Farmer__c sf4 = getSaleFarmer(sale2, farmer2);
-    	insert sf1;
-    	insert sf2;
-    	insert sf3;
-    	insert sf4;
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
     		
  		test.startTest();
 
@@ -328,7 +242,7 @@ private class SalesRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
-        req.requestBody = Blob.valueOf('[{"Id":"'+sale1.Id+'","Status":"Duplicate"},{"Id":"'+sale2.Id+'","Status":"Failed"}]}');
+        req.requestBody = Blob.valueOf('[{"Id":"'+ids.get('sale1_1Id')+'","Status":"Duplicate"},{"Id":"'+ids.get('sale2_1Id')+'","Status":"Failed"}]}');
         
 		RestContext.request = req;
 		RestContext.response = res;
@@ -345,7 +259,7 @@ private class SalesRestServiceTest {
 		List<Sale__c> lstSale1 = [SELECT 
 										ID, 
 										Status__c
-									FROM Sale__c WHERE Id = :sale1.Id];
+									FROM Sale__c WHERE Id = :ids.get('sale1_1Id')];
 		
 		System.assertEquals(1, lstSale1.size());
 		System.assertEquals('Duplicate', lstSale1.get(0).Status__c);
@@ -353,7 +267,7 @@ private class SalesRestServiceTest {
         List<Sale__c> lstSale2 = [SELECT 
 										ID, 
 										Status__c
-									FROM Sale__c WHERE Id = :sale2.Id];
+									FROM Sale__c WHERE Id = :ids.get('sale2_1Id')];
 		
 		System.assertEquals(1, lstSale2.size());
 		System.assertEquals('Failed', lstSale2.get(0).Status__c);
@@ -541,7 +455,7 @@ private class SalesRestServiceTest {
     
     static testMethod void updateLoansGetException() {
     	// set the datasource to mock
-     	EwarehouseServiceBase.setDataSource(new DataSourceExceptionMock.AllExceptionMock());
+     	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
      	// start the test
  		test.startTest();
@@ -573,79 +487,7 @@ private class SalesRestServiceTest {
  		
     }
     */
-        
-    static District__c getTestDistrict(){
-    	District__c district = new District__c();
-    	district.Name = 'Isiolo';
-    	return district;
-    }
-    
-    static Country__c getTestCountry(){
-    	Country__c country = new Country__c();
-    	country.Name = 'Kenya';
-    	country.ISO_Standard_Code__c = 'KE';
-    	country.Language__c = 'Swahili';
-    	return country;
-    }
 
-    static Person__c getTestPerson(Country__c country, District__c district){
-    	
-    	Person__c person = new Person__c();
-    	
-    	person.First_Name__c = 'Jane';
-    	person.Last_Name__c = 'Fonda';
-    	person.Date_of_Birth__c = date.newinstance(1937, 12, 21);
-    	person.Raw_Mobile_Number__c = '+254123456789';
-    	person.Phone_Number__c = '+254987654321';
-    	person.Gender__c = 'Female';
-    	person.Village__c = 'Kisumu';
-    	person.City__c = 'Kisumu city';
-    	person.District__c = district.Id;
-    	person.Country__c = country.Id;
-    	person.ID_Number__c = 'ID0987654321';
-    	
-    	return person;
-    }
     
-    static Farmer__c getTestFarmer(Person__c person){
-    	Farmer__c farmer = new Farmer__c();
-    	farmer.Name = '3eyUUD';
-    	farmer.Person__c = person.Id;
-    	farmer.Status__c = 'Processed';
-    	return farmer;
-    }
     
-    static Loan__c getLoan(Farmer__c farmer){
-    	
-    	Loan__c loan = new Loan__c();
-		loan.Amount_Applied_For__c = 130000;
-		loan.Amount_Approved__c = 120000;
-		loan.Application_Date__c = date.newinstance(2013, 4, 30);
-		loan.Decision_Date__c = date.newinstance(2013, 5, 1);
-		loan.Status__c = 'Applied';
-		loan.Currency__c = 'KES';
-		loan.Farmer__c = farmer.Id;	
-    	
-		return loan;
-    	
-    }
-    
-    static Sale__c getSale(Farmer__c farmer){
-    	Sale__c sale = new Sale__c();
-    	sale.Farmer__c = farmer.Id;
-    	sale.Purchaser_Name__c = 'John the purchaser';
-    	sale.Sale_Date__c = date.newinstance(2013, 4, 30);
-    	sale.Sale_Price__c = 12000.20;
-    	sale.Volume_Sold__c = 10101.01;
-    	sale.Status__c = 'New';
-    	return sale;
-    }
-    
-    static Sale_Farmer__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
-    	Sale_Farmer__c sf = new Sale_Farmer__c();
-    	sf.Amount_Applied__c = 6000.10;
-    	sf.Farmer__c = farmer.Id;
-    	sf.Sale__c = sale.Id;
-    	return sf;
-    }
 }

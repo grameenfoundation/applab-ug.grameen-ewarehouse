@@ -17,6 +17,17 @@
         <name>ApexTrigger</name>
     </types>
     <types>
+        <members>Farmer__c</members>
+        <members>Group__c</members>
+        <members>Harvest__c</members>
+        <members>Loan_Repayment__c</members>
+        <members>Loan__c</members>
+        <members>Person__c</members>
+        <members>Sale_Farmer__c</members>
+        <members>Sale__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
         <members>*</members>
         <name>StaticResource</name>
     </types>
