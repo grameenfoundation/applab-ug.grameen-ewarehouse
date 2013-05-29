@@ -96,6 +96,13 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Currency__c,
 					Decision_Date__c,
 					Farmer__r.Name,
+					Harvest__r.Id,
+					Harvest__r.Crop__c,
+					Harvest__r.Date_Harvested__c,
+					Harvest__r.Quantity_Accepted__c,
+					Harvest__r.Quantity_Harvested__c,
+					Harvest__r.Quantity_Rejected__c,
+					Harvest__r.Storage_Location__c,
 					Status__c
 				FROM Loan__c WHERE Id = :id];
 	}
@@ -116,6 +123,13 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Currency__c,
 					Decision_Date__c,
 					Farmer__r.Name,
+					Harvest__r.Id,
+					Harvest__r.Crop__c,
+					Harvest__r.Date_Harvested__c,
+					Harvest__r.Quantity_Accepted__c,
+					Harvest__r.Quantity_Harvested__c,
+					Harvest__r.Quantity_Rejected__c,
+					Harvest__r.Storage_Location__c,
 					Status__c
 				FROM Loan__c WHERE Status__c = :status];
 	}

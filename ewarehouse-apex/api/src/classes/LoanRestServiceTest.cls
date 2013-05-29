@@ -49,6 +49,12 @@ private class LoanRestServiceTest {
 		System.assertEquals(date.newinstance(2013, 5, 1),result.loan.DecisionDate);
 		System.assertEquals('Applied',result.loan.Status);
 		System.assertEquals(farmerId,result.loan.FarmerId);
+		System.assertEquals('Beans',result.loan.Harvest.Crop);
+		System.assertEquals(date.newinstance(2013, 4, 30),result.loan.Harvest.DateHarvested);
+		System.assertEquals(1000.01,result.loan.Harvest.QuantityAccepted);
+		System.assertEquals(2000.03,result.loan.Harvest.QuantityHarvested);
+		System.assertEquals(1000.02,result.loan.Harvest.QuantityRejected);
+		System.assertEquals('Home',result.loan.Harvest.StorageLocation);
 		
 		System.debug('Test finished');
     }

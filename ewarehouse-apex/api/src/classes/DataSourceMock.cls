@@ -28,9 +28,14 @@ public with sharing class DataSourceMock {
         insert farmer1;
         insert farmer2;
         
+        Harvest__c harvest1 = getHarvest(farmer1);
+        Harvest__c harvest2 = getHarvest(farmer2);
+        insert harvest1;
+        insert harvest2;
+        
         // create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
+    	Loan__c loan1 = getLoan(farmer1, harvest1);
+    	Loan__c loan2 = getLoan(farmer2, harvest2);
     	insert loan1;
     	insert loan2;
     	
@@ -134,7 +139,19 @@ public with sharing class DataSourceMock {
         return farmer;
     }
     
-    static Loan__c getLoan(Farmer__c farmer){
+    static Harvest__c getHarvest(Farmer__c farmer){
+    	Harvest__c h = new Harvest__c();
+    	h.Crop__c = 'Beans';
+    	h.Date_Harvested__c = date.newinstance(2013, 4, 30);
+    	h.Farmer__c = farmer.Id;
+    	h.Quantity_Accepted__c = 1000.01;
+    	h.Quantity_Harvested__c = 2000.03;
+    	h.Quantity_Rejected__c = 1000.02;
+    	h.Storage_Location__c = 'Home';
+    	return h;
+    }
+    
+    static Loan__c getLoan(Farmer__c farmer, Harvest__c harvest){
     	
     	Loan__c loan = new Loan__c();
 		loan.Amount_Applied_For__c = 130000;
@@ -145,6 +162,7 @@ public with sharing class DataSourceMock {
 		loan.Status__c = 'Applied';
 		loan.Currency__c = 'KES';
 		loan.Farmer__c = farmer.Id;	
+		loan.Harvest__c = harvest.Id; 
     	
 		return loan;
     	
