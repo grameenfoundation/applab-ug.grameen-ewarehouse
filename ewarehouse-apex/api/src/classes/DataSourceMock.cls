@@ -127,6 +127,8 @@ public with sharing class DataSourceMock {
         person.Picture_URL__c = 'http://www.himmelreich-it.com/image.jpg';
         person.Next_Of_Kin__c = 'Ted Turner';
         person.Next_Of_Kin_Telephone__c = '+254123456788';
+        person.Group_ID__c = 'A12/10';
+        person.Group_Name__c = 'Kiruri Farmers';
         
         return person;
     }
@@ -136,6 +138,7 @@ public with sharing class DataSourceMock {
         farmer.Name = '3eyUUD';
         farmer.Person__c = person.Id;
         farmer.Status__c = 'Processed';
+        farmer.Sale_Status__c = 'Paid';
         return farmer;
     }
     
@@ -173,6 +176,7 @@ public with sharing class DataSourceMock {
     	sale.Farmer__c = farmer.Id;
     	sale.Sale_Price__c = 1500.00;
     	sale.Purchaser_Name__c = 'John Doe';
+    	sale.Status__c = 'New';
 		
 		return sale;
     	
@@ -181,6 +185,8 @@ public with sharing class DataSourceMock {
     static Sale_Farmer__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
     	Sale_Farmer__c sf = new Sale_Farmer__c();
     	sf.Amount_Applied__c = 6000.10;
+    	sf.Fee_Due__c = 5000.10;
+    	sf.Fee_Paid__c = 4000.10;
     	sf.Farmer__c = farmer.Id;
     	sf.Sale__c = sale.Id;
     	return sf;

@@ -255,6 +255,24 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Sale_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Sale Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Paid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unpaid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>

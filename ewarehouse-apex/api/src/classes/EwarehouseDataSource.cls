@@ -24,7 +24,10 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Next_Of_Kin__c,
 					Person__r.Next_Of_Kin_Telephone__c,
 					Person__r.Country__r.Name,
-					Person__r.Gender__c
+					Person__r.Gender__c,
+					Person__r.Group_ID__c,
+					Person__r.Group_Name__c,
+					Sale_Status__c
 				FROM Farmer__c 
 				WHERE Name = :name];
 		
@@ -50,7 +53,10 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Next_Of_Kin__c,
 					Person__r.Next_Of_Kin_Telephone__c,
 					Person__r.Country__r.Name,
-					Person__r.Gender__c
+					Person__r.Gender__c,
+					Person__r.Group_ID__c,
+					Person__r.Group_Name__c,
+					Sale_Status__c
 				FROM Farmer__c WHERE Status__c = 'New' OR Status__c = ''];
 		}
 		
@@ -71,7 +77,10 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Person__r.Next_Of_Kin__c,
 					Person__r.Next_Of_Kin_Telephone__c,
 					Person__r.Country__r.Name,
-					Person__r.Gender__c
+					Person__r.Gender__c,
+					Person__r.Group_ID__c,
+					Person__r.Group_Name__c,
+					Sale_Status__c
 				FROM Farmer__c WHERE Status__c = :status];
 	}
 	
@@ -178,6 +187,8 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Id, 
 					Name, 
 					Amount_Applied__c,
+					Fee_Due__c,
+					Fee_Paid__C,
 					Farmer__c
 				FROM Sale_Farmer__c WHERE Sale__c = :saleId];
 	}

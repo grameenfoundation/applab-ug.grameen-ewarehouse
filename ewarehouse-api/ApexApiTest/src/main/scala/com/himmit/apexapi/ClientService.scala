@@ -6,7 +6,7 @@ import spray.json._
 import DefaultJsonProtocol._
 import com.himmit.apexapi._
 import com.himmit.apexapi.response._
-import com.himmit.apexapi.parameter.UpdateClient
+import com.himmit.apexapi.parameter.{UpdateClientSaleStatus, UpdateClient}
 import com.himmit.apexapi.base.ApexApiRequest
 import com.himmit.apexapi.base.JsonConfigurator._
 import scala.util.parsing.json.JSONObject
@@ -22,6 +22,7 @@ class ClientService (val apiSession: ApiSession) {
 
     val clientRequest = "client"
     val clientsRequest = "clients"
+    val clientSaleStatusRequest = "clientsalestatus"
 
     def getClient(id: String) : Option[ClientResponse] =  {
         val parameters = Map[String, String](
@@ -66,6 +67,18 @@ class ClientService (val apiSession: ApiSession) {
 
         val jsonResult = request.post(clientsRequest, json.toString)
         val myObject = jsonResult.get.convertTo[ClientsResponse]
+
+        return myObject
+    }
+
+    def updateClientSaleStatus(status: UpdateClientSaleStatus) : ClientResponse =  {
+        val parameters = Map[String, String](
+            "Id" -> status.Id,
+            "SaleStatus" -> status.SaleStatus
+        )
+
+        val jsonResult = request.post(clientSaleStatusRequest, parameters)
+        val myObject = jsonResult.get.convertTo[ClientResponse]
 
         return myObject
     }

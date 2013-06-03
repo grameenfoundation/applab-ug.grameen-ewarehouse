@@ -45,6 +45,11 @@ private class ClientsRestServiceTest{
         System.assertEquals('Isiolo',result.clients[0].District);
         System.assertEquals('Kenya',result.clients[0].Country);
         System.assertEquals('ID0987654321',result.clients[0].IDNumber);
+        System.assertEquals('http://www.himmelreich-it.com/image.jpg',result.clients[0].PictureURL);
+        System.assertEquals('Ted Turner',result.clients[0].NextOfKin);
+        System.assertEquals('+254123456788',result.clients[0].NextOfKinTelephone);
+        System.assertEquals('A12/10',result.clients[0].CPGId);
+        System.assertEquals('Kiruri Farmers',result.clients[0].CPGName);
         
         System.assertEquals('John',result.clients[1].FirstName);
         System.assertEquals('Lennon',result.clients[1].LastName);
@@ -56,6 +61,11 @@ private class ClientsRestServiceTest{
         System.assertEquals('Isiolo',result.clients[1].District);
         System.assertEquals('Kenya',result.clients[1].Country);
         System.assertEquals('ID0987654321',result.clients[1].IDNumber);
+        System.assertEquals('http://www.himmelreich-it.com/image.jpg',result.clients[1].PictureURL);
+        System.assertEquals('Ted Turner',result.clients[1].NextOfKin);
+        System.assertEquals('+254123456788',result.clients[1].NextOfKinTelephone);
+        System.assertEquals('A12/10',result.clients[1].CPGId);
+        System.assertEquals('Kiruri Farmers',result.clients[1].CPGName);
         
         System.debug('Test finished');
     }

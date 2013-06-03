@@ -5,7 +5,7 @@ import org.scalatest.matchers.ShouldMatchers
 import org.slf4j.LoggerFactory
 import com.himmit.apexapi.authentication.Authenticator
 import scala.Predef._
-import com.himmit.apexapi.parameter.UpdateClient
+import com.himmit.apexapi.parameter.{UpdateSale, UpdateClientSaleStatus, UpdateClient}
 
 /**
  * User: Oskar
@@ -45,7 +45,6 @@ class ClientApiTest  extends FunSpec with ShouldMatchers {
             resultClient.FirstName.get should be("Jane")
             resultClient.LastName.get should be("Fonda")
             resultClient.DateOfBirth.get should startWith("1937-12-21")
-            resultClient.PhoneNumber.get should be("+254987654321")
             resultClient.MobileNumber.get should be("+254123456789")
             resultClient.IDNumber.get should be("GF0987654321")
             resultClient.Gender.get should be("Female")
@@ -53,6 +52,16 @@ class ClientApiTest  extends FunSpec with ShouldMatchers {
             resultClient.District.get should be("Isiolo")
             resultClient.City.get should be("Kisumu city")
             resultClient.Country.get should be("Kenya")
+            resultClient.SaleStatus.get should be("Unpaid")
+            resultClient.PictureURL.get should be("http://www.himmelreich-it.com/image.jpg")
+            resultClient.NextOfKin.get should be("Ted Turner")
+            resultClient.NextOfKinTelephone.get should be("+254123456788")
+            //resultClient.CPGId.get should be("A12/10")
+            //resultClient.CPGName.get should be("Kiruri Farmers")
+
+
+
+
 
         }
         it("will update a Client from a Custom APEX API given a client object"){
@@ -156,6 +165,31 @@ class ClientApiTest  extends FunSpec with ShouldMatchers {
 
             result.code should be("200")
             result.description should be("Update success")
+        }
+
+        it("will update an Farmer object, setting the sale-status from a Custom APEX API"){
+
+
+
+            val updateStatus = new UpdateClientSaleStatus(Id = "3eyUUD", SaleStatus = "Paid")
+
+            val result = getObject.updateClientSaleStatus(updateStatus)
+
+            result should not be(null)
+
+            result.code should be("200")
+            result.description should be("Updated: client id [3eyUUD], sale-status: [Paid]")
+
+            val updateStatus2 = new UpdateClientSaleStatus(Id = "3eyUUD", SaleStatus = "Unpaid")
+
+            val result2 = getObject.updateClientSaleStatus(updateStatus2)
+
+            result2 should not be(null)
+
+            result2.code should be("200")
+            result2.description should be("Updated: client id [3eyUUD], sale-status: [Unpaid]")
+
+
         }
 
 

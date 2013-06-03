@@ -11,13 +11,14 @@ case class Client(Id: String,
                   FirstName: Option[String],
                   LastName: Option[String],
                   DateOfBirth: Option[String],
-                  PhoneNumber: Option[String],
                   MobileNumber: Option[String],
                   IDNumber: Option[String],
                   Gender: Option[String],
                   Village: Option[String],
                   District: Option[String],
                   City: Option[String],
-                  Country: Option[String]) {
-
-}
+                  Country: Option[String],
+                  SaleStatus: Option[String],
+                  PictureURL: Option[String],
+                  NextOfKin: Option[String],
+                  NextOfKinTelephone: Option[String])

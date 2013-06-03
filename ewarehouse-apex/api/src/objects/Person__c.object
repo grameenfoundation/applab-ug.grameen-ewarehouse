@@ -255,6 +255,26 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Group_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Group ID</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Group_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Group Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Handset__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>Physical handset assigned to this Person (in the case of GF-managed assets)</description>

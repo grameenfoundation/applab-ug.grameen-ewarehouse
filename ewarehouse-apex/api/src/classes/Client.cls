@@ -17,6 +17,10 @@ global with sharing class Client {
     
     public String NextOfKin { get; set; }
     public String NextOfKinTelephone { get; set; }
+    public String CPGId { get; set; }
+    public String CPGName { get; set; }
+    public String SaleStatus {get; set; }
+    
     
     //photo,Next of Kin Name and Next of Kin Telephone
     
@@ -32,6 +36,7 @@ global with sharing class Client {
         Client client = new Client();
     	
     	client.Id = farmer.Name;
+    	client.SaleStatus = farmer.Sale_Status__c; 
     	
     	// take the information from the referenced objects when they are available
     	if(personRef != null){
@@ -48,7 +53,9 @@ global with sharing class Client {
 		    client.Picture = getImage(client.PictureURL);
 		    client.NextOfKin = personRef.Next_Of_Kin__c;
 		    client.NextOfKinTelephone = personRef.Next_Of_Kin_Telephone__c;
-    	}
+		    client.CPGId = personRef.Group_ID__c;
+		    client.CPGName = personRef.Group_Name__c;
+		}
     	
     	if(districtRef != null)
 			client.District = districtRef.Name;

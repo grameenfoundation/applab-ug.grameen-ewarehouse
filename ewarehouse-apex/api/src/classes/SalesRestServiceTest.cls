@@ -21,11 +21,10 @@ private class SalesRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
-		req.addParameter('Status', 'New');
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the loan (normally converted to JSON via API)
+		// load the results in the sales (normally converted to JSON via API)
 		SalesRestService.SalesResponse result = (SalesRestService.SalesResponse) SalesRestService.getSales();
 		
 		test.stopTest();
@@ -33,11 +32,33 @@ private class SalesRestServiceTest {
 		// assert what was stored
 		system.debug(result);
 		
+		// assert error returned
+		System.assertEquals('200',result.code);
+		//System.assertEquals(ids.get('sale1Id'), result.sales[0].Id);
+		System.assertEquals(1500, result.sales[0].Amount);
+		System.assertEquals(6000.10, result.sales[0].SaleFarmers[0].AmountApplied);
+		System.assertEquals(5000.10, result.sales[0].SaleFarmers[0].FeeDue);
+		System.assertEquals(4000.10, result.sales[0].SaleFarmers[0].FeePaid);
+		System.assertEquals(6000.10, result.sales[0].SaleFarmers[0].AmountApplied);
+		System.assertEquals(5000.10, result.sales[0].SaleFarmers[0].FeeDue);
+		System.assertEquals(4000.10, result.sales[0].SaleFarmers[0].FeePaid);
+		
+		System.assertEquals(1500, result.sales[1].Amount);
+				
+		System.assertEquals(1500, result.sales[2].Amount);
+		System.assertEquals(6000.10, result.sales[2].SaleFarmers[0].AmountApplied);
+		System.assertEquals(5000.10, result.sales[2].SaleFarmers[0].FeeDue);
+		System.assertEquals(4000.10, result.sales[2].SaleFarmers[0].FeePaid);
+		System.assertEquals(6000.10, result.sales[2].SaleFarmers[0].AmountApplied);
+		System.assertEquals(5000.10, result.sales[2].SaleFarmers[0].FeeDue);
+		System.assertEquals(4000.10, result.sales[2].SaleFarmers[0].FeePaid);
+		
+		System.assertEquals(1500, result.sales[3].Amount);
 		
 		System.debug('Test finished');
     }
-    /*
-    static testMethod void getLoanDMLException() {
+    
+    static testMethod void getSalesDMLException() {
      	
      	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
@@ -53,13 +74,11 @@ private class SalesRestServiceTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
 		
-		// set as parameter the just stored id
-		req.addParameter('Status', 'dummy');
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) LoansRestService.getLoans();
+		// get an error response instead of sales response
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) SalesRestService.getSales();
 		
 		test.stopTest();
 	
@@ -69,63 +88,19 @@ private class SalesRestServiceTest {
 		System.debug('Test finished');
 		// reset the datasource
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
-     }
-    
-    static testMethod void getLoansNoStatusParam() {
-    	// ready to start the test
- 		test.startTest();
-    	
-    	// create request and response
-    	RestRequest req = new RestRequest(); 
-		RestResponse res = new RestResponse();
- 
- 		// do the request
-		req.requestURI = testRequestURI;
-		req.httpMethod = 'GET';
-		// set as parameter the just stored id
-		req.addParameter('bla-param', 'NOTEXISTING');
-		RestContext.request = req;
-		RestContext.response = res;
-		
-		// get an error response instead of client response
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) LoansRestService.getLoans();
-		
-		test.stopTest();
-	
-		// assert error returned
-		System.assertEquals('400',result.code);
-		System.assertEquals('We could find required parameter [Status]', result.description);
-		
-		System.debug('Test finished');
     }
     
-    static testMethod void getNoLoansReturned() {
-
- 		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
+    static testMethod void getNoSalesReturned() {
     	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
+    	// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+        List<Sale__c> sales = [SELECT Status__c FROM Sale__c];
+        for(Sale__c sale : sales){
+        	sale.Status__c = 'Processing';
+        }
+        update sales;
+        
     	
  		// ready to start the test
  		test.startTest();
@@ -137,13 +112,12 @@ private class SalesRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
-		// set as parameter the just stored id
-		req.addParameter('Status', 'Applied');
+		
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the client (normally converted to JSON via API)
-		LoansRestService.LoansResponse result = (LoansRestService.LoansResponse) LoansRestService.getLoans();
+		// load the results in the sales (normally converted to JSON via API)
+		SalesRestService.SalesResponse result = (SalesRestService.SalesResponse) SalesRestService.getSales();
 		
 		test.stopTest();
 		
@@ -151,46 +125,20 @@ private class SalesRestServiceTest {
 		
 		System.assertEquals('200',result.code);
 		System.assertEquals('OK',result.description);
-		System.assertEquals(0,result.loans.size());
+		System.assertEquals(0,result.sales.size());
 		System.debug('Test finished');
     	
     }
     
-     static testMethod void getOneLoanReturned() {
+     static testMethod void getThreeSalesReturned() {
 
- 		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	loan2.Status__c = 'Default';
-    	insert loan1;
-    	insert loan2;
-    	
-    	String farmerId1 = farmer1.Name;
-    	String farmerId2 = farmer2.Name;
-    	
+		// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
+        
+        Sale__c sale = [SELECT Status__c FROM Sale__c WHERE Id = :ids.get('sale1_1Id')];
+        sale.Status__c = 'Processing';
+        update sale;
+ 		
  		// ready to start the test
  		test.startTest();
     	
@@ -202,12 +150,12 @@ private class SalesRestServiceTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'GET';
 		// set as parameter the just stored id
-		req.addParameter('Status', 'Applied');
+		req.addParameter('Status', 'Processing');
 		RestContext.request = req;
 		RestContext.response = res;
 		
-		// load the results in the client (normally converted to JSON via API)
-		LoansRestService.LoansResponse result = (LoansRestService.LoansResponse) LoansRestService.getLoans();
+		// load the results in the sales (normally converted to JSON via API)
+		SalesRestService.SalesResponse result = (SalesRestService.SalesResponse) SalesRestService.getSales();
 		
 		test.stopTest();
 		
@@ -215,19 +163,13 @@ private class SalesRestServiceTest {
 		
 		System.assertEquals('200',result.code);
 		System.assertEquals('OK',result.description);
-		System.assertEquals(1,result.loans.size());
-		
-		System.assertEquals(130000,result.loans[0].AmountApplied);
-		System.assertEquals(120000,result.loans[0].AmountApproved);
-		System.assertEquals(date.newinstance(2013, 4, 30),result.loans[0].ApplicationDate);
-		System.assertEquals(date.newinstance(2013, 5, 1),result.loans[0].DecisionDate);
-		System.assertEquals('Applied',result.loans[0].Status);
-		System.assertEquals(farmerId1,result.loans[0].FarmerId);
+		system.debug(result);
+		System.assertEquals(3,result.sales.size());		
 		
 		System.debug('Test finished');
     	
     }
-    */
+    
     
     static testMethod void updateSale() {
     	// insert test data
@@ -275,42 +217,10 @@ private class SalesRestServiceTest {
 		System.debug('Test finished');
  		
     }
-    /*
-    static testMethod void updateLoansNotExists() {
-		// create and insert country
-    	Country__c country = getTestCountry();
-    	insert country;
-    	
-    	// create and insert district
-    	District__c district = getTestDistrict();
-    	insert district;
-    	
-    	// create and insert 2 Persons
-    	Person__c person1 = getTestPerson(country, district);
-    	Person__c person2 = getTestPerson(country, district);
-    	person2.First_Name__c = 'John';
-    	person2.Last_Name__c = 'Lennon';
-    	insert person1;
-    	insert person2;
-    	
-    	// with the person id, create and insert a Farmer
-    	Farmer__c farmer1 = getTestFarmer(person1);
-    	Farmer__c farmer2 = getTestFarmer(person2);
-    	farmer2.Name = '2eyUUD';
-    	
-    	insert farmer1;
-    	insert farmer2;
-    	
-    	// create a loan
-    	Loan__c loan1 = getLoan(farmer1);
-    	Loan__c loan2 = getLoan(farmer2);
-    	insert loan1;
-    	insert loan2;
-    	
-    	String farmerId1 = farmer1.Id;
-    	String farmerId2 = farmer2.Id;
-    	String loanId1 = loan1.Id;
-    	String loanId2 = loan2.Id;
+    
+    static testMethod void updateSalesNotExists() {
+		// insert test data
+        Map<String, String> ids = DataSourceMock.insertTestData();
     	
  		test.startTest();
 
@@ -321,44 +231,35 @@ private class SalesRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
-		req.requestBody = Blob.valueOf('[{"Id":"'+loanId1+'","Status":"Default", "Balance": 100.02},{"Id":"non-existing","Status":"Default", "Balance": 100.03}]}');
+		req.requestBody = Blob.valueOf('[{"Id":"'+ids.get('sale1_1Id')+'","Status":"Processing"},{"Id":"non-existing","Status":"Failed"}]}');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// load the results in the client (normally converted to JSON via API)
-		LoansRestService.LoansErrorResponse result = (LoansRestService.LoansErrorResponse)LoansRestService.updateLoans();
+		EwarehouseServiceBase.ErrorMapResponse result = (EwarehouseServiceBase.ErrorMapResponse) SalesRestService.updateSales();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('400', result.code);
-		System.assertEquals('Not all IDs where found as loans, attached Ids not updated.', result.description);
+		System.assertEquals('Not all IDs where found as sales, attached Ids not updated.', result.description);
 		
-		// assert that the farmers are the same for the not updated farmers
-		List<Loan__c> lstLoan1 = [SELECT 
-										Id, 
-										Status__c,
-										Balance__c
-									FROM Loan__c WHERE Id = :loanId1];
+		Sale__c sale1 = [SELECT Status__c FROM Sale__c WHERE Id = :ids.get('sale1_1Id')];
+		Sale__c sale2 = [SELECT Status__c FROM Sale__c WHERE Id = :ids.get('sale1_2Id')];
+		Sale__c sale3 = [SELECT Status__c FROM Sale__c WHERE Id = :ids.get('sale2_1Id')];
+		Sale__c sale4 = [SELECT Status__c FROM Sale__c WHERE Id = :ids.get('sale2_2Id')];
 		
-		System.assertEquals(1, lstLoan1.size());
-		System.assertEquals('Default', lstLoan1.get(0).Status__c);
-        // farmer 2 was not updated, the Id was wrong
-        List<Loan__c> lstLoan2 = [SELECT 
-										Id, 
-										Status__c,
-										Balance__c
-									FROM Loan__c WHERE Id = :loanId2];
-		
-		System.assertEquals(1, lstLoan2.size());
-		System.assertEquals('Applied', lstLoan2.get(0).Status__c);
+		System.assertEquals('Processing', sale1.Status__c);
+		System.assertEquals('New', sale2.Status__c);
+		System.assertEquals('New', sale3.Status__c);
+		System.assertEquals('New', sale4.Status__c);
 		
 		System.debug('Test finished');
  		
     }
     
-     static testMethod void updateLoansNoIdParam() {
+     static testMethod void updateSalesNoIdParam() {
     	
  		test.startTest();
 
@@ -371,26 +272,26 @@ private class SalesRestServiceTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
 		// error in the JSON last Id wrong
-		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Ids":"dummy","Status":"Failed", "Balance": 100.01}]}';
+		String jsonString = '[{"Id":"dummy","Status":"Duplicate"},{"Ids":"dummy","Status":"Failed"}]}';
 		req.requestBody = Blob.valueOf(jsonString);
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// retrieve an error
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoansRestService.updateLoans();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) SalesRestService.updateSales();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('400', result.code);
-		System.assertEquals('We could find the property Id in the passed json: ['+ jsonString +']', result.description);
+		System.assertEquals('JSON ERROR: We could find required parameter [Id] in one of the objects', result.description);
 		
 		System.debug('Test finished');
  		
     }
     
-    static testMethod void updateLoansNoStatusParam() {
+    static testMethod void updateSalesNoStatusParam() {
     	
  		test.startTest();
 
@@ -402,58 +303,28 @@ private class SalesRestServiceTest {
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
 		// error in the JSON, last Status wrong
-		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Id":"dummy","Statqs":"Failed", "Balance": 100.01}]}';
+		String jsonString = '[{"Id":"dummy","Status":"Duplicate"},{"Id":"dummy","Statqs":"Failed"}]}';
 		req.requestBody = Blob.valueOf(jsonString);
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// retrieve an error
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoansRestService.updateLoans();
+		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse) SalesRestService.updateSales();
 		
 		test.stopTest();
 		
 		// assert what was stored
 		System.assertEquals('400',result.code);
-		System.assertEquals('We could find the property Status in the passed json: ['+ jsonString +']', result.description);
+		System.assertEquals('JSON ERROR: We could find required parameter [Status] in one of the objects', result.description);
 		
        
 		System.debug('Test finished');
  		
     }
     
-    static testMethod void updateLoansNoBalanceParam() {
-    	
- 		test.startTest();
-
-		// create request and response
-    	RestRequest req = new RestRequest(); 
-		RestResponse res = new RestResponse();
- 
- 		// do the request
-		req.requestURI = testRequestURI;
-		req.httpMethod = 'POST';
-		// error in the JSON, last Balance wrong
-		String jsonString = '[{"Id":"dummy","Status":"Duplicate", "Balance": 100.01},{"Id":"dummy","Status":"Failed", "Bslance": 100.01}]}';
-		req.requestBody = Blob.valueOf(jsonString);
-		
-		RestContext.request = req;
-		RestContext.response = res;
-		
-		// retrieve an error
-		EwarehouseServiceBase.ErrorResponse result = (EwarehouseServiceBase.ErrorResponse)LoansRestService.updateLoans();
-		
-		test.stopTest();
-		
-		// assert what was stored
-		System.assertEquals('400',result.code);
-		System.assertEquals('We could find the property Balance in the passed json: ['+ jsonString +']', result.description);
-	   
-		System.debug('Test finished');
- 		
-    }
     
-    static testMethod void updateLoansGetException() {
+    static testMethod void updateSalesGetException() {
     	// set the datasource to mock
      	EwarehouseServiceBase.setDataSource(new DataSourceMock.AllExceptionMock());
      	
@@ -467,13 +338,13 @@ private class SalesRestServiceTest {
  		// do the request
 		req.requestURI = testRequestURI;
 		req.httpMethod = 'POST';
-		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Processed", "Balance":100.01}]');
+		req.requestBody = Blob.valueOf('[{"Id":"dummy","Status":"Processed"}]');
 		
 		RestContext.request = req;
 		RestContext.response = res;
 		
 		// get an error response instead of client response
-		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) LoansRestService.updateLoans();
+		EwarehouseServiceBase.ExceptionResponse result = (EwarehouseServiceBase.ExceptionResponse) SalesRestService.updateSales();
 		
 		test.stopTest();
 	
@@ -486,7 +357,7 @@ private class SalesRestServiceTest {
 		EwarehouseServiceBase.setDataSource(new EwarehouseDataSource());
  		
     }
-    */
+    
 
     
     

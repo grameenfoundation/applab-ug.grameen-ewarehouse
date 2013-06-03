@@ -4,11 +4,8 @@ import spray.json._
 import com.himmit.apexapi.response._
 import com.himmit.apexapi._
 import com.himmit.apexapi.parameter._
-import com.himmit.apexapi.response.ClientsResponse
+import com.himmit.apexapi.response._
 import com.himmit.apexapi.response.ClientResponse
-import com.himmit.apexapi.Loan
-import com.himmit.apexapi.Client
-import com.himmit.apexapi.parameter.UpdateClient
 
 /**
  * User: Oskar
@@ -16,13 +13,18 @@ import com.himmit.apexapi.parameter.UpdateClient
  * Time: 16:57
  */
 object JsonConfigurator extends DefaultJsonProtocol with CollectionFormats with spray.json.AdditionalFormats{
-    implicit val clientFormat = jsonFormat12(Client)
-    implicit val loanFormat = jsonFormat7(Loan);
+    implicit val clientFormat = jsonFormat(Client, "Id", "FirstName", "LastName", "DateOfBirth", "MobileNumber",
+        "IDNumber", "Gender", "Village", "District", "City", "Country", "SaleStatus", "PictureURL",
+        "NextOfKin", "NextOfKinTelephone")
+    implicit val harvestFormat = jsonFormat7(Harvest)
+    implicit val loanFormat = jsonFormat8(Loan);
     implicit val repaymentFormat = jsonFormat6(Repayment);
     implicit val saleFarmerFormat = jsonFormat2(SaleFarmer);
     implicit val saleFormat = jsonFormat3(Sale);
 
+
     implicit val updateClientFormat = jsonFormat(UpdateClient, "Id", "Status")
+    implicit val updateClientSaleStatus = jsonFormat(UpdateClientSaleStatus, "Id", "UpdateClientSaleStatus")
     implicit val updateSaleFormat = jsonFormat(UpdateSale, "Id", "Status")
     implicit val updateLoanFormat = jsonFormat(UpdateLoan, "Id", "Status", "Balance")
     implicit val addRepaymentFormat = jsonFormat(AddRepayment, "Id", "LoanId", "SaleId", "Amount", "Remarks", "PaymentDate")

@@ -32,6 +32,8 @@ global class SalesRestService extends EwarehouseServiceBase  {
 		    		SaleFarmer sf = new SaleFarmer();
 		    		sf.AmountApplied = obj.Amount_Applied__c;
 		    		sf.FarmerId = obj.Farmer__c;
+		    		sf.FeeDue = obj.Fee_Due__C;
+		    		sf.FeePaid = obj.Fee_Paid__C;
 		    		saleFarmerList.add(sf);
 		    	}
 		    	sale.SaleFarmers = saleFarmerList;
@@ -101,7 +103,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
         }
         else {
             system.debug(updateMap);
-            return new ErrorMapResponse('Not all IDs where found as client, attached Ids not updated.', updateMap);
+            return new ErrorMapResponse('Not all IDs where found as sales, attached Ids not updated.', updateMap);
         }
     }
     
@@ -124,18 +126,8 @@ global class SalesRestService extends EwarehouseServiceBase  {
 	public class SaleFarmer {
 		public String FarmerId { get; set; }
 		public Decimal AmountApplied { get; set; }
+		public Decimal FeeDue { get; set; }
+		public Decimal FeePaid { get; set; }
 	}
-	
-	/*
-	{“id” : “aZER782”, 
-	“Amount” : “250000”, 
-	“Farmers” : [
-		{“FarmerId”: “3eyUUD”, 
-		“AmountApplied”: “120000”}, 
-		{“FarmerId”: “3eyXDE”, 
-		“AmountApplied”: “130000”}]
-	}
-	
-	*/
 	
 }
