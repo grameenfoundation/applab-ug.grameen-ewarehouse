@@ -126,35 +126,31 @@
         <label>Status</label>
         <picklist>
             <picklistValues>
-                <fullName>New</fullName>
+                <fullName>Application</fullName>
                 <default>true</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Pending Confirmation</fullName>
+                <fullName>Processing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Repaid</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Overdue</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Pending Payment</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Loan Payment Confirmed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Partially Processed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Processed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Duplicate</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
