@@ -39,7 +39,8 @@ class LoanService (val apiSession: ApiSession) {
 
         val parameters = Map[String, String](
             "Id" -> updateLoan.Id,
-            "Status" -> updateLoan.Status
+            "Status" -> updateLoan.Status,
+            "Balance" -> updateLoan.Balance.toString()
         )
 
         val jsonResult = request.post(loanRequest, parameters)

@@ -48,7 +48,7 @@ private class ClientsRestServiceTest{
         System.assertEquals('http://www.himmelreich-it.com/image.jpg',result.clients[0].PictureURL);
         System.assertEquals('Ted Turner',result.clients[0].NextOfKin);
         System.assertEquals('+254123456788',result.clients[0].NextOfKinTelephone);
-        System.assertEquals('A12/10',result.clients[0].CPGId);
+        System.assertEquals('A12/012/001/002',result.clients[0].CPGId);
         System.assertEquals('Kiruri Farmers',result.clients[0].CPGName);
         
         System.assertEquals('John',result.clients[1].FirstName);
@@ -64,7 +64,7 @@ private class ClientsRestServiceTest{
         System.assertEquals('http://www.himmelreich-it.com/image.jpg',result.clients[1].PictureURL);
         System.assertEquals('Ted Turner',result.clients[1].NextOfKin);
         System.assertEquals('+254123456788',result.clients[1].NextOfKinTelephone);
-        System.assertEquals('A12/10',result.clients[1].CPGId);
+        System.assertEquals('A12/012/001/002',result.clients[1].CPGId);
         System.assertEquals('Kiruri Farmers',result.clients[1].CPGName);
         
         System.debug('Test finished');

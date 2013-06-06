@@ -25,45 +25,53 @@ global with sharing class Client {
     //photo,Next of Kin Name and Next of Kin Telephone
     
     
-    public static Client fromFarmer(Farmer__c farmer){
+    public static Client fromFarmer(Person__c person){
     	
-    	// get a reference of the farmer's person object
-    	Person__c personRef = farmer.Person__r;
-    	District__c districtRef = personRef.District__r;
-    	Country__c countryRef = personRef.Country__r;
+    	List<Farmer__c> farmerRef = person.Farmers__r;
+    	// farmer should not be null
+    	if(farmerRef.size() == 0)
+    		return null;
+    	
+    	District__c districtRef = person.District__r;
+    	Country__c countryRef = person.Country__r;
+    	List<Person_Group_Association__c> pgaRef = person.PersonGroupAssociations__r;
     	
     	// create new client
         Client client = new Client();
-    	
-    	client.Id = farmer.Name;
-    	client.SaleStatus = farmer.Sale_Status__c; 
+    	client.Id = farmerRef[0].Name;
+    	client.SaleStatus = farmerRef[0].Sale_Status__c; 
     	
     	// take the information from the referenced objects when they are available
-    	if(personRef != null){
-    		client.FirstName = personRef.First_Name__c;
-    		client.MiddleName = personRef.Middle_Name__c;
-		    client.LastName = personRef.Last_Name__c;
-		    client.DateOfBirth = personRef.Date_of_Birth__c;
-		    client.MobileNumber = personRef.Mobile_Number__c;
-		    client.IDNumber = personRef.ID_Number__c;
-		    client.Gender = personRef.Gender__c;
-		    client.Village = personRef.Village__c;
-		    client.City = personRef.City__c;
-		    client.PictureURL = personRef.Picture_URL__c;
-		    client.Picture = getImage(client.PictureURL);
-		    client.NextOfKin = personRef.Next_Of_Kin__c;
-		    client.NextOfKinTelephone = personRef.Next_Of_Kin_Telephone__c;
-		    client.CPGId = personRef.Group_ID__c;
-		    client.CPGName = personRef.Group_Name__c;
-		}
-    	
+		client.FirstName = person.First_Name__c;
+		client.MiddleName = person.Middle_Name__c;
+	    client.LastName = person.Last_Name__c;
+	    client.DateOfBirth = person.Date_of_Birth__c;
+	    client.MobileNumber = person.Mobile_Number__c;
+	    client.IDNumber = person.ID_Number__c;
+	    client.Gender = person.Gender__c;
+	    client.Village = person.Village__c;
+	    client.City = person.City__c;
+	    client.PictureURL = person.Picture_URL__c;
+	    client.Picture = getImage(client.PictureURL);
+	    client.NextOfKin = person.Next_Of_Kin__c;
+	    client.NextOfKinTelephone = person.Next_Of_Kin_Telephone__c;
+		
     	if(districtRef != null)
 			client.District = districtRef.Name;
 			
 		if(countryRef != null)
 	    	client.Country = countryRef.Name;
+	    	
+	    if(pgaRef.size() > 0){
+	    	Group__c groupRef = pgaRef[0].Group__r;
+	    	if(groupRef != null){
+		    	client.CPGId = groupRef.Group_ID__c;
+		    	client.CPGName = groupRef.Name;	
+	    	}
+	    	
+	    }
 	    
-		System.debug(client);
+		system.debug(client);
 		
 		return client;
     }

@@ -14,13 +14,13 @@ global class ClientSaleStatusRest extends EwarehouseServiceBase {
         // get id parameter
         String id = EwarehouseServiceBase.getParameter(parameters, 'Id');
         if(id == null){
-            System.debug('ERROR: request param [Id] should not be null');
+            System.debug(LoggingLevel.Debug, 'ERROR: request param [Id] should not be null');
             return new ErrorResponse('We could find required parameter [Id]');
         }
         
         String status = EwarehouseServiceBase.getParameter(parameters, 'SaleStatus');
         if(status == null){
-            System.debug('ERROR: request param [SaleStatus] should not be null');
+            System.debug(LoggingLevel.Debug, 'ERROR: request param [SaleStatus] should not be null');
             return new ErrorResponse('We could find required parameter [SaleStatus]');
         }
         
@@ -31,7 +31,7 @@ global class ClientSaleStatusRest extends EwarehouseServiceBase {
             lstClient = EwarehouseServiceBase.dataSource.getFarmer(id);
         }
         catch(Exception e){
-            system.debug('EXCEPTION: ' + e);
+            system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
             return new ExceptionResponse(e);
         }
         
@@ -51,18 +51,18 @@ global class ClientSaleStatusRest extends EwarehouseServiceBase {
             results = EwarehouseServiceBase.dataSource.updateFarmer(clObj);
         }
         catch(Exception e){
-            system.debug('ERROR: ' + e);
+            system.debug(LoggingLevel.Error, 'ERROR: ' + e);
             return new ExceptionResponse(e);
         }
         
-        system.debug(results);
+        system.debug(LoggingLevel.Debug, results);
         
         // check if the update was succesful otherwise return the errors -- TODO check how I can get a DML Error in the update for testing
         if(results.isSuccess()){
             return new SuccessResponse('Updated: client id ['+id+'], sale-status: ['+status+']');
         }
         else{
-            system.debug('ERROR: ' + results.getErrors());
+            system.debug(LoggingLevel.Error, 'ERROR: ' + results.getErrors());
             return new DmlErrorResponse('We could update client with the gived id: ['+ id +']', results.getErrors());
         }
     }

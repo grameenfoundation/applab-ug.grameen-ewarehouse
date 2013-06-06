@@ -10,7 +10,7 @@ global class LoanRestService extends EwarehouseServiceBase {
 		String id = RestContext.request.params.get('Id');
 		
 		if(id == null){
-			System.debug('ERROR: request param [Id] should not be null');
+			System.debug(LoggingLevel.Info, 'ERROR: request param [Id] should not be null');
 			return new ErrorResponse('We could find required parameter [Id]');
 		}
         
@@ -21,7 +21,7 @@ global class LoanRestService extends EwarehouseServiceBase {
         	lstLoans = EwarehouseServiceBase.dataSource.getLoan(id);
         }
         catch(Exception e){
-        	system.debug('ERROR: ' + e);
+        	system.debug(LoggingLevel.Error, 'ERROR: ' + e);
 	       	return new ExceptionResponse(e);
         }																
 		
@@ -31,7 +31,7 @@ global class LoanRestService extends EwarehouseServiceBase {
 			return new LoanRestService.LoanResponse(Loan.fromSObject(lObject));
 		}
 		else{
-			System.debug('No Loan found with Id:' + id);
+			System.debug(LoggingLevel.Info, 'No Loan found with Id:' + id);
 			return new ErrorResponse('We could not find a loan with the gived Id: ['+id+']');
 		}
 	}
@@ -77,7 +77,7 @@ global class LoanRestService extends EwarehouseServiceBase {
 			lstLoan = EwarehouseServiceBase.dataSource.getLoan(parameter.Id);
 		}
 		catch(Exception e){
-			system.debug('EXCEPTION: ' + e);
+			system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
 	       	return new ExceptionResponse(e);
 		}
 		
@@ -98,18 +98,16 @@ global class LoanRestService extends EwarehouseServiceBase {
        		results = EwarehouseServiceBase.dataSource.updateLoan(loanObj);
         }
        	catch(Exception e){
-       		system.debug('ERROR: ' + e);
+       		system.debug(LoggingLevel.Error, 'ERROR: ' + e);
        		return new ExceptionResponse(e);
        	}
        	
-		system.debug(results);
-		
 		// check if the update was succesful otherwise return the errors -- TODO check how I can get a DML Error in the update for testing
 		if(results.isSuccess()){
 			return new SuccessResponse('Updated: Loan Id ['+parameter.Id+'], Status: ['+parameter.Status+'], Balance: ['+parameter.Balance+']');
 		}
 		else{
-			system.debug('ERROR: ' + results.getErrors());
+			system.debug(LoggingLevel.Error, 'ERROR: ' + results.getErrors());
 			return new DmlErrorResponse('We could update Loan with the gived Id: ['+ parameter.Id +']', results.getErrors());
 		}
 	}

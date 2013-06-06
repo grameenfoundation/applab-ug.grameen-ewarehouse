@@ -28,6 +28,14 @@ public with sharing class DataSourceMock {
         insert farmer1;
         insert farmer2;
         
+        Group__c group1 = getGroup();
+        insert group1;
+        
+        Person_Group_Association__c pga1 = getPersonGroupAsso(group1, person1);
+        Person_Group_Association__c pga2 = getPersonGroupAsso(group1, person2);
+        insert pga1;
+        insert pga2;
+        
         Harvest__c harvest1 = getHarvest(farmer1);
         Harvest__c harvest2 = getHarvest(farmer2);
         insert harvest1;
@@ -59,10 +67,10 @@ public with sharing class DataSourceMock {
     	insert loanRepayment2_1;
     	insert loanRepayment2_2;   
     	
-    	Sale_Farmer__c sf1 = getSaleFarmer(sale1_1, farmer1);
-    	Sale_Farmer__c sf2 = getSaleFarmer(sale1_1, farmer2);
-    	Sale_Farmer__c sf3 = getSaleFarmer(sale2_1, farmer1);
-    	Sale_Farmer__c sf4 = getSaleFarmer(sale2_1, farmer2);
+    	Sale_Farmer_Association__c sf1 = getSaleFarmer(sale1_1, farmer1);
+    	Sale_Farmer_Association__c sf2 = getSaleFarmer(sale1_1, farmer2);
+    	Sale_Farmer_Association__c sf3 = getSaleFarmer(sale2_1, farmer1);
+    	Sale_Farmer_Association__c sf4 = getSaleFarmer(sale2_1, farmer2);
     	insert sf1;
     	insert sf2;
     	insert sf3;
@@ -142,6 +150,20 @@ public with sharing class DataSourceMock {
         return farmer;
     }
     
+    static Group__c getGroup(){
+    	Group__c groupC = new Group__c();
+    	groupC.Name = 'Kiruri Farmers';
+    	groupC.Group_ID__c = 'A12/012/001/002';
+    	return groupC;
+    }
+    
+    static Person_Group_Association__c getPersonGroupAsso(Group__c groupC, Person__c person){
+    	Person_Group_Association__c pga = new Person_Group_Association__c();
+    	pga.Group__c = groupC.Id;
+    	pga.Person__c = person.Id;
+    	return pga;
+    }
+    
     static Harvest__c getHarvest(Farmer__c farmer){
     	Harvest__c h = new Harvest__c();
     	h.Crop__c = 'Beans';
@@ -182,8 +204,8 @@ public with sharing class DataSourceMock {
     	
     }
     
-    static Sale_Farmer__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
-    	Sale_Farmer__c sf = new Sale_Farmer__c();
+    static Sale_Farmer_Association__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
+    	Sale_Farmer_Association__c sf = new Sale_Farmer_Association__c();
     	sf.Amount_Applied__c = 6000.10;
     	sf.Fee_Due__c = 5000.10;
     	sf.Fee_Paid__c = 4000.10;
@@ -212,12 +234,17 @@ public with sharing class DataSourceMock {
 			return null;
 		}
 		
+		public List<Person__c> getPerson(String name){
+			throwError();
+			return null;
+		}
+		
 		public Database.SaveResult updateFarmer(Farmer__c farmer){
 			throwError();
 			return null;
 		}
 		
-		public List<Farmer__c> getFarmersByStatus(String status){
+		public List<Person__c> getPersonsByStatus(String status){
 			throwError();
 			return null;
 		}
@@ -262,7 +289,7 @@ public with sharing class DataSourceMock {
 			return null;
 		}
 		
-		public Sale_Farmer__c[] getSaleFarmers(String saleId){
+		public Sale_Farmer_Association__c[] getSaleFarmers(String saleId){
 			throwError();
 			return null;
 		}
@@ -284,12 +311,17 @@ public with sharing class DataSourceMock {
 			return ds.getFarmer(name);
 		}
 		
-		public List<Farmer__c> getFarmersByStatus(String status){
+		public List<Person__c> getPerson(String name){
 			throwError();
 			return null;
 		}
 		
 		public Database.SaveResult updateFarmer(Farmer__c farmer){
+			throwError();
+			return null;
+		}
+		
+		public List<Person__c> getPersonsByStatus(String status){
 			throwError();
 			return null;
 		}
@@ -333,7 +365,7 @@ public with sharing class DataSourceMock {
 			return null;
 		}
 		
-		public Sale_Farmer__c[] getSaleFarmers(String saleId){
+		public Sale_Farmer_Association__c[] getSaleFarmers(String saleId){
 			throwError();
 			return null;
 		}

@@ -54,7 +54,7 @@ class LoanApiTest  extends FunSpec with ShouldMatchers {
             val result = resultOption.get
 
             result.code should be("200")
-            result.description should be("Updated: Loan Id ["+loanId+"], Status: [Rejected]")
+            result.description should be("Updated: Loan Id ["+loanId+"], Status: [Rejected], Balance: [1000.01]")
 
         }
         it("will reset (update) a Loan from a Custom APEX API given a Loan object"){
@@ -67,7 +67,7 @@ class LoanApiTest  extends FunSpec with ShouldMatchers {
             val result = resultOption.get
 
             result.code should be("200")
-            result.description should be("Updated: Loan Id ["+loanId+"], Status: [Default]")
+            result.description should be("Updated: Loan Id ["+loanId+"], Status: [Default], Balance: [1000.01]")
         }
         it("will return the same Loan from a Custom APEX API given a existing ID and check the Status"){
 

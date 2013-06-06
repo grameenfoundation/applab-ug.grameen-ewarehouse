@@ -68,7 +68,7 @@ global virtual with sharing class EwarehouseServiceBase extends EwarehouseServic
 			return value;
 		}
 	
-		System.debug('ERROR: request param ['+key+'] cannot be found');
+		System.debug(LoggingLevel.Error, 'ERROR: request param ['+key+'] cannot be found');
 		return null;
 	}
 }

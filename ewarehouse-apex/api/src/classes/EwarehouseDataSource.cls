@@ -3,85 +3,150 @@
  * Classes will use the Interface [IEwarehouseDataSource] and instantiate by default the [EwarehouseDataSource]
  */
 public with sharing class EwarehouseDataSource implements IEwarehouseDataSource {
+	
+	public List<Farmer__c> getFarmer(String name){
+		return [SELECT
+					ID, 
+					Name, 
+				    Sale_Status__c,
+				    Status__c
+				FROM 
+					Farmer__c
+				WHERE
+				    Name = :name];
+	}
+	
 	/*
 	 * This method returns a Farmer object from SalesForce wuth the appropriate information needed for the Client object
 	 */
-	public List<Farmer__c> getFarmer(String name){
-		// Select the client by name (Farmer ID in SalesForce)
+	public List<Person__c> getPerson(String name){
+		
 		return [SELECT 
+				  Name,
+				  First_Name__c,
+				  Middle_Name__c,
+				  Last_Name__c,
+				  Date_of_Birth__c,
+				  Mobile_Number__c,
+				  ID_Number__c,
+				  Village__c,
+				  District__r.Name,
+				  City__c,
+				  Picture_URL__c,
+				  Next_Of_Kin__c,
+				  Next_Of_Kin_Telephone__c,
+				  Country__r.Name,
+				  Gender__c,
+				  (SELECT
+				   Name,
+					Group__r.Group_ID__c,
+					Group__r.Name
+				  FROM 
+					PersonGroupAssociations__r),
+				  (SELECT
 					ID, 
 					Name, 
-					Person__r.First_Name__c,
-					Person__r.Middle_Name__c,
-					Person__r.Last_Name__c,
-					Person__r.Date_of_Birth__c,
-					Person__r.Mobile_Number__c,
-					Person__r.ID_Number__c,
-					Person__r.Village__c,
-					Person__r.District__r.Name,
-					Person__r.City__c,
-					Person__r.Picture_URL__c,
-					Person__r.Next_Of_Kin__c,
-					Person__r.Next_Of_Kin_Telephone__c,
-					Person__r.Country__r.Name,
-					Person__r.Gender__c,
-					Person__r.Group_ID__c,
-					Person__r.Group_Name__c,
-					Sale_Status__c
-				FROM Farmer__c 
-				WHERE Name = :name];
+				    Sale_Status__c
+				  FROM 
+					Farmers__r)
+				FROM Person__c
+				WHERE Id IN
+				    (
+				    SELECT 
+				        Person__c
+				    FROM
+				        Farmer__c
+				    WHERE
+				        Name = :name
+				    )		
+		];
+		
+		//return person;
 		
 	}
 	
-	public List<Farmer__c> getFarmersByStatus(String status){
+	public List<Person__c> getPersonsByStatus(String status){
 		// Select the client by status
 		// when the service gets a request for a status New we get items with Status New but also empty
 		if(status == 'New'){
 			return [SELECT 
+				  Name,
+				  First_Name__c,
+				  Middle_Name__c,
+				  Last_Name__c,
+				  Date_of_Birth__c,
+				  Mobile_Number__c,
+				  ID_Number__c,
+				  Village__c,
+				  District__r.Name,
+				  City__c,
+				  Picture_URL__c,
+				  Next_Of_Kin__c,
+				  Next_Of_Kin_Telephone__c,
+				  Country__r.Name,
+				  Gender__c,
+				  (SELECT
+				    Name,
+					Group__r.Group_ID__c,
+					Group__r.Name
+				  FROM 
+					PersonGroupAssociations__r),
+				  (SELECT
 					ID, 
 					Name, 
-					Person__r.First_Name__c,
-					Person__r.Middle_Name__c,
-					Person__r.Last_Name__c,
-					Person__r.Date_of_Birth__c,
-					Person__r.Mobile_Number__c,
-					Person__r.ID_Number__c,
-					Person__r.Village__c,
-					Person__r.District__r.Name,
-					Person__r.City__c,
-					Person__r.Picture_URL__c,
-					Person__r.Next_Of_Kin__c,
-					Person__r.Next_Of_Kin_Telephone__c,
-					Person__r.Country__r.Name,
-					Person__r.Gender__c,
-					Person__r.Group_ID__c,
-					Person__r.Group_Name__c,
-					Sale_Status__c
-				FROM Farmer__c WHERE Status__c = 'New' OR Status__c = ''];
+				    Sale_Status__c
+				  FROM 
+					Farmers__r)
+				FROM Person__c
+				WHERE Id IN
+				    (
+				    SELECT 
+				        Person__c
+				    FROM
+				        Farmer__c
+				    WHERE
+				        Status__c = 'New' OR Status__c = ''
+				    )];
 		}
 		
 		// if not status New, get the other
 		return [SELECT 
+				  Name,
+				  First_Name__c,
+				  Middle_Name__c,
+				  Last_Name__c,
+				  Date_of_Birth__c,
+				  Mobile_Number__c,
+				  ID_Number__c,
+				  Village__c,
+				  District__r.Name,
+				  City__c,
+				  Picture_URL__c,
+				  Next_Of_Kin__c,
+				  Next_Of_Kin_Telephone__c,
+				  Country__r.Name,
+				  Gender__c,
+				  (SELECT
+				    Name,
+					Group__r.Group_ID__c,
+					Group__r.Name
+				  FROM 
+					PersonGroupAssociations__r),
+				  (SELECT
 					ID, 
 					Name, 
-					Person__r.First_Name__c,
-					Person__r.Middle_Name__c,
-					Person__r.Last_Name__c,
-					Person__r.Date_of_Birth__c,
-					Person__r.Mobile_Number__c,
-					Person__r.ID_Number__c,
-					Person__r.Village__c,
-					Person__r.District__r.Name,
-					Person__r.City__c,
-					Person__r.Picture_URL__c,
-					Person__r.Next_Of_Kin__c,
-					Person__r.Next_Of_Kin_Telephone__c,
-					Person__r.Country__r.Name,
-					Person__r.Gender__c,
-					Person__r.Group_ID__c,
-					Person__r.Group_Name__c,
-					Sale_Status__c
-				FROM Farmer__c WHERE Status__c = :status];
+				    Sale_Status__c
+				  FROM 
+					Farmers__r)
+				FROM Person__c
+				WHERE Id IN
+				    (
+				    SELECT 
+				        Person__c
+				    FROM
+				        Farmer__c
+				    WHERE Status__c = :status
+				    )];
 	}
 	
 	public Database.SaveResult updateFarmer(Farmer__c farmer){
@@ -149,13 +214,6 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 	}
 	
 	public Database.SaveResult[] addLoanRepayments(Loan_Repayment__c[] loanRepayments){
-		//List<Database.Saveresult> sr = new List<Database.Saveresult>();
-		system.debug('Loan Repayments: ' + loanRepayments);
-		/*for(Loan_Repayment__c lr : loanRepayments){
-			sr.add(Database.Insert(lr));
-		}
-		system.debug(sr);
-		return sr;//*/
 		return Database.Insert(loanRepayments, true);
 	}
 	
@@ -182,7 +240,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 				FROM Sale__c WHERE Status__c = :status];
 	}
 	
-	public Sale_Farmer__c[] getSaleFarmers(String saleId){
+	public Sale_Farmer_Association__c[] getSaleFarmers(String saleId){
 		return [SELECT 
 					Id, 
 					Name, 
@@ -190,7 +248,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 					Fee_Due__c,
 					Fee_Paid__C,
 					Farmer__c
-				FROM Sale_Farmer__c WHERE Sale__c = :saleId];
+				FROM Sale_Farmer_Association__c WHERE Sale__c = :saleId];
 	}
 	
 	public Sale__c[] getSales(Set<String> saleIds){
@@ -209,8 +267,10 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		// returns a Farmer (single item List) given an name (Farmer id)
 		List<Farmer__c> getFarmer(String name);
 		
+		List<Person__c> getPerson(String name);
+		
 		// returns a list of Farmers by status
-		List<Farmer__c> getFarmersByStatus(String status);
+		List<Person__c> getPersonsByStatus(String status);
 		
 		// update a farmer, currently only used to update the Status
 		Database.SaveResult updateFarmer(Farmer__c farmer);
@@ -240,7 +300,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		Sale__c[] getSales(String status);
 		
 		// retrieve the sale/farmer list by Sale Id
-		Sale_Farmer__c[] getSaleFarmers(String saleId);
+		Sale_Farmer_Association__c[] getSaleFarmers(String saleId);
 		
 		// retrieve a list of Sales with a Set of Ids
 		Sale__c[] getSales(Set<String> saleIds);

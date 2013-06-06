@@ -10,11 +10,9 @@ global class LoansRestService extends EwarehouseServiceBase {
 		String status = RestContext.request.params.get('Status');
 		
 		if(status == null){
-			System.debug('ERROR: request param [Status] should not be null');
+			System.debug(LoggingLevel.Info, 'ERROR: request param [Status] should not be null');
 			return new ErrorResponse('We could find required parameter [Status]');
 		}
-        
-        system.debug('Status = ' + status);
         
         List<Loan> loanList = new List<Loan>();
         List<Loan__c> loans;
@@ -22,7 +20,7 @@ global class LoansRestService extends EwarehouseServiceBase {
         	loans = EwarehouseServiceBase.dataSource.getLoansByStatus(status);
         }
         catch(Exception e){
-        	system.debug('ERROR: ' + e);
+        	system.debug(LoggingLevel.Error, 'ERROR: ' + e);
 	       	return new ExceptionResponse(e);
         }
         		
@@ -39,7 +37,7 @@ global class LoansRestService extends EwarehouseServiceBase {
 		
 		// take the client from the parameters
 		String jsonString = RestContext.request.requestBody.toString();	
-		system.debug('json: ' + jsonString);
+		system.debug(LoggingLevel.Info, 'json: ' + jsonString);
 		
 		List<UpdateLoan> parameters = null;
 		
@@ -48,11 +46,9 @@ global class LoansRestService extends EwarehouseServiceBase {
 			parameters = (List<UpdateLoan>) JSON.deserialize(jsonString, List<UpdateLoan>.class);
 			
 		}catch (Exception e){
-			system.debug(e);
+			system.debug(LoggingLevel.Error, e);
 			return new ExceptionResponse(e);
 		}
-		
-		system.debug(parameters);
 		
 		// Store all the Ids in a Set and the objects in its own update map to be able to find the UpdateLoan by Id
 		Set<String> ids = new Set<String>();
@@ -76,7 +72,6 @@ global class LoansRestService extends EwarehouseServiceBase {
 			ids.add(item.Id);
 			updateMap.put(item.Id, item);
 		}
-		system.debug(ids);
 		
 		// put the whole loop for updating records in a try-catch, any exception thrown will be returned to the user
 		try {
@@ -96,7 +91,7 @@ global class LoansRestService extends EwarehouseServiceBase {
 			}	
 		}
 		catch(Exception e){
-			system.debug('EXCEPTION: ' + e);
+			system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
 	       	return new ExceptionResponse(e);
 		}
 		
@@ -104,7 +99,7 @@ global class LoansRestService extends EwarehouseServiceBase {
 			return new SuccessResponse('Update success');
 		}
 		else {
-			system.debug(updateMap);
+			system.debug(LoggingLevel.Info, updateMap);
 			return new LoansErrorResponse(updateMap);
 		}
 	}

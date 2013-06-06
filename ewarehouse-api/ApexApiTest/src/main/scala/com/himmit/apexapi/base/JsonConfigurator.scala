@@ -23,6 +23,7 @@ object JsonConfigurator extends DefaultJsonProtocol with CollectionFormats with 
     implicit val saleFormat = jsonFormat3(Sale);
 
 
+    implicit val insertGroupFormat = jsonFormat2(InsertGroup)
     implicit val updateClientFormat = jsonFormat(UpdateClient, "Id", "Status")
     implicit val updateClientSaleStatus = jsonFormat(UpdateClientSaleStatus, "Id", "UpdateClientSaleStatus")
     implicit val updateSaleFormat = jsonFormat(UpdateSale, "Id", "Status")

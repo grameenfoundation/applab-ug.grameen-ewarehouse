@@ -10,11 +10,9 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		String loanId = RestContext.request.params.get('LoanId');
 		
 		if(loanId == null){
-			System.debug('ERROR: request param [LoanId] should not be null');
+			System.debug(LoggingLevel.Error, 'ERROR: request param [LoanId] should not be null');
 			return new ErrorResponse('We could find required parameter [LoanId]');
 		}
-        
-        system.debug('LoanId = ' + loanId);
         
         // get all the sObjects
         List<Repayment> repayments = new List<Repayment>();
@@ -23,7 +21,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
         	sfRepayments = EwarehouseServiceBase.dataSource.getLoanRepayments(loanId);
         }
         catch(Exception e){
-        	system.debug('ERROR: ' + e);
+        	system.debug(LoggingLevel.Error, 'ERROR: ' + e);
 	       	return new ExceptionResponse(e);
         }
         		
@@ -52,7 +50,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		
 		// take the client from the parameters
 		String jsonString = RestContext.request.requestBody.toString();	
-		system.debug('json: ' + jsonString);
+		system.debug(LoggingLevel.Debug, 'json: ' + jsonString);
 		
 		// parse the client data
 		List<Repayment> repayments = null;
@@ -71,7 +69,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 			}
 		}
 		catch(Exception e){
-			system.debug('EXCEPTION: ' + e);
+			system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
 	       	return new ExceptionResponse(e);
 		}
 		
@@ -79,19 +77,13 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 			return new ErrorResponse('Only 9000 records are allowed in one batch, please split the upload in smaller amounts');
 		}
 		
-		system.debug('Repayments: ' + repayments);
-	
 		// insert the loan repayments
 		Database.Saveresult[] results = null;
 		try {
-			system.debug('tester-start');
 			results = EwarehouseServiceBase.dataSource.addLoanRepayments(loanRepayments);
-			system.debug(results);
-			system.debug('tester-end');
-			
 		}
 		catch(Exception e){
-			system.debug('EXCEPTION: ' + e);
+			system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
 	       	return new ExceptionResponse(e);
 		}
 		
@@ -109,7 +101,7 @@ global class LoanRepaymentRestService extends EwarehouseServiceBase  {
 		}
 		// check whether there were errors during posting
 		if(errors){
-			system.debug(errorMessage);
+			system.debug(LoggingLevel.Error, errorMessage);
 			return new ErrorResponse('Error while posting loan repayments:\n ' + errorMessage);
 		}
 		

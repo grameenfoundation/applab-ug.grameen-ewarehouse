@@ -40,33 +40,10 @@ public with sharing class Loan {
     		h.StorageLocation = harvestRef.Storage_Location__c;
     		h.Id = harvestRef.Id;
     		
-    		/*
-    		// add the Current Quality Rating
-    		if(cqrRef != null){
-    			QualityRating cqr = new QualityRating();
-    			cqr.AflatoxinRating = cqrRef.Aflatoxin_Rating__c;
-    			cqr.MoistureContent = cqrRef.Moisture_Content__c;
-    			cqr.PercentageForeignMatter = cqrRef.Percentage_Foreign_Matter__c;
-    			h.CurrentQualityRating = cqr;
-    			system.debug(cqr);
-    		}
-    		
-    		// add the Previous Quality Rating
-    		if(pqrRef != null){
-    			QualityRating pqr = new QualityRating();
-    			pqr.AflatoxinRating = pqrRef.Aflatoxin_Rating__c;
-    			pqr.MoistureContent = pqrRef.Moisture_Content__c;
-    			pqr.PercentageForeignMatter = pqrRef.Percentage_Foreign_Matter__c;
-    			h.PreviousQualityRating = pqr;
-    			system.debug(pqr);
-    		}
-    		*/
     		// add the harvest to the loan
     		l.Harvest = h;
     	}
     	
-		system.debug(l);
-		
 		return l;
 
 		
@@ -76,8 +53,6 @@ public with sharing class Loan {
 		public String Id { get; set; }
 		public String Crop { get; set; }
 		public Date DateHarvested { get; set; }
-		//public QualityRating CurrentQualityRating { get; set; } //  check Quality Rating
-		//public QualityRating PreviousQualityRating { get; set; } // chec kQuality Rating
 		public Decimal QuantityAccepted { get; set; }
 		public Decimal QuantityHarvested { get; set; }
 		public Decimal QuantityRejected { get; set; }
@@ -85,10 +60,4 @@ public with sharing class Loan {
 		
 	}
 	
-	public class QualityRating {
-		public String Id { get; set; }
-		public String AflatoxinRating { get; set; }
-		public String MoistureContent { get; set; }
-		public String PercentageForeignMatter { get; set; }
-	}
 }

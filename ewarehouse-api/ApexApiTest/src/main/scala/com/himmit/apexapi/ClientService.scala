@@ -18,11 +18,14 @@ import scala.util.parsing.json.JSONObject
  * Time: 10:00
  */
 class ClientService (val apiSession: ApiSession) {
+    val logger = LoggerFactory.getLogger(classOf[ClientService])
+
     val request = new ApexApiRequest(Authenticator.getSession.get)
 
     val clientRequest = "client"
     val clientsRequest = "clients"
     val clientSaleStatusRequest = "clientsalestatus"
+    val groupRequest = "group"
 
     def getClient(id: String) : Option[ClientResponse] =  {
         val parameters = Map[String, String](
@@ -81,6 +84,17 @@ class ClientService (val apiSession: ApiSession) {
         val myObject = jsonResult.get.convertTo[ClientResponse]
 
         return myObject
+    }
+
+    def insertGroup(name: String, groupID: String){
+        val parameters = Map[String, String](
+            "Name" -> name,
+            "GroupID" -> groupID
+        )
+        val jsonResult = request.post(groupRequest, parameters)
+        logger.info(jsonResult.get.toString());
+        //val myObject = jsonResult.get.convertTo[String]
+
     }
 
 }

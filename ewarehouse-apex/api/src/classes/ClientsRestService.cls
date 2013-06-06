@@ -13,13 +13,13 @@ global class ClientsRestService extends EwarehouseServiceBase  {
         
         // check if Status param is null
         if(status == null){
-            System.debug('ERROR: request param [Status] should not be null');
+            System.debug(LoggingLevel.Error, 'ERROR: request param [Status] should not be null');
             return new ErrorResponse('We could find required parameter [Status]');
         }
         
         // Check if the Status value is in allowed range of statuses
         if(!allowedStatus.contains(status)){
-            System.debug('ERROR: request param [Status] can only be: New, Processed, Failed, Duplicate');
+            System.debug(LoggingLevel.Error, 'ERROR: request param [Status] can only be: New, Processed, Failed, Duplicate');
             return new ErrorResponse('Param [Status] can only be: New, Processed, Failed, Duplicate');
         }
         
@@ -27,18 +27,18 @@ global class ClientsRestService extends EwarehouseServiceBase  {
         
         // get all the farmers with the requested status
         List<Client> clientList = new List<Client>();
-        List<Farmer__c> farmers;
+        List<Person__c> persons;
         try {
-            farmers = EwarehouseServiceBase.dataSource.getFarmersByStatus(status);
+            persons = EwarehouseServiceBase.dataSource.getPersonsByStatus(status);
         }
         catch(Exception e){
-            system.debug('ERROR: ' + e);
+            system.debug(LoggingLevel.Error, 'ERROR: ' + e);
             return new ExceptionResponse(e);
         }
                 
         // iterate through farmers and convert to clients                                                       
-        for(Farmer__c f: farmers){
-            clientList.add(Client.fromFarmer(f));
+        for(Person__c p: persons){
+            clientList.add(Client.fromFarmer(p));
         }
         
         // return the farmers
@@ -89,7 +89,7 @@ global class ClientsRestService extends EwarehouseServiceBase  {
             }   
         }
         catch(Exception e){
-            system.debug('EXCEPTION: ' + e);
+            system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
             return new ExceptionResponse(e);
         }
         

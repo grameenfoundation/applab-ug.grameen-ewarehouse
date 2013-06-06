@@ -20,7 +20,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
         	
         	// iterate through the new sale__c objects and convert to Sale
 	    	for(Sale__c sObj : newSales){
-	    		Sale_Farmer__c[] sfList = EwarehouseServiceBase.dataSource.getSaleFarmers(sObj.Id);
+	    		Sale_Farmer_Association__c[] sfList = EwarehouseServiceBase.dataSource.getSaleFarmers(sObj.Id);
 	    		// create Sale object
 	    		Sale sale = new Sale();
 	    		sale.Id = sObj.Id;
@@ -28,7 +28,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
 	    		
 	    		// create an array of SaleFarmer objects
 	    		List<SaleFarmer> saleFarmerList = new List<SaleFarmer>();
-		    	for(Sale_Farmer__c obj : sfList){
+		    	for(Sale_Farmer_Association__c obj : sfList){
 		    		SaleFarmer sf = new SaleFarmer();
 		    		sf.AmountApplied = obj.Amount_Applied__c;
 		    		sf.FarmerId = obj.Farmer__c;
@@ -43,7 +43,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
 	    	}
         }
         catch(Exception e){
-        	system.debug('ERROR: ' + e);
+        	system.debug(LoggingLevel.Error, 'ERROR: ' + e);
 	       	return new ExceptionResponse(e);
         }
      	
@@ -55,11 +55,11 @@ global class SalesRestService extends EwarehouseServiceBase  {
     global static EwarehouseServiceBase.ServiceResultResponse updateSales() {
     	// take the JSON from the body
     	String jsonString = RestContext.request.requestBody.toString(); 
-        system.debug('json: ' + jsonString);
+        system.debug(LoggingLevel.Info, 'json: ' + jsonString);
         
         // parse the sales update data
         List<Map<String, String>> parameters = (List<Map<String, String>>) JSON.deserialize(jsonString, List<Map<String, String>>.class);
-        system.debug(parameters);
+        system.debug(LoggingLevel.Debug, parameters);
         
         // Store all the Ids in a Set and the objects in its own update map to be able to find the Status by Id
         Set<String> ids = new Set<String>();
@@ -75,7 +75,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
             ids.add(item.get('Id'));
             updateMap.put(item.get('Id'), item.get('Status'));
         }
-        system.debug(ids);
+        system.debug(LoggingLevel.Debug, ids);
         
         // put the whole loop for updating records in a try-catch, any exception thrown will be returned to the user
         try {
@@ -94,7 +94,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
             }   
         }
         catch(Exception e){
-            system.debug('EXCEPTION: ' + e);
+            system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
             return new ExceptionResponse(e);
         }
         
@@ -102,7 +102,7 @@ global class SalesRestService extends EwarehouseServiceBase  {
             return new SuccessResponse('Update success');
         }
         else {
-            system.debug(updateMap);
+            system.debug(LoggingLevel.Info, updateMap);
             return new ErrorMapResponse('Not all IDs where found as sales, attached Ids not updated.', updateMap);
         }
     }
