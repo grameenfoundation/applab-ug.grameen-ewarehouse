@@ -53,7 +53,6 @@
         <externalId>false</externalId>
         <label>Farmer</label>
         <referenceTo>Farmer__c</referenceTo>
-        <relationshipLabel>Sales Farmers</relationshipLabel>
         <relationshipName>Sales_Farmers</relationshipName>
         <relationshipOrder>1</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
@@ -88,7 +87,6 @@
         <externalId>false</externalId>
         <label>Sale</label>
         <referenceTo>Sale__c</referenceTo>
-        <relationshipLabel>Sales Farmers</relationshipLabel>
         <relationshipName>Sales_Farmers</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
@@ -96,7 +94,7 @@
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
-    <label>Sale Farmer</label>
+    <label>Sale Farmer Associaton</label>
     <listViews>
         <fullName>All</fullName>
         <filterScope>Everything</filterScope>
@@ -108,7 +106,7 @@
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Sales Farmers</pluralLabel>
+    <pluralLabel>Sales Farmers Association</pluralLabel>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>
