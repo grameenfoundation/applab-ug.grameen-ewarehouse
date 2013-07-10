@@ -98,6 +98,13 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Disburse_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Disburse Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Farmer__c</fullName>
         <externalId>false</externalId>
         <label>Farmer</label>
@@ -119,6 +126,40 @@
         <relationshipName>Loans</relationshipName>
         <required>false</required>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Loan_Account_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Loan Account No</label>
+        <length>30</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Loan_Contract_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Loan Contract No</label>
+        <length>30</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Maturity_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Maturity Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Saving_Account_No__c</fullName>
+        <externalId>false</externalId>
+        <label>Saving Account No</label>
+        <length>30</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Status__c</fullName>

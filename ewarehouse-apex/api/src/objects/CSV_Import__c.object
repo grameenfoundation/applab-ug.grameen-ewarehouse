@@ -33,22 +33,11 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object holds all CSV imports into the e-Warehouse and makes reporting possible per import.</description>
     <enableActivities>true</enableActivities>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
-    <fields>
-        <fullName>Erroneous_Line_Count__c</fullName>
-        <description>The amount of lines found incorrect in the file, preventing those rows being imported into the e-Warehouse</description>
-        <externalId>false</externalId>
-        <label>Erroneous Line Count</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <trackHistory>false</trackHistory>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
     <fields>
         <fullName>Import_Date__c</fullName>
         <description>The date of the original import of the file</description>
@@ -84,41 +73,45 @@
         <label>Status</label>
         <picklist>
             <picklistValues>
-                <fullName>1. Reading file</fullName>
+                <fullName>Starting</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>2. Parsing file</fullName>
+                <fullName>Saving file</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>3. Convert data</fullName>
+                <fullName>Reading file</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>4. Saving data</fullName>
+                <fullName>Parsing file</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>5. Finished</fullName>
+                <fullName>Converting data</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Update farmers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Saving data</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finished</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Failed</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-    </fields>
-    <fields>
-        <fullName>Total_Line_Count__c</fullName>
-        <description>The total of lines meant for import subtracting the initial expected header row</description>
-        <externalId>false</externalId>
-        <label>Total Line Count</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <trackHistory>false</trackHistory>
-        <type>Number</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Type__c</fullName>
@@ -140,6 +133,11 @@
         <type>Picklist</type>
     </fields>
     <label>CSV Import</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <label>CSV Import Name</label>
         <trackHistory>false</trackHistory>

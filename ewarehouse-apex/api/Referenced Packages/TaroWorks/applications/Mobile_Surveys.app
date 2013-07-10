@@ -12,4 +12,5 @@
     <tab>standard-Dashboard</tab>
     <tab>SurveyLibrary__c</tab>
     <tab>Sale_Farmer_Association__c</tab>
+    <tab>CSV_Import__c</tab>
 </CustomApplication>
