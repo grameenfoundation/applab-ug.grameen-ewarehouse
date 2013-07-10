@@ -16,8 +16,68 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 				    Name = :name];
 	}
 	
+	public List<Person__c> getPersons(String value, String columnName){
+		// creating the where clause to decide what Persons/Farmers we need to return
+		String whereClause = '';
+		
+		// Status has a special treatment, when it is new, it also should return Status empty results
+		if(columnName == 'Status__c'){
+			if(value == 'New'){
+				whereClause = 'Status__c = \'New\' OR Status__c = \'\'';
+			}
+			else{
+				whereClause = 'Status__c = \''+ value +'\'';
+			}
+		}
+		else {
+			whereClause = String.format('%s = \'%s\'', new List<String>{value, columnName});
+		}
+		String q = 'SELECT Name, First_Name__c, Middle_Name__c, Last_Name__c, Date_of_Birth__c, Mobile_Number__c, ' + 
+				   'ID_Number__c,  Village__c, District__r.Name, City__c, Picture_URL__c, Next_Of_Kin__c, ' +
+				   'Next_Of_Kin_Telephone__c, Country__r.Name, Gender__c, ' +
+				   '(SELECT Name, Group__r.Group_ID__c, Group__r.Name FROM PersonGroupAssociations__r),' +
+				   '(SELECT ID, Name, Sale_Status__c FROM Farmers__r)' +
+				   'FROM Person__c WHERE Id IN ' +
+				   '(SELECT Person__c FROM Farmer__c WHERE '+ whereClause +')';
+		return Database.query(q);
+	}
+	
+	public List<Person__c> getPersonsBySet(Set<String> values, String columnName){
+        
+        String q = 'SELECT Name, First_Name__c, Middle_Name__c, Last_Name__c, Date_of_Birth__c, Mobile_Number__c, ' + 
+                   'ID_Number__c,  Village__c, District__r.Name, City__c, Picture_URL__c, Next_Of_Kin__c, ' +
+                   'Next_Of_Kin_Telephone__c, Country__r.Name, Gender__c, ' +
+                   '(SELECT Name, Group__r.Group_ID__c, Group__r.Name FROM PersonGroupAssociations__r),' +
+                   '(SELECT ID, Name, Sale_Status__c FROM Farmers__r)' +
+                   'FROM Person__c WHERE Id IN ' +
+                   '(SELECT Person__c FROM Farmer__c WHERE '+ columnName +' IN :values)';
+        return Database.query(q);
+    }
+    
+    public List<Loan__c> getLoansByFarmerNameSet(Set<String> farmers, Set<String> contracts){
+        return [SELECT 
+                    Id, 
+                    Name, 
+                    Amount_Applied_For__c,
+                    Amount_Approved__c,
+                    Balance__c,
+                    Application_Date__c,
+                    Currency__c,
+                    Decision_Date__c,
+                    Farmer__r.Name,
+                    Saving_Account_No__c,
+                    Loan_Account_No__c,
+                    Loan_Contract_No__c,
+                    Disburse_Date__c,
+                    Maturity_Date__c,
+                    Status__c
+                FROM Loan__c WHERE Loan_Contract_No__c IN :contracts];
+    }
+	
+	
 	/*
 	 * This method returns a Farmer object from SalesForce wuth the appropriate information needed for the Client object
+	 * The name is the ID field in the Farmer__c object
 	 */
 	public List<Person__c> getPerson(String name){
 		
@@ -60,8 +120,6 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 				        Name = :name
 				    )		
 		];
-		
-		//return person;
 		
 	}
 	
@@ -267,10 +325,18 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		// returns a Farmer (single item List) given an name (Farmer id)
 		List<Farmer__c> getFarmer(String name);
 		
+		List<Person__c> getPersons(String value, String columnName);
+		
 		List<Person__c> getPerson(String name);
 		
 		// returns a list of Farmers by status
 		List<Person__c> getPersonsByStatus(String status);
+		
+		// get a list of persons given a Set of Strings and a columnname
+		List<Person__c> getPersonsBySet(Set<String> values, String columnName);
+		
+		// retrieve loans by list of farmers for the manual CSV upload from SMEP
+		List<Loan__c> getLoansByFarmerNameSet(Set<String> farmers, Set<String> contracts);
 		
 		// update a farmer, currently only used to update the Status
 		Database.SaveResult updateFarmer(Farmer__c farmer);

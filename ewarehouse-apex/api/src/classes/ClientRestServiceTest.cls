@@ -6,9 +6,65 @@ public class ClientRestServiceTest {
 // TODO create test for no farmer found and no parameter given, check other things that might happen
 
     private static String testRequestURI = '/services/apexrest/ewarehouse/client';
-
-    static testMethod void getClient() {
+	
+	static testMethod void listLimitTest(){
+		
+		// create and insert country
+        //Country__c country = DataSourceMock.getTestCountry();
+        //insert country;
         
+        // create and insert district
+        //District__c district = DataSourceMock.getTestDistrict();
+        //insert district;
+        /*
+        Integer total = 1; //10000;
+		
+		List<District__c> districts = new List<District__c>();
+		
+		for(Integer x = 1; x <= total; x++){
+			District__c district = DataSourceMock.getTestDistrict();
+			district.Name = string.valueOf(x);
+            districts.add(district);
+		}
+		insert districts;
+		
+		List<District__c> districts2 = [SELECT Name FROM District__c];
+		system.debug(districts2.size());
+		*/
+		/*
+		List<Integer> integers = new List<Integer>();
+		List<Person__c> persons = new List<Person__c>();
+		List<Farmer__c> farmers = new List<Farmer__c>();
+		
+		for(Integer x = 1; x <= total; x++){
+			// create and insert 2 Persons
+	        Person__c person = DataSourceMock.getTestPerson(country, district);
+	        person.First_Name__c = string.valueOf(x);
+	        integers.add(x);
+	        persons.add(person);
+		}
+				
+		insert persons;
+		
+		for(Person__c person : persons){
+			// with the person id, create and insert a Farmer
+	        Farmer__c farmer = DataSourceMock.getTestFarmer(person);
+	        farmer.Name = 'ey' + person.First_Name__c;
+	        farmer.Status__c = 'New';
+	        farmers.add(farmer);
+		}
+		
+		insert farmers;
+		
+		List<Person__c> personResult = EwarehouseServiceBase.dataSource.getPersonsByStatus('New');
+        system.debug(personResult.size());
+        */
+        
+	}
+		
+	
+    static testMethod void getClient() {
+    	
         Map<String, String> ids = DataSourceMock.insertTestData();
         // get the newly inserted farmer id (name field)
         String id = ids.get('farmer1Name');

@@ -103,13 +103,13 @@ public with sharing class DataSourceMock {
     }
     
     // mock data for test runs
-    static District__c getTestDistrict(){
+    public static District__c getTestDistrict(){
         District__c district = new District__c();
         district.Name = 'Isiolo';
         return district;
     }
     
-    static Country__c getTestCountry(){
+    public static Country__c getTestCountry(){
         Country__c country = new Country__c();
         country.Name = 'Kenya';
         country.ISO_Standard_Code__c = 'KE';
@@ -117,7 +117,7 @@ public with sharing class DataSourceMock {
         return country;
     }
 
-    static Person__c getTestPerson(Country__c country, District__c district){
+    public static Person__c getTestPerson(Country__c country, District__c district){
         
         Person__c person = new Person__c();
         
@@ -139,7 +139,7 @@ public with sharing class DataSourceMock {
         return person;
     }
     
-    static Farmer__c getTestFarmer(Person__c person){
+    public static Farmer__c getTestFarmer(Person__c person){
         Farmer__c farmer = new Farmer__c();
         farmer.Name = '3eyUUD';
         farmer.Person__c = person.Id;
@@ -148,21 +148,21 @@ public with sharing class DataSourceMock {
         return farmer;
     }
     
-    static Group__c getGroup(){
+    public static Group__c getGroup(){
         Group__c groupC = new Group__c();
         groupC.Name = 'Kiruri Farmers';
         groupC.Group_ID__c = 'A12/012/001/002';
         return groupC;
     }
     
-    static Person_Group_Association__c getPersonGroupAsso(Group__c groupC, Person__c person){
+    public static Person_Group_Association__c getPersonGroupAsso(Group__c groupC, Person__c person){
         Person_Group_Association__c pga = new Person_Group_Association__c();
         pga.Group__c = groupC.Id;
         pga.Person__c = person.Id;
         return pga;
     }
     
-    static Harvest__c getHarvest(Farmer__c farmer){
+    public static Harvest__c getHarvest(Farmer__c farmer){
         Harvest__c h = new Harvest__c();
         h.Crop__c = 'Beans';
         h.Date_Harvested__c = date.newinstance(2013, 4, 30);
@@ -174,7 +174,7 @@ public with sharing class DataSourceMock {
         return h;
     }
     
-    static Loan__c getLoan(Farmer__c farmer, Harvest__c harvest){
+    public static Loan__c getLoan(Farmer__c farmer, Harvest__c harvest){
         
         Loan__c loan = new Loan__c();
         loan.Amount_Applied_For__c = 130000;
@@ -191,7 +191,7 @@ public with sharing class DataSourceMock {
         
     }
     
-    static Sale__c getSale(Farmer__c farmer){
+    public static Sale__c getSale(Farmer__c farmer){
         Sale__c sale = new Sale__c();
         sale.Farmer__c = farmer.Id;
         sale.Sale_Price__c = 1500.00;
@@ -202,7 +202,7 @@ public with sharing class DataSourceMock {
         
     }
     
-    static Sale_Farmer_Association__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
+    public static Sale_Farmer_Association__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
         Sale_Farmer_Association__c sf = new Sale_Farmer_Association__c();
         sf.Amount_Applied__c = 6000.10;
         sf.Fee_Due__c = 5000.10;
@@ -212,7 +212,7 @@ public with sharing class DataSourceMock {
         return sf;
     }
     
-    static Loan_Repayment__c getLoanRepayment(Loan__c loan, Sale__c sale){
+    public static Loan_Repayment__c getLoanRepayment(Loan__c loan, Sale__c sale){
 
         Loan_Repayment__c lr = new Loan_Repayment__c();
         lr.Amount__c = 1500.00;
@@ -232,6 +232,11 @@ public with sharing class DataSourceMock {
             return null;
         }
         
+        public List<Person__c> getPersons(String value, String columnName){
+            throwError();
+            return null;
+        }
+        
         public List<Person__c> getPerson(String name){
             throwError();
             return null;
@@ -244,6 +249,16 @@ public with sharing class DataSourceMock {
         
         public List<Person__c> getPersonsByStatus(String status){
             throwError();
+            return null;
+        }
+        
+        public List<Person__c> getPersonsBySet(Set<String> values, String columnName){
+            throwError();
+            return null;
+        }
+        
+        public List<Loan__c> getLoansByFarmerNameSet(Set<String> farmers, Set<String> contracts){
+        	throwError();
             return null;
         }
         
@@ -309,6 +324,11 @@ public with sharing class DataSourceMock {
             return ds.getFarmer(name);
         }
         
+        public List<Person__c> getPersons(String value, String columnName){
+            throwError();
+            return null;
+        }
+        
         public List<Person__c> getPerson(String name){
             throwError();
             return null;
@@ -320,6 +340,16 @@ public with sharing class DataSourceMock {
         }
         
         public List<Person__c> getPersonsByStatus(String status){
+            throwError();
+            return null;
+        }
+        
+        public List<Person__c> getPersonsBySet(Set<String> values, String columnName){
+            throwError();
+            return null;
+        }
+        
+        public List<Loan__c> getLoansByFarmerNameSet(Set<String> farmers, Set<String> contracts){
             throwError();
             return null;
         }

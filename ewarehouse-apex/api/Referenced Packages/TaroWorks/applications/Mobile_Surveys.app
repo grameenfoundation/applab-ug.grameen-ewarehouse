@@ -11,5 +11,5 @@
     <tab>standard-report</tab>
     <tab>standard-Dashboard</tab>
     <tab>SurveyLibrary__c</tab>
-    <tab>Sale_Farmer__c</tab>
+    <tab>Sale_Farmer_Association__c</tab>
 </CustomApplication>
