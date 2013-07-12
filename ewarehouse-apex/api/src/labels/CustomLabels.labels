@@ -252,6 +252,14 @@ VERY IMPORTANT: If your name or phone number are not listed correctly, please ad
         <value>The query with FCI ID {0} returned more than 1 result.</value>
     </labels>
     <labels>
+        <fullName>loan_not_found</fullName>
+        <categories>e-Warehouse</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>We could find a Loan attached to this client: [ID]</shortDescription>
+        <value>We could find a Loan attached to this client: [{0}]</value>
+    </labels>
+    <labels>
         <fullName>no_uploadfile</fullName>
         <categories>e-Warehouse</categories>
         <language>en_US</language>

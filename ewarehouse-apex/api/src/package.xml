@@ -13,6 +13,7 @@
         <members>EwarehouseServiceBase</members>
         <members>EwarehouseServiceModel</members>
         <members>FileUploader</members>
+        <members>HarvestAndLoanSurveyController</members>
         <members>Loan</members>
         <members>LoanRepaymentRestService</members>
         <members>LoanRepaymentRestServiceTest</members>
@@ -26,6 +27,8 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>HarvestAndLoanSurvey</members>
+        <members>HarvestAndLoanSurveyExport</members>
         <members>UploadAccounts</members>
         <name>ApexPage</name>
     </types>

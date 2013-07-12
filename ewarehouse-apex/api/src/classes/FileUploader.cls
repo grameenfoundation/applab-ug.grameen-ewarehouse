@@ -5,7 +5,7 @@ public class FileUploader {
     private String content;
     
     private Map<String, UpdateSavingAccount> updates = new Map<String, UpdateSavingAccount>();
-    private List<Loan__c> newLoans = new List<Loan__c>();
+    //private List<Loan__c> newLoans = new List<Loan__c>();
     private List<Loan__c> existingLoans = new List<Loan__c>();
     
     private Set<String> updateIds = new Set<String>();
@@ -26,7 +26,6 @@ public class FileUploader {
     {
     	// reset lists
     	updates = new Map<String, UpdateSavingAccount>();
-	    newLoans = new List<Loan__c>();
 	    existingLoans = new List<Loan__c>();
 	    
 	    updateIds = new Set<String>();
@@ -222,13 +221,11 @@ public class FileUploader {
 	                }
 	            }
 	            
-	            // if loan is still null, we need to create a new one, otherwise update the existing
+	            // if loan is still null, we need to throw an error and continue
 	            if(updateLoan == null){
-	                updateLoan = new Loan__c();
-	                updateLoan.Amount_Applied_For__c = 0;
-	                updateLoan.Currency__c = 'KES';
-	                updateLoan.Farmer__c = farmer.Id;
-	                newLoans.add(updateLoan);
+	                String errorMessage = String.format(System.Label.loan_not_found, new String[]{farmer.Name});
+                    addError(errorMessage);
+                    continue;
 	            }
 	            else {
 	            	existingLoans.add(updateLoan);
@@ -256,12 +253,10 @@ public class FileUploader {
     	Boolean hasErrors = false;
     	List<Database.SaveResult> results1;
     	List<Database.SaveResult> results2;
-    	List<Database.SaveResult> results3;
         try {
             // check if we need to move to datasource
             results1 = Database.update(updateList);
             results2 = Database.update(existingLoans);
-            results3 = Database.insert(newLoans);
             
         }
         catch(Exception e){
@@ -278,10 +273,6 @@ public class FileUploader {
                hasErrors = true;
         }
         for(Database.SaveResult result : results2){
-            if(!result.isSuccess())
-               hasErrors = true;
-        }
-        for(Database.SaveResult result : results3){
             if(!result.isSuccess())
                hasErrors = true;
         }
@@ -436,10 +427,6 @@ public class FileUploader {
     
     public List<Loan__c> getExistingLoans(){
         return existingLoans;
-    }
-    
-    public List<Loan__c> getNewLoans(){
-        return newLoans;
     }
     
     public void addError(String error){
