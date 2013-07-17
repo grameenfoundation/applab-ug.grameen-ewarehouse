@@ -71,7 +71,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
                     Disburse_Date__c,
                     Maturity_Date__c,
                     Status__c
-                FROM Loan__c WHERE Loan_Contract_No__c IN :contracts];
+                FROM Loan__c WHERE Farmer__r.Name IN :farmers];
     }
 	
 	

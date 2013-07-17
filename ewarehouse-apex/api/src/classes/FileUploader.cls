@@ -64,7 +64,6 @@ public class FileUploader {
         try {
         	// save the file content to a string
         	content = contentFile.toString();
-        	System.debug('File Content:' + content);
         	// save the file as attachment to the importResult object
         	saveAttachment();
         	
@@ -179,11 +178,34 @@ public class FileUploader {
             updateLoanList = EwarehouseServiceBase.dataSource.getLoansByFarmerNameSet(updateIds, updateLoanIds);
             system.debug(LoggingLevel.Debug, 'updateList: ' + updateList);
             system.debug(LoggingLevel.Debug, 'updateLoanList: ' + updateLoanList);
+            
+            // check if list with farmers is same size as csv file
+	        if(updateList.size() != updateIds.size()){
+	            List<String> missingIds = new List<String>();
+	            for(String updateId : updateIds){
+	                Boolean found = false;
+	                for(Person__c p : updateList){
+	                    if(updateId == p.Farmers__r[0].Name) found = true;
+	                }
+	                if(!found){
+	                    String errorMessage = String.format(System.Label.client_not_found, new String[]{updateId});
+	                    addError(errorMessage);
+	                }
+	            }
+	        }
+            
         }
         catch(Exception e){
             system.debug(LoggingLevel.Error, 'EXCEPTION: ' + e);
             String errorMessage = String.format('{0} {1}', new String[]{System.Label.retrieve_client_error, System.Label.contact_support});
             addError(errorMessage);
+            logError();
+            return null;
+        }
+        
+        
+        
+        if(getErrors().size() > 0){
             logError();
             return null;
         }

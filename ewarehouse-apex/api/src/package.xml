@@ -9,6 +9,7 @@
         <members>ClientsRestService</members>
         <members>ClientsRestServiceTest</members>
         <members>DataSourceMock</members>
+        <members>EWarehouseMEDashboardController</members>
         <members>EwarehouseDataSource</members>
         <members>EwarehouseServiceBase</members>
         <members>EwarehouseServiceModel</members>
@@ -30,6 +31,7 @@
         <members>HarvestAndLoanSurvey</members>
         <members>HarvestAndLoanSurveyExport</members>
         <members>UploadAccounts</members>
+        <members>eWarehouseMEDashboard</members>
         <name>ApexPage</name>
     </types>
     <types>
