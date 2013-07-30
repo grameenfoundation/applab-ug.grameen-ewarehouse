@@ -13,4 +13,8 @@
     <tab>SurveyLibrary__c</tab>
     <tab>Sale_Farmer_Association__c</tab>
     <tab>CSV_Import__c</tab>
+    <tab>SMEP_Import</tab>
+    <tab>Harvest_Loan</tab>
+    <tab>Commodities__c</tab>
+    <tab>Markets__c</tab>
 </CustomApplication>

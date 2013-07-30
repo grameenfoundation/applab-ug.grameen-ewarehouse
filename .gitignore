@@ -1,2 +1,4 @@
 target/
 ewarehouse-apex/api/ewarehouse-apex-src.zip
+ewarehouse-test/.metadata/.lock
+ewarehouse-test/

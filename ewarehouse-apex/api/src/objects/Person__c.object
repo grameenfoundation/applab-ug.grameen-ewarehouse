@@ -483,6 +483,10 @@ IF( NOT( ISBLANK( Handset__c)),
                 <fullName>BVAT</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>VKW</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackHistory>false</trackHistory>

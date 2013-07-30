@@ -1,54 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Client</members>
-        <members>ClientRestService</members>
-        <members>ClientRestServiceTest</members>
-        <members>ClientSaleStatusRest</members>
-        <members>ClientSaleStatusRestTest</members>
-        <members>ClientsRestService</members>
-        <members>ClientsRestServiceTest</members>
-        <members>DataSourceMock</members>
         <members>EWarehouseMEDashboardController</members>
-        <members>EwarehouseDataSource</members>
-        <members>EwarehouseServiceBase</members>
-        <members>EwarehouseServiceModel</members>
-        <members>FileUploader</members>
-        <members>HarvestAndLoanSurveyController</members>
-        <members>Loan</members>
-        <members>LoanRepaymentRestService</members>
-        <members>LoanRepaymentRestServiceTest</members>
-        <members>LoanRestService</members>
-        <members>LoanRestServiceTest</members>
-        <members>LoansRestService</members>
-        <members>LoansRestServiceTest</members>
-        <members>SalesRestService</members>
-        <members>SalesRestServiceTest</members>
-        <members>SmepCsvUploadTest</members>
+        <members>GenericTestController</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>HarvestAndLoanSurvey</members>
-        <members>HarvestAndLoanSurveyExport</members>
-        <members>UploadAccounts</members>
+        <members>GenericTest</members>
         <members>eWarehouseMEDashboard</members>
         <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>CustomLabels</name>
-    </types>
-    <types>
-        <members>CSV_Import__c</members>
-        <members>Farmer__c</members>
-        <members>Group__c</members>
-        <members>Harvest__c</members>
-        <members>Loan_Repayment__c</members>
-        <members>Loan__c</members>
-        <members>Person__c</members>
-        <members>Sale_Farmer_Association__c</members>
-        <members>Sale__c</members>
-        <name>CustomObject</name>
     </types>
     <version>27.0</version>
 </Package>

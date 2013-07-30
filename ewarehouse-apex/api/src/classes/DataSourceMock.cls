@@ -18,6 +18,7 @@ public with sharing class DataSourceMock {
         Person__c person2 = getTestPerson(country, district);
         person2.First_Name__c = 'John';
         person2.Last_Name__c = 'Lennon';
+        person2.Gender__c = 'Male';
         insert person1;
         insert person2;
         
@@ -25,6 +26,7 @@ public with sharing class DataSourceMock {
         Farmer__c farmer1 = getTestFarmer(person1);
         Farmer__c farmer2 = getTestFarmer(person2);
         farmer2.Name = '2eyUUD';
+        farmer2.Land_Size__c = 10;
         insert farmer1;
         insert farmer2;
         
@@ -44,6 +46,7 @@ public with sharing class DataSourceMock {
         // create a loan
         Loan__c loan1 = getLoan(farmer1, harvest1);
         Loan__c loan2 = getLoan(farmer2, harvest2);
+        loan2.Status__c = 'Repaid';
         insert loan1;
         insert loan2;
         
@@ -145,6 +148,9 @@ public with sharing class DataSourceMock {
         farmer.Person__c = person.Id;
         farmer.Status__c = 'Processed';
         farmer.Sale_Status__c = 'Paid';
+        farmer.Land_Size__c = 35;
+        farmer.Crops__c = 'Maize';
+        farmer.Livestock__c = 'Goats';
         return farmer;
     }
     
