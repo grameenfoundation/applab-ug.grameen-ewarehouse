@@ -1,0 +1,16 @@
+<apex:page standardController="Commodities__c" extensions="CommodityEditController">
+   
+   <script type="text/javascript">
+       function validatePage() {
+           alert('test');
+           
+           
+       }
+    
+     
+   </script>
+
+  <h1>Custom Contact Us Page</h1>
+  <button onclick="validatePage();">Validate</button><br/>
+  <apex:detail oncomplete="validatePage()" subject="{!CommodityId}" relatedList="false" title="false" inlineEdit="true" showChatter="true"/> 
+</apex:page>

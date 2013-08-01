@@ -13,41 +13,44 @@
             <h2>List of all harvests without an active SMEP loan</h2>
             <apex:pageblocktable value="{!LeadData}" var="data" >
                 <apex:column headerValue="Harvest ID">
-                    <apex:outputText value="{!data.Name}"/>
-                </apex:column>
-                <apex:column headerValue="Crop">
-                    <apex:outputText value="{!data.Crop__c}"/> 
-                </apex:column>
-                <apex:column headerValue="FCI ID">
-                    <apex:outputText value="{!data.Farmer__r.Name}"/> 
-                </apex:column>
-                <apex:column headerValue="First name">
-                    <apex:outputText value="{!data.Farmer__r.Person__r.First_Name__c}"/> 
-                </apex:column>
-                <apex:column headerValue="Middle Name">
-                    <apex:outputText value="{!data.Farmer__r.Person__r.Middle_Name__c}"/> 
-                </apex:column>
-                <apex:column headerValue="Last name">
-                    <apex:outputText value="{!data.Farmer__r.Person__r.Last_Name__c}"/> 
-                </apex:column>
-                <apex:column headerValue="National ID">
-                    <apex:outputText value="{!data.Farmer__r.Person__r.ID_Number__c}"/> 
-                </apex:column>
-                <apex:column headerValue="Quantity Harvested">
-                    <apex:outputText value="{!data.Quantity_Harvested__c}"/> 
-                </apex:column>
-                <apex:column headerValue="Quantity Accepted">
-                    <apex:outputText value="{!data.Quantity_Accepted__c}"/> 
-                </apex:column>
-                <apex:column headerValue="Quantity Rejected">
-                    <apex:outputText value="{!data.Quantity_Rejected__c}"/> 
-                </apex:column>
-                <apex:column headerValue="o Value of stored crop">
-                    <apex:outputText value="TBD"/> 
-                </apex:column>
-                <apex:column headerValue="o Estimated loan amount ">
-                    <apex:outputText value="TBD"/> 
-                </apex:column>
+                     <apex:outputText value="{!data.ID}"/>
+                 </apex:column>
+                 <apex:column headerValue="Crop">
+                     <apex:outputText value="{!data.Crop}"/> 
+                 </apex:column>
+                 <apex:column headerValue="FCI ID">
+                     <apex:outputText value="{!data.FciID}"/> 
+                 </apex:column>
+                 <apex:column headerValue="First name">
+                     <apex:outputText value="{!data.FirstName}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Middle Name">
+                     <apex:outputText value="{!data.MiddleName}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Last name">
+                     <apex:outputText value="{!data.LastName}"/> 
+                 </apex:column>
+                 <apex:column headerValue="National ID">
+                     <apex:outputText value="{!data.NationalID}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Quantity Harvested">
+                     <apex:outputText value="{!data.QuantityHarvested}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Quantity Accepted">
+                     <apex:outputText value="{!data.QuantityAccepted}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Quantity Rejected">
+                     <apex:outputText value="{!data.QuantityRejected}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Value of crop per bag">
+                     <apex:outputText value="{!data.ValueOfCrop}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Value of harvest">
+                     <apex:outputText value="{!data.ValueOfHarvest}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Estimated loan amount ">
+                     <apex:outputText value="{!data.EstimatedLoanAmount}"/> 
+                 </apex:column>
             </apex:pageblocktable>
         </apex:pageBlock>
         <apex:form >

@@ -33,89 +33,79 @@
         <type>Default</type>
     </actionOverrides>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>false</enableHistory>
-    <enableReports>false</enableReports>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
     <fields>
-        <fullName>Baseline_Date__c</fullName>
-        <defaultValue>DATE(2013, 8, 1)</defaultValue>
+        <fullName>Highest_Retail_Price__c</fullName>
         <externalId>false</externalId>
-        <label>Baseline Date</label>
-        <required>true</required>
-        <type>Date</type>
-    </fields>
-    <fields>
-        <fullName>CVs_Covered__c</fullName>
-        <defaultValue>0</defaultValue>
-        <externalId>false</externalId>
-        <label>CVs Covered</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Cache_timeout__c</fullName>
-        <defaultValue>60</defaultValue>
-        <externalId>false</externalId>
-        <label>Cache timeout (min)</label>
+        <label>Highest Retail Price</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Farmers_receiving_information__c</fullName>
-        <defaultValue>0</defaultValue>
-        <description># of farmers receiving market information through SMS</description>
+        <fullName>Highest_Wholesale_Price__c</fullName>
         <externalId>false</externalId>
-        <label>Farmers receiving information</label>
+        <label>Highest Wholesale Price</label>
         <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Farmers_with_previous_Financial_Service__c</fullName>
-        <defaultValue>0</defaultValue>
-        <description># of farmers who had financial services before joining the e-Warehouse</description>
-        <externalId>false</externalId>
-        <label>Farmers with previous Financial Service</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Grain_checks_FCI_staff_and_VKWs__c</fullName>
-        <defaultValue>0</defaultValue>
-        <description># of checks conducted by FCI staff and VKWs on grain stored</description>
-        <externalId>false</externalId>
-        <label>Grain checks FCI staff and VKWs</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>0</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Last_update__c</fullName>
-        <externalId>false</externalId>
-        <label>Last update</label>
         <required>false</required>
-        <type>DateTime</type>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
-    <label>e-Warehouse Dashboard Info</label>
+    <fields>
+        <fullName>Lowest_Retail_Price__c</fullName>
+        <externalId>false</externalId>
+        <label>Lowest Retail Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lowest_Wholesale_Price__c</fullName>
+        <externalId>false</externalId>
+        <label>Lowest Wholesale Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Market__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Market</label>
+        <referenceTo>Markets__c</referenceTo>
+        <relationshipLabel>Commodities</relationshipLabel>
+        <relationshipName>Commodities</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <label>Commodities</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
-        <label>Name</label>
+        <label>Commodity Name</label>
+        <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>e-Warehouse Dashboard Info</pluralLabel>
+    <pluralLabel>Commodities</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

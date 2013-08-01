@@ -12,6 +12,7 @@ public with sharing class EWarehouseMEDashboardController  {
     private String farmersHadTraining = 'No of Farmers trained on post-harvest handling';
     private String farmersNewStorageTechniques = 'No of Farmers implementing new storage techniques';
     private String increaseInFarmersStr = 'Increase in farmers storing grains and delaying sale';
+    private String increaseInFinancialAccessStr = 'Increase in farmers with access to financial services';
     private String repaymentRatioLbl = 'Repaid ratio (loans)';
     private String totalLoansLbl = 'Total loans';
     private String repaidLoansLbl = 'Repaid loans';
@@ -286,8 +287,7 @@ public with sharing class EWarehouseMEDashboardController  {
     	
     	// get the increase in farmers from the baseline date
     	String q = 'SELECT COUNT() FROM Farmer__c WHERE CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
-    	System.Debug(LoggingLevel.Debug, q);
-        Integer baseLineFarmerCount = Database.countQuery(q);
+    	Integer baseLineFarmerCount = Database.countQuery(q);
         q = 'SELECT COUNT() FROM Farmer__c';
         Integer currentFarmerCount = Database.countQuery(q);
         
@@ -297,17 +297,22 @@ public with sharing class EWarehouseMEDashboardController  {
         }
         
         // get the increase in farmers with access to financial services
-        /*
-        String q = 'SELECT COUNT() FROM Farmer__c WHERE Id IN (SELECT Farmer__c FROM Loan__c) OR ' + baseLineDate;
-        Integer baseLineFarmerCount = Database.countQuery(q);
-        q = 'SELECT COUNT() FROM Farmer__c';
-        Integer currentFarmerCount = Database.countQuery(q);
+        //SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND Id IN (SELECT Farmer__c FROM Loan__c)
+        q = 'SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
+        Integer financialServicesBaseline = Database.countQuery(q);
+        List<Farmer__c> financialServices = [SELECT Id FROM Farmer__c WHERE Access_Financial_Services__c = true];
+        List<Farmer__c> hadLoan = [SELECT Id FROM Farmer__c WHERE Id IN (SELECT Farmer__c FROM Loan__c)];
+        Set<Farmer__c> hasFinancialServicesSet = new Set<Farmer__c>();
+        hasFinancialServicesSet.addAll(financialServices);
+        hasFinancialServicesSet.addAll(hasFinancialServicesSet);
         
-        if(baseLineFarmerCount > 0){
-            Decimal increaseInFarmers = (((Decimal)currentFarmerCount - (Decimal)baseLineFarmerCount) / (Decimal)baseLineFarmerCount) * 100;
-            farmersByStorageLocation.add(new NameCount(increaseInFarmersStr, increaseInFarmers.setScale(2).toPlainString())); 
+        Integer hasAccessFinancialServices = hasFinancialServicesSet.size();
+        
+        if(financialServicesBaseline > 0){
+            Decimal increaseInAccess = (((Decimal)hasAccessFinancialServices - (Decimal)financialServicesBaseline) / (Decimal)financialServicesBaseline) * 100;
+            impactData.add(new NameCount(increaseInFinancialAccessStr, increaseInAccess.setScale(2).toPlainString())); 
         }
-    	*/
+    	
     }
     
     private void loadLoanInformation(){
