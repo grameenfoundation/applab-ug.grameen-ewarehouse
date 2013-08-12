@@ -1,23 +1,9 @@
 <apex:page sidebar="true" controller="HarvestAndLoanSurveyController" >
-    <apex:includeScript value="{!URLFOR($Resource.jquery, 'js/jquery-1.5.1.min.js')}" />
-    <apex:includeScript value="{!$Resource.CommonJS}"/>
-    <c:UpdateMetricComponent />
-    <c:GenericModal />
-    <c:ErrorMessage />
-    <script type="text/javascript">
-        assignUpdateModalFunctions();
-    </script>
     <apex:sectionHeader title="Lead generation report"/>
         <apex:pagemessages />
         <apex:pageBlock rendered="{!NOT(LeadData.empty)}">
             <h2>List of all harvests without an active SMEP loan</h2>
             <apex:pageblocktable value="{!LeadData}" var="data" >
-                <apex:column headerValue="Harvest ID">
-                     <apex:outputText value="{!data.ID}"/>
-                 </apex:column>
-                 <apex:column headerValue="Crop">
-                     <apex:outputText value="{!data.Crop}"/> 
-                 </apex:column>
                  <apex:column headerValue="FCI ID">
                      <apex:outputText value="{!data.FciID}"/> 
                  </apex:column>
@@ -33,23 +19,17 @@
                  <apex:column headerValue="National ID">
                      <apex:outputText value="{!data.NationalID}"/> 
                  </apex:column>
-                 <apex:column headerValue="Quantity Harvested">
-                     <apex:outputText value="{!data.QuantityHarvested}"/> 
-                 </apex:column>
-                 <apex:column headerValue="Quantity Accepted">
-                     <apex:outputText value="{!data.QuantityAccepted}"/> 
-                 </apex:column>
-                 <apex:column headerValue="Quantity Rejected">
-                     <apex:outputText value="{!data.QuantityRejected}"/> 
-                 </apex:column>
-                 <apex:column headerValue="Value of crop per bag">
-                     <apex:outputText value="{!data.ValueOfCrop}"/> 
+                 <apex:column headerValue="Harvest (in bags)">
+                     <apex:outputText value="{!data.Harvest}"/> 
                  </apex:column>
                  <apex:column headerValue="Value of harvest">
                      <apex:outputText value="{!data.ValueOfHarvest}"/> 
                  </apex:column>
                  <apex:column headerValue="Estimated loan amount ">
                      <apex:outputText value="{!data.EstimatedLoanAmount}"/> 
+                 </apex:column>
+                 <apex:column headerValue="Error" rendered="{!NOT(data.Error.empty)}">
+                     <apex:outputText value="{!data.Error}"/> 
                  </apex:column>
             </apex:pageblocktable>
         </apex:pageBlock>

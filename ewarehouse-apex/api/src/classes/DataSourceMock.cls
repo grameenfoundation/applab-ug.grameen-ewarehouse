@@ -191,7 +191,8 @@ public with sharing class DataSourceMock {
         loan.Status__c = 'Applied';
         loan.Currency__c = 'KES';
         loan.Farmer__c = farmer.Id; 
-        loan.Harvest__c = harvest.Id; 
+        if(harvest != null)
+            loan.Harvest__c = harvest.Id; 
         
         return loan;
         
@@ -230,6 +231,18 @@ public with sharing class DataSourceMock {
         return lr;
         
     }
+    
+    public static Commodities__c getCommodity(){
+        Commodities__c c = new Commodities__c();
+        
+        c.Name = 'Beans';
+        c.Highest_Wholesale_Price__c = 200;
+        
+        return c;
+        
+    }
+    
+    
     
     // mock datasource implementations
     public class AllExceptionMock implements EwarehouseDataSource.IEwarehouseDataSource {

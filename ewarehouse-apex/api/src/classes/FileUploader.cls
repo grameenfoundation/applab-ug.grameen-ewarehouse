@@ -145,21 +145,17 @@ public class FileUploader {
 	        }
 	        catch(MatchException me){
 	        	String errorMessage = String.format('{0}, line #{1}',  new String[]{me.getMessage(), String.valueOf(lineNo)});
-                system.debug(LoggingLevel.Error, errorMessage);
                 addError(errorMessage);
 	        }
 	        catch (Exception e){
 	        	String errorMessage = String.format(System.Label.csvimport_parseerrorline_msg,  new String[]{String.valueOf(lineNo)});
-                system.debug(LoggingLevel.Error, 'EXCEPTION: ' + errorMessage + e);
                 addError(errorMessage);
 	        }
 	        finally {
 	        	lineNo++;
 	        }
         }
-        system.debug(LoggingLevel.Debug, 'updateIds: ' + updateIds);
-        system.debug(LoggingLevel.Debug, 'updateLoanIds: ' + updateLoanIds);
-
+     
         // check if any errors occured while parsing through the objects from the raw data, stop the process
         if(getErrors().size() > 0){
             logError();

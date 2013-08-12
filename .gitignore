@@ -3,3 +3,5 @@ ewarehouse-apex/api/ewarehouse-apex-src.zip
 ewarehouse-test/.metadata/.lock
 ewarehouse-test/
 deploy/
+deploy-dev/
+ewarehouse-live/

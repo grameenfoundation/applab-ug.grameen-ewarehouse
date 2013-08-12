@@ -2,19 +2,25 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>CommodityEditController</members>
+        <members>DataSourceMock</members>
         <members>EWarehouseMEDashboardController</members>
+        <members>FileUploader</members>
+        <members>FileUploaderTest</members>
         <members>GenericTestController</members>
         <members>HarvestAndLoanSurveyController</members>
+        <members>HarvestAndLoanSurveyControllerTest</members>
         <name>ApexClass</name>
     </types>
     <types>
         <members>CommodityEdit</members>
         <members>GenericTest</members>
+        <members>HarvestAndLoanSurveyExport</members>
         <members>eWarehouseMEDashboard</members>
         <name>ApexPage</name>
     </types>
     <types>
         <members>Commodities__c</members>
+        <members>Sale__c</members>
         <members>e_Warehouse_Extra_Info__c</members>
         <name>CustomObject</name>
     </types>

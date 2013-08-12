@@ -17,4 +17,5 @@
     <tab>Harvest_Loan</tab>
     <tab>Commodities__c</tab>
     <tab>Markets__c</tab>
+    <tab>e_Warehouse_Extra_Info__c</tab>
 </CustomApplication>
