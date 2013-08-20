@@ -36,7 +36,7 @@ global with sharing class Client {
     	Country__c countryRef = person.Country__r;
     	List<Person_Group_Association__c> pgaRef = person.PersonGroupAssociations__r;
     	
-    	// create new client
+        // create new client
         Client client = new Client();
     	client.Id = farmerRef[0].Name;
     	client.SaleStatus = farmerRef[0].Sale_Status__c; 

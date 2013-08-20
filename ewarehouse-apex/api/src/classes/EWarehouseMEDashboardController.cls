@@ -300,7 +300,7 @@ public with sharing class EWarehouseMEDashboardController  {
         //SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND Id IN (SELECT Farmer__c FROM Loan__c)
         q = 'SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
         Integer financialServicesBaseline = Database.countQuery(q);
-        List<Farmer__c> financialServices = [SELECT Id FROM Farmer__c WHERE Access_Financial_Services__c = true];
+        List<Farmer__c> financialServices = [SELECT Id FROM Farmer__c WHERE Had_Credit_Access__c = true];
         List<Farmer__c> hadLoan = [SELECT Id FROM Farmer__c WHERE Id IN (SELECT Farmer__c FROM Loan__c)];
         Set<Farmer__c> hasFinancialServicesSet = new Set<Farmer__c>();
         hasFinancialServicesSet.addAll(financialServices);
@@ -350,7 +350,9 @@ public with sharing class EWarehouseMEDashboardController  {
     }
     
     private void loadGrainSold(){
-        for(AggregateResult ar: [SELECT SUM(Volume_Sold__c) vs, Harvest__r.Crop__c FROM Sale__c GROUP BY Harvest__r.Crop__c]){
+    	// TODO FIX
+    	Integer x = 9/0;
+        for(AggregateResult ar: [SELECT SUM(Volume_Sold__c) vs FROM Sale__c]){
         	if(ar.get('vs') != null && ar.get('Crop__c') != null){
         		// convert the values
         		Integer quantity = Integer.valueOf(ar.get('vs'));

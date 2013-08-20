@@ -1,0 +1,63 @@
+<apex:page sidebar="true" controller="PaymentAllocationReportController" >
+    <script type="text/javascript">
+    
+        window.onload=function() {
+            document.getElementById('{!$Component.mainPage.mainForm.theButton}').focus();
+           
+        }
+    
+        function focus(id){
+            
+        }
+    </script>
+    <apex:sectionHeader title="Payment allocation report"/>
+        <apex:pagemessages />
+        <apex:form >
+            <div style="margin-bottom:10px;">
+                Sale date: <apex:inputText value="{!formDate}" size="10" id="demo" onfocus="DatePicker.pickDate(false, this , false);" /> 
+                <apex:commandButton value="Refresh" action="{!refresh}"/><br />
+            </div>
+            <apex:pageBlock rendered="{!NOT(Payments.empty)}">
+                <h2>List of all sales made by members of the e-Warehouse</h2>
+                <apex:pageblocktable value="{!Payments}" var="data" >
+                     <apex:column headerValue="Name">
+                         <apex:outputText value="{!data.Name}"/> 
+                     </apex:column>
+                     <apex:column headerValue="National ID">
+                         <apex:outputText value="{!data.NationalID}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Sale ID">
+                         <apex:outputText value="{!data.SaleID}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Reported loan balance">
+                         <apex:outputText value="{!data.LoanBalance}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Loan Account No.">
+                         <apex:outputText value="{!data.LoanAccountNo}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Saving Account No.">
+                         <apex:outputText value="{!data.SavingAccountNo}"/> 
+                     </apex:column>
+                     <apex:column headerValue="GF Account No">
+                         <apex:outputText value="{!data.GFAccountNo}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Total sale">
+                         <apex:outputText value="{!data.TotalAmount}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Credit GF Account (fee)">
+                         <apex:outputText value="{!data.CreditGFFee}"/> 
+                     </apex:column>
+                     <apex:column headerValue="Credit client account">
+                         <apex:outputText value="{!data.CreditAccounts}"/> 
+                     </apex:column>
+                </apex:pageblocktable>
+            </apex:pageBlock>
+        
+        
+            <apex:commandButton action="{!exportPage}" value="Export" id="theButton" style="width:70px;" rendered="{!NOT(Payments.empty)}"/>
+        </apex:form>
+        
+        <apex:pageBlock rendered="{!(Payments.empty)}">
+            <h2>No sales are found for date:&nbsp;<apex:outputText value="{!CurrentDate}"/></h2>
+        </apex:pageBlock>
+</apex:page>

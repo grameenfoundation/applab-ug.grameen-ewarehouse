@@ -40,9 +40,52 @@
     <fields>
         <fullName>Amount_Applied__c</fullName>
         <externalId>false</externalId>
+        <formula>( Beans_Number_of_90kg_Bags_Sold__c *  Sale__r.Beans_Price_Per_90kg_Bag__c ) +
+( Cow_Peas_Number_of_90kg_Bags_Sold__c *  Sale__r.Cow_Peas_Price_Per_90kg_Bag__c ) +
+( Dolichos_Number_of_90kg_Bags_Sold__c *  Sale__r.Dolichos_Price_Per_90kg_Bag__c ) +
+( Green_Grams_Number_of_90kg_Bags_Sold__c *  Sale__r.Dolichos_Price_Per_90kg_Bag__c ) +
+( Maize_Number_of_90kg_Bags_Sold__c *  Sale__r.Maize_Price_Per_90kg_Bag__c ) +
+( Pigeon_Peas_Number_of_90kg_Bags_Sold__c *  Sale__r.Pigeon_Peas_Price_Per_90kg_Bag__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Amount Applied</label>
         <precision>18</precision>
-        <required>true</required>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Beans_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Beans Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cow_Peas_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Cow Peas Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Dolichos_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Dolichos Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
         <type>Number</type>
@@ -53,7 +96,8 @@
         <externalId>false</externalId>
         <label>Farmer</label>
         <referenceTo>Farmer__c</referenceTo>
-        <relationshipName>Sales_Farmers</relationshipName>
+        <relationshipLabel>Sale Farmer Associations</relationshipLabel>
+        <relationshipName>Sale_Farmer_Associations</relationshipName>
         <relationshipOrder>1</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackHistory>false</trackHistory>
@@ -83,11 +127,48 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Green_Grams_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Green Grams Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Maize_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Maize Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pigeon_Peas_Number_of_90kg_Bags_Sold__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Pigeon Peas Number of 90kg Bags Sold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Sale__c</fullName>
         <externalId>false</externalId>
         <label>Sale</label>
         <referenceTo>Sale__c</referenceTo>
-        <relationshipName>Sales_Farmers</relationshipName>
+        <relationshipLabel>Sale Farmer Associations</relationshipLabel>
+        <relationshipName>Sale_Farmer_Associations</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackHistory>false</trackHistory>

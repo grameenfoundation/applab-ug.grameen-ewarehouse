@@ -250,7 +250,7 @@ public class HarvestAndLoanSurveyControllerTest {
         System.assertEquals(0, hlList.size());
     }
     
-     // mock data for test runs
+    // mock data for test runs
     public static District__c getTestDistrict(){
         District__c district = new District__c();
         district.Name = 'Isiolo';

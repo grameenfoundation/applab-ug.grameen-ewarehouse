@@ -40,15 +40,6 @@
     <enableHistory>false</enableHistory>
     <enableReports>true</enableReports>
     <fields>
-        <fullName>Bank_Transaction_Reference_Number__c</fullName>
-        <externalId>false</externalId>
-        <label>Bank Transaction Reference Number</label>
-        <length>255</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Beans_Number_of_90kg_Bags_Sold__c</fullName>
         <defaultValue>0</defaultValue>
         <externalId>false</externalId>
@@ -115,19 +106,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Farmer__c</fullName>
-        <description>The farmer who is selling their produce</description>
-        <externalId>false</externalId>
-        <label>Farmer</label>
-        <referenceTo>Farmer__c</referenceTo>
-        <relationshipLabel>Sales</relationshipLabel>
-        <relationshipName>Sales</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
-    </fields>
-    <fields>
         <fullName>Green_Grams_Number_of_90kg_Bags_Sold__c</fullName>
         <defaultValue>0</defaultValue>
         <externalId>false</externalId>
@@ -148,18 +126,6 @@
         <scale>2</scale>
         <type>Number</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Harvest__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <description>The harvest from which this sale is being made</description>
-        <externalId>false</externalId>
-        <label>Harvest</label>
-        <referenceTo>Harvest__c</referenceTo>
-        <relationshipLabel>Sales</relationshipLabel>
-        <relationshipName>Sales</relationshipName>
-        <required>false</required>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Maize_Number_of_90kg_Bags_Sold__c</fullName>
@@ -206,13 +172,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Purchaser_Name__c</fullName>
-        <externalId>false</externalId>
-        <label>Purchaser Name</label>
-        <required>true</required>
-        <type>TextArea</type>
-    </fields>
-    <fields>
         <fullName>Sale_Date__c</fullName>
         <defaultValue>TODAY()</defaultValue>
         <description>The date the transaction was made</description>
@@ -220,16 +179,6 @@
         <label>Sale Date</label>
         <required>true</required>
         <type>Date</type>
-    </fields>
-    <fields>
-        <fullName>Sale_Price__c</fullName>
-        <externalId>false</externalId>
-        <label>Sale Price</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <type>Number</type>
-        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
@@ -270,19 +219,15 @@
     </fields>
     <fields>
         <fullName>Total_Amount__c</fullName>
-        <defaultValue>0</defaultValue>
         <externalId>false</externalId>
+        <formula>(Beans_Number_of_90kg_Bags_Sold__c *  Beans_Price_Per_90kg_Bag__c) +
+ (Cow_Peas_Number_of_90kg_Bags_Sold__c  *  Cow_Peas_Price_Per_90kg_Bag__c ) +
+ (Dolichos_Number_of_90kg_Bags_Sold__c *  Dolichos_Price_Per_90kg_Bag__c ) +
+ (Green_Grams_Number_of_90kg_Bags_Sold__c *  Green_Grams_Price_Per_90kg_Bag__c) +
+ (Maize_Number_of_90kg_Bags_Sold__c *  Maize_Price_Per_90kg_Bag__c ) +
+ (Pigeon_Peas_Number_of_90kg_Bags_Sold__c *  Pigeon_Peas_Price_Per_90kg_Bag__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Total Amount</label>
-        <precision>18</precision>
-        <required>true</required>
-        <scale>2</scale>
-        <type>Number</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Volume_Sold__c</fullName>
-        <externalId>false</externalId>
-        <label>Volume Sold</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -302,5 +247,5 @@
     </nameField>
     <pluralLabel>Sales</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ControlledByParent</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

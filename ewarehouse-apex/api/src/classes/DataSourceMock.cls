@@ -200,9 +200,7 @@ public with sharing class DataSourceMock {
     
     public static Sale__c getSale(Farmer__c farmer){
         Sale__c sale = new Sale__c();
-        sale.Farmer__c = farmer.Id;
-        sale.Sale_Price__c = 1500.00;
-        sale.Purchaser_Name__c = 'John Doe';
+        //sale.Farmer__c = farmer.Id;
         sale.Status__c = 'New';
         
         return sale;
@@ -211,7 +209,7 @@ public with sharing class DataSourceMock {
     
     public static Sale_Farmer_Association__c getSaleFarmer(Sale__c sale, Farmer__c farmer){
         Sale_Farmer_Association__c sf = new Sale_Farmer_Association__c();
-        sf.Amount_Applied__c = 6000.10;
+        //sf.Amount_Applied__c = 6000.10;
         sf.Fee_Due__c = 5000.10;
         sf.Fee_Paid__c = 4000.10;
         sf.Farmer__c = farmer.Id;

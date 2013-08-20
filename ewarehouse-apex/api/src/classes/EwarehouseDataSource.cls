@@ -1,3 +1,4 @@
+// TODO FIX AFTER STEVENS CHANGES
 /*
  * Datasource for accessing objcets within Salesforce. Includes Interface which can be used to Mock the class during testing
  * Classes will use the Interface [IEwarehouseDataSource] and instantiate by default the [EwarehouseDataSource]
@@ -118,7 +119,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 				        Farmer__c
 				    WHERE
 				        Name = :name
-				    )		
+				    )
 		];
 		
 	}
@@ -292,9 +293,8 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		return [SELECT 
 					Id, 
 					Name, 
-					Sale_Price__c,
-					Sale_Date__c,
-					Volume_Sold__c
+					//Sale_Price__c,
+					Sale_Date__c
 				FROM Sale__c WHERE Status__c = :status];
 	}
 	
@@ -302,7 +302,7 @@ public with sharing class EwarehouseDataSource implements IEwarehouseDataSource 
 		return [SELECT 
 					Id, 
 					Name, 
-					Amount_Applied__c,
+					//Amount_Applied__c,
 					Fee_Due__c,
 					Fee_Paid__C,
 					Farmer__c

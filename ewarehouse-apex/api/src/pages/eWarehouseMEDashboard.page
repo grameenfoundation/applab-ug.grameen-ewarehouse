@@ -48,8 +48,7 @@
                 </apex:chart>
             </apex:pageBlockSectionItem>
         </apex:pageBlockSection>
-        
-        <!--  fix this -->
+  
         <apex:pageBlockSection title="Harvest and Sales in tons shown by crop type" columns="2">
             <apex:pageBlockSectionItem >
                 

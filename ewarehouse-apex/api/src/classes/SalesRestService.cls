@@ -1,3 +1,4 @@
+// TODO PROCESS CHANGES FROM STEVEN
 @RestResource(urlMapping='/ewarehouse/sales/*')
 global class SalesRestService extends EwarehouseServiceBase  {
 	
@@ -24,13 +25,13 @@ global class SalesRestService extends EwarehouseServiceBase  {
 	    		// create Sale object
 	    		Sale sale = new Sale();
 	    		sale.Id = sObj.Id;
-	    		sale.Amount = sObj.Sale_Price__c;
+	    		//sale.Amount = sObj.Sale_Price__c;
 	    		
 	    		// create an array of SaleFarmer objects
 	    		List<SaleFarmer> saleFarmerList = new List<SaleFarmer>();
 		    	for(Sale_Farmer_Association__c obj : sfList){
 		    		SaleFarmer sf = new SaleFarmer();
-		    		sf.AmountApplied = obj.Amount_Applied__c;
+		    		//sf.AmountApplied = obj.Amount_Applied__c;
 		    		sf.FarmerId = obj.Farmer__c;
 		    		sf.FeeDue = obj.Fee_Due__C;
 		    		sf.FeePaid = obj.Fee_Paid__C;
