@@ -11,6 +11,8 @@
     }
     </style>
     <apex:pageBlock title="M & E Dashboard" id="General">
+        
+    
         <apex:pageBlockSection title="General information" columns="2">
             <apex:pageBlockTable value="{!impactData}" var="item">
                 <apex:facet name="caption">General statistics</apex:facet>

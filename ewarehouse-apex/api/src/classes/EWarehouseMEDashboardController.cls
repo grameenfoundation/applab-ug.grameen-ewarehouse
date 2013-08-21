@@ -8,21 +8,28 @@ public with sharing class EWarehouseMEDashboardController  {
 	private Info ewInfo;
 	private Boolean editMode = false;
 	
-    private String farmersTrained = 'No of Farmers registered';
-    private String farmersHadTraining = 'No of Farmers trained on post-harvest handling';
-    private String farmersNewStorageTechniques = 'No of Farmers implementing new storage techniques';
+    private String farmersTrained = 'No of farmers registered';
+    private String byGenderStr = 'By gender:';
+    private String byPpiStr = 'Poverty distribution:';
+    private String below250DayStr = 'Below $2.50/day poverty line';
+    private String below150Percent = 'Below 150% of national poverty line';
+    private String belowExtreme = 'Below extreme poverty line';
+    private String tabStr = '- ';
+    
+    private String farmersHadTraining = 'No of farmers trained on post-harvest handling';
+    private String farmersNewStorageTechniques = 'No of farmers implementing new storage techniques';
     private String increaseInFarmersStr = 'Increase in farmers storing grains and delaying sale';
     private String increaseInFinancialAccessStr = 'Increase in farmers with access to financial services';
-    private String repaymentRatioLbl = 'Repaid ratio (loans)';
-    private String totalLoansLbl = 'Total loans';
-    private String repaidLoansLbl = 'Repaid loans';
+    private String repaymentRatioLbl = 'Loan repayment rate';
+    private String totalLoansLbl = 'Total loans disbursed';
+    private String repaidLoansLbl = 'Total loans repaid';
             
-    private String cvCoveredLabel = 'Commercial Villages covered:';
-    private String farmersReceivingInformationLabel = 'Number of farmers receiving market information through SMS :';
-    private String farmersGrainChecksLabel = 'Number of checks conducted by FCI staff and VKWs on grain stored:';
-    private String inputsPurchasedLabel = 'Volume of inputs/fertilizers purchased by FCI:';
-    private String trainingsDoneOnInputAdoptionLabel = 'Number of trainings on adoption of inputs:';
-    private String totalInputPriceLabel = 'Number of farmers compared against total input purchased:';
+    private String cvCoveredLabel = 'Commercial Villages covered';
+    private String farmersReceivingInformationLabel = 'Number of farmers receiving market information through SMS';
+    private String farmersGrainChecksLabel = 'Number of checks conducted by FCI staff and VKWs on grain stored';
+    private String inputsPurchasedLabel = 'Volume of inputs/fertilizers purchased by FCI';
+    private String trainingsDoneOnInputAdoptionLabel = 'Number of trainings on adoption of inputs';
+    private String totalInputPriceLabel = 'Number of farmers compared against total input purchased';
     
     private Integer acreSteps = 5;
 
@@ -93,10 +100,9 @@ public with sharing class EWarehouseMEDashboardController  {
     	
     	// load farmers by gender and also set the total farmers
     	loadFarmersByGender();
-    	loadFarmersByTraining();
-    	loadVKWInformation();
-    	loadFarmersByAcre();
     	loadFarmersByPPI();
+        loadFarmersByTraining();
+    	loadFarmersByAcre();
     	loadFarmersByCrop();
     	loadFarmersByLivestock();
     	loadFarmersByStorageMaterial();
@@ -151,15 +157,22 @@ public with sharing class EWarehouseMEDashboardController  {
     }
     
     private void loadFarmersByGender(){
-    	
+    	Map<String, Integer> fbg = new Map<String, Integer>();
         
         for(AggregateResult ar: [SELECT Person__r.Gender__c, COUNT(Id) c FROM Farmer__c GROUP BY Person__r.Gender__c ORDER BY Person__r.Gender__c DESC]){
-            farmersByGender.add(new NameCount(String.valueOf(ar.get('Gender__c')), String.valueOf(ar.get('c'))));
+            fbg.put(String.valueOf(ar.get('Gender__c')), Integer.valueOf(ar.get('c')));
             totalFarmers += Integer.valueOf(ar.get('c'));
         }
         
         // add the total amount of farmers to the impactData
         impactData.add(new NameCount(farmersTrained, String.valueOf(totalFarmers)));
+        impactData.add(new NameCount(byGenderStr, ''));
+        
+        for (String field: fbg.keySet()){
+        	Decimal fbgPercent = ((Decimal)fbg.get(field) / (Decimal)totalFarmers) * 100;
+        	farmersByGender.add(new NameCount(tabStr + field, String.valueOf(fbgPercent) + '%'));
+        }
+        
         for(NameCount nc : farmersByGender){
         	impactData.add(nc);
         }
@@ -180,16 +193,14 @@ public with sharing class EWarehouseMEDashboardController  {
         }
         newStorageMaterialStr = newStorageMaterialStr.removeEnd(',');
         
-    	System.debug('SELECT COUNT() FROM Farmer__c WHERE Crop_Storage_Material__c INCLUDES ('+newStorageMaterialStr+') OR Crop_Storage_Location__c INCLUDES ('+newStorageLocationStr+')');
     	Integer useNewStorageTechniques = Database.countQuery('SELECT COUNT() FROM Farmer__c WHERE Crop_Storage_Material__c INCLUDES ('+newStorageMaterialStr+') OR Crop_Storage_Location__c INCLUDES ('+newStorageLocationStr+')');
-    	impactData.add(new NameCount(farmersHadTraining, String.valueOf(hadTraining)));
-    	impactData.add(new NameCount(farmersNewStorageTechniques, String.valueOf(useNewStorageTechniques)));
     	
-    }
-    
-    private void loadVKWInformation(){
-        Integer vkws = Database.countQuery('SELECT COUNT() FROM Person__c WHERE Type__c = \'VKW\'');
-        impactData.add(new NameCount('No of Village Knowledge Workers registered', String.valueOf(vkws)));
+    	Decimal hadTraingPercent = ((Decimal)hadTraining / totalFarmers) * 100;
+    	Decimal useNewStorageTechniquesPercent = ((Decimal)useNewStorageTechniques / totalFarmers) * 100;
+    	
+    	impactData.add(new NameCount(farmersHadTraining, String.valueOf(hadTraingPercent) + '%'));
+    	impactData.add(new NameCount(farmersNewStorageTechniques, String.valueOf(useNewStorageTechniquesPercent) + '%'));
+    	
     }
     
     private void loadFarmersWhoArePaid(){
@@ -221,6 +232,10 @@ public with sharing class EWarehouseMEDashboardController  {
     }
     
     private void loadFarmersByPPI(){
+    	impactData.add(new NameCount(byPpiStr, ''));
+        impactData.add(new NameCount(tabStr + below250DayStr, 'fix'));
+        impactData.add(new NameCount(tabStr + below150Percent, 'fix'));
+    	impactData.add(new NameCount(tabStr + belowExtreme, 'fix'));
     	// make sure they are sorted to loop through them correctly
        /* ppiRanges.sort();
         
@@ -284,7 +299,7 @@ public with sharing class EWarehouseMEDashboardController  {
     }
     
     private void loadFarmersIncrease(){
-    	
+    	/*
     	// get the increase in farmers from the baseline date
     	String q = 'SELECT COUNT() FROM Farmer__c WHERE CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
     	Integer baseLineFarmerCount = Database.countQuery(q);
@@ -297,8 +312,8 @@ public with sharing class EWarehouseMEDashboardController  {
         }
         
         // get the increase in farmers with access to financial services
-        //SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND Id IN (SELECT Farmer__c FROM Loan__c)
-        q = 'SELECT COUNT() FROM Farmer__c WHERE Access_Financial_Services__c = true AND CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
+        //SELECT COUNT() FROM Farmer__c WHERE Had_Credit_Access__c = true AND Id IN (SELECT Farmer__c FROM Loan__c)
+        q = 'SELECT COUNT() FROM Farmer__c WHERE Had_Credit_Access__c = true AND CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
         Integer financialServicesBaseline = Database.countQuery(q);
         List<Farmer__c> financialServices = [SELECT Id FROM Farmer__c WHERE Had_Credit_Access__c = true];
         List<Farmer__c> hadLoan = [SELECT Id FROM Farmer__c WHERE Id IN (SELECT Farmer__c FROM Loan__c)];
@@ -312,7 +327,7 @@ public with sharing class EWarehouseMEDashboardController  {
             Decimal increaseInAccess = (((Decimal)hasAccessFinancialServices - (Decimal)financialServicesBaseline) / (Decimal)financialServicesBaseline) * 100;
             impactData.add(new NameCount(increaseInFinancialAccessStr, increaseInAccess.setScale(2).toPlainString())); 
         }
-    	
+    	*/
     }
     
     private void loadLoanInformation(){
@@ -336,8 +351,8 @@ public with sharing class EWarehouseMEDashboardController  {
         impactData.add(new NameCount(totalLoansLbl, String.valueOf(totalLoans)));
         impactData.add(new NameCount(repaidLoansLbl, String.valueOf(repaidLoans)));
         
-        Decimal ratio = totalLoans != 0 ? (repaidLoans / (Decimal)totalLoans) : 0;
-        impactData.add(new NameCount(repaymentRatioLbl, String.valueOf(ratio.setScale(2))));
+        Decimal ratio = totalLoans != 0 ? ((repaidLoans / (Decimal)totalLoans)) * 100 : 0;
+        impactData.add(new NameCount(repaymentRatioLbl, String.valueOf(ratio) + '%'));
     }
     
     private void loadGrainCollected(){
@@ -350,6 +365,7 @@ public with sharing class EWarehouseMEDashboardController  {
     }
     
     private void loadGrainSold(){
+    	/*
     	// TODO FIX
     	Integer x = 9/0;
         for(AggregateResult ar: [SELECT SUM(Volume_Sold__c) vs FROM Sale__c]){
@@ -372,14 +388,17 @@ public with sharing class EWarehouseMEDashboardController  {
         			grainCollected.add(new NameCount(crop, '0', String.valueOf(tons)));
         		}
         	}
-        }
+        }*/
+        grainCollected.add(new NameCount('fix', '0', 'fix'));
     }
     
     private void loadFciInformation(){
     	ewInfo = new Info();
-
+    	Integer vkws = Database.countQuery('SELECT COUNT() FROM Person__c WHERE Type__c = \'VKW\'');
+        
     	fciInformation.add(new NameCount(cvCoveredLabel, ewInfo.cvsCovered));
-    	fciInformation.add(new NameCount(farmersReceivingInformationLabel, ewInfo.farmersReceivingInformation));
+    	fciInformation.add(new NameCount('No of Village Knowledge Workers registered', String.valueOf(vkws)));
+        fciInformation.add(new NameCount(farmersReceivingInformationLabel, ewInfo.farmersReceivingInformation));
     	fciInformation.add(new NameCount(farmersGrainChecksLabel, ewInfo.farmersGrainChecks));
     	fciInformation.add(new NameCount(inputsPurchasedLabel, ewInfo.inputsPurchased));
     	fciInformation.add(new NameCount(trainingsDoneOnInputAdoptionLabel, ewInfo.trainingsDoneOnInputAdoption));
