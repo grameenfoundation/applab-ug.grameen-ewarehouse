@@ -18,4 +18,6 @@
     <tab>Commodities__c</tab>
     <tab>Markets__c</tab>
     <tab>e_Warehouse_Extra_Info__c</tab>
+    <tab>Sale_Bank_Reference__c</tab>
+    <tab>Payment_allocation_SMEP</tab>
 </CustomApplication>

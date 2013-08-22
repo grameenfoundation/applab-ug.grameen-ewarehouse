@@ -9,7 +9,6 @@
         <members>EwarehouseDataSource</members>
         <members>FileUploader</members>
         <members>FileUploaderTest</members>
-        <members>GenericTestController</members>
         <members>HarvestAndLoanSurveyController</members>
         <members>HarvestAndLoanSurveyControllerTest</members>
         <members>PaymentAllocationReportController</members>
@@ -19,7 +18,6 @@
     </types>
     <types>
         <members>CommodityEdit</members>
-        <members>GenericTest</members>
         <members>HarvestAndLoanSurveyExport</members>
         <members>PaymentAllocationExport</members>
         <members>PaymentAllocationReport</members>

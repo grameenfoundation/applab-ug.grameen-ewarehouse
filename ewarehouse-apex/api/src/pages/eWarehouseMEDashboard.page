@@ -11,8 +11,6 @@
     }
     </style>
     <apex:pageBlock title="M & E Dashboard" id="General">
-        
-    
         <apex:pageBlockSection title="General information" columns="2">
             <apex:pageBlockTable value="{!impactData}" var="item">
                 <apex:facet name="caption">General statistics</apex:facet>
@@ -28,11 +26,13 @@
         
         <apex:pageBlockSection title="Farmers per acre, crop and livestock" columns="3">
             <apex:pageBlockSectionItem >
-                <apex:pageBlockTable value="{!FarmersByAcre}" var="item">
-                    <apex:facet name="caption">Farmers per acre</apex:facet>
-                    <apex:column value="{!item.name}" headerValue="Land in acre" width="200px"/>
-                    <apex:column width="70px" value="{!item.count}" headerValue="# of farmers"/>
-                </apex:pageBlockTable>
+                <apex:chart height="350" width="450" id="FarmSize" data="{!FarmersByAcre}">
+                    <label class="graph-caption" for="FarmSize">Farm size of farmers</label>
+                    <apex:pieSeries dataField="count" labelField="name"/>
+                    <apex:legend position="right"/>
+                </apex:chart>
+                
+                
             </apex:pageBlockSectionItem>
             <apex:pageBlockSectionItem >
             

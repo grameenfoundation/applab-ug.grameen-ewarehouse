@@ -63,6 +63,11 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Sale Bank Reference</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <displayFormat>SBR{000000}</displayFormat>
         <label>Sale Bank Reference Name</label>
