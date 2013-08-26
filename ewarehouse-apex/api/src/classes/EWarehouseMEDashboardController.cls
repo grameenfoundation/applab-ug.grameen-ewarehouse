@@ -1,5 +1,5 @@
 public with sharing class EWarehouseMEDashboardController  {
-	
+
 	private List<String> cropValues;
 	private List<String> livestockValues;
 	private List<String> storageMaterialValues;
@@ -31,6 +31,11 @@ public with sharing class EWarehouseMEDashboardController  {
     private String trainingsDoneOnInputAdoptionLabel = 'Number of trainings on adoption of inputs';
     private String totalInputPriceLabel = 'Number of farmers compared against total input purchased';
     
+    private Map<String, String> saleCropTypes;
+    private List<PPIRating> nationalPoverty;
+    private List<PPIRating> national150Poverty;
+    private List<PPIRating> extremePoverty;
+   
     private Integer acreSteps = 5;
 
     private Integer totalFarmers = 0;
@@ -80,6 +85,15 @@ public with sharing class EWarehouseMEDashboardController  {
     	newStorageMaterial.add('Plastic bags');
         newStorageMaterial.add('Dedicated room');
         
+        saleCropTypes = new Map<String, String>();
+        saleCropTypes.put('Beans', 'Beans_Number_of_90kg_Bags_Sold__c');
+        saleCropTypes.put('Cow peas', 'Cow_Peas_Number_of_90kg_Bags_Sold__c');
+        saleCropTypes.put('Black beans(Dolichos)', 'Dolichos_Number_of_90kg_Bags_Sold__c');
+        saleCropTypes.put('Green grams', 'Green_Grams_Number_of_90kg_Bags_Sold__c');
+        saleCropTypes.put('Maize', 'Maize_Number_of_90kg_Bags_Sold__c');
+        saleCropTypes.put('Pigeon peas', 'Pigeon_Peas_Number_of_90kg_Bags_Sold__c');
+    
+        
     	loadCropValues();
     	loadLivestockValues();
     	loadStorageMaterialValues();
@@ -90,9 +104,7 @@ public with sharing class EWarehouseMEDashboardController  {
         farmersByGender = new List<NameCount>();
         farmersByAcre = new List<NameCount>();
         farmersByPPI = new List<NameCount>();
-    	farmersByCrop = new List<NameCount>();
-    	farmersByLivestock = new List<NameCount>();
-        farmersByStorageMaterial = new List<NameCount>();
+    	farmersByStorageMaterial = new List<NameCount>();
         farmersByStorageLocation = new List<NameCount>();
         grainCollected = new List<NameCount>();
     	grainSold = new List<NameCount>();
@@ -103,15 +115,11 @@ public with sharing class EWarehouseMEDashboardController  {
     	loadFarmersByPPI();
         loadFarmersByTraining();
     	loadFarmersByAcre();
-    	loadFarmersByCrop();
-    	loadFarmersByLivestock();
     	loadFarmersByStorageMaterial();
     	loadFarmersByStorageLocation();
-    	loadFarmersIncrease();
     	loadLoanInformation();
     	loadFarmersWhoArePaid();
-    	loadGrainCollected();
-    	loadGrainSold();
+    	loadGrainCollectedAndSold();
     	loadFciInformation();
     	
     }
@@ -127,15 +135,7 @@ public with sharing class EWarehouseMEDashboardController  {
     public List<NameCount> getFarmersByAcre(){
         return farmersByAcre;
     }
-    
-    public List<NameCount> getFarmersByCrop(){
-        return farmersByCrop;
-    }
-    
-    public List<NameCount> getFarmersByLivestock(){
-        return farmersByLivestock;
-    }
-    
+ 
     public List<NameCount> getGrainCollected(){
         return grainCollected;
     }
@@ -223,9 +223,9 @@ public with sharing class EWarehouseMEDashboardController  {
                 
             Integer result = Database.countQuery(q);
             if(stepMax != -1)
-                farmersByAcre.add(new NameCount(stepMin+' - '+stepMax, String.valueOf(result)));
+                farmersByAcre.add(new NameCount(stepMin+' - ' + stepMax + ' acre', String.valueOf(result)));
             else
-                farmersByAcre.add(new NameCount('> ' + (stepMin - 1), String.valueOf(result)));
+                farmersByAcre.add(new NameCount('> ' + (stepMin - 1) + ' acre', String.valueOf(result)));
         }
         
         system.debug(LoggingLevel.Debug, farmersByAcre);
@@ -233,9 +233,28 @@ public with sharing class EWarehouseMEDashboardController  {
     
     private void loadFarmersByPPI(){
     	impactData.add(new NameCount(byPpiStr, ''));
-        impactData.add(new NameCount(tabStr + below250DayStr, 'fix'));
-        impactData.add(new NameCount(tabStr + below150Percent, 'fix'));
-    	impactData.add(new NameCount(tabStr + belowExtreme, 'fix'));
+    	
+    	Integer totalFarmers = 0;
+    	Decimal rating250Dollar = 0;
+        Decimal rating150Percent = 0;
+        Decimal ratingExtreme = 0;
+        
+    	List<PPIRating> ratings = getPpiRating();
+    	for(PPIRating rating : ratings){
+    	   String q;
+    	   q = 'SELECT COUNT() FROM Farmer__c WHERE Person__c IN (SELECT Person__c FROM PPI_Data__c WHERE Score__c >= '+ rating.min +' AND Score__c <= '+ rating.max +')';
+    	   Integer result = Database.countQuery(q);
+    	   rating.farmerCount = result;
+    	   totalFarmers += result;
+    	   rating250Dollar += rating.farmerCount * rating.below250Dollar;
+    	   rating150Percent += rating.farmerCount * rating.below150Percent;
+    	   ratingExtreme += rating.farmerCount * rating.belowExtreme;
+    	   System.debug(rating);
+    	}
+    	
+        impactData.add(new NameCount(tabStr + below250DayStr, String.valueOf((rating250Dollar / totalFarmers).setScale(1)) + '%'));
+        impactData.add(new NameCount(tabStr + below150Percent, String.valueOf((rating150Percent / totalFarmers).setScale(1)) + '%'));
+    	impactData.add(new NameCount(tabStr + belowExtreme, String.valueOf((ratingExtreme / totalFarmers).setScale(1)) + '%'));
     	// make sure they are sorted to loop through them correctly
        /* ppiRanges.sort();
         
@@ -257,7 +276,7 @@ public with sharing class EWarehouseMEDashboardController  {
         
     	farmersByPPI*/
     }
-    
+    /*
     private void loadFarmersByCrop(){
     	for(String crop : cropValues){
     		String q = 'SELECT COUNT() FROM Farmer__c WHERE Crops__c includes (\''+crop+'\')';
@@ -277,7 +296,7 @@ public with sharing class EWarehouseMEDashboardController  {
             }
         }
     }
-    
+    */
     private void loadFarmersByStorageMaterial(){
     	for(String storageMaterial : storageMaterialValues){
             String q = 'SELECT COUNT() FROM Farmer__c WHERE Crop_Storage_Material__c INCLUDES (\''+storageMaterial+'\')';
@@ -298,37 +317,7 @@ public with sharing class EWarehouseMEDashboardController  {
         }
     }
     
-    private void loadFarmersIncrease(){
-    	/*
-    	// get the increase in farmers from the baseline date
-    	String q = 'SELECT COUNT() FROM Farmer__c WHERE CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
-    	Integer baseLineFarmerCount = Database.countQuery(q);
-        q = 'SELECT COUNT() FROM Farmer__c';
-        Integer currentFarmerCount = Database.countQuery(q);
-        
-        if(baseLineFarmerCount > 0){
-            Decimal increaseInFarmers = (((Decimal)currentFarmerCount - (Decimal)baseLineFarmerCount) / (Decimal)baseLineFarmerCount) * 100;
-            impactData.add(new NameCount(increaseInFarmersStr, increaseInFarmers.setScale(2).toPlainString()));
-        }
-        
-        // get the increase in farmers with access to financial services
-        //SELECT COUNT() FROM Farmer__c WHERE Had_Credit_Access__c = true AND Id IN (SELECT Farmer__c FROM Loan__c)
-        q = 'SELECT COUNT() FROM Farmer__c WHERE Had_Credit_Access__c = true AND CreatedDate < ' + ewInfo.baseLineDate.format('yyyy-MM-dd\'T\'HH:mm:ss\'Z\'');
-        Integer financialServicesBaseline = Database.countQuery(q);
-        List<Farmer__c> financialServices = [SELECT Id FROM Farmer__c WHERE Had_Credit_Access__c = true];
-        List<Farmer__c> hadLoan = [SELECT Id FROM Farmer__c WHERE Id IN (SELECT Farmer__c FROM Loan__c)];
-        Set<Farmer__c> hasFinancialServicesSet = new Set<Farmer__c>();
-        hasFinancialServicesSet.addAll(financialServices);
-        hasFinancialServicesSet.addAll(hasFinancialServicesSet);
-        
-        Integer hasAccessFinancialServices = hasFinancialServicesSet.size();
-        
-        if(financialServicesBaseline > 0){
-            Decimal increaseInAccess = (((Decimal)hasAccessFinancialServices - (Decimal)financialServicesBaseline) / (Decimal)financialServicesBaseline) * 100;
-            impactData.add(new NameCount(increaseInFinancialAccessStr, increaseInAccess.setScale(2).toPlainString())); 
-        }
-    	*/
-    }
+   
     
     private void loadLoanInformation(){
     	
@@ -355,41 +344,52 @@ public with sharing class EWarehouseMEDashboardController  {
         impactData.add(new NameCount(repaymentRatioLbl, String.valueOf(ratio) + '%'));
     }
     
-    private void loadGrainCollected(){
+    private void loadGrainCollectedAndSold(){
     	for(AggregateResult ar: [SELECT SUM(Quantity_Accepted__c) s, Crop__c FROM Harvest__c GROUP BY Crop__c]){
     		Integer quantity = Integer.valueOf(ar.get('s'));
     		String crop = String.valueOf(ar.get('Crop__c'));
     		Integer tons = (quantity * 90) / 1000;
             grainCollected.add(new NameCount(crop, String.valueOf(tons)));
         }
-    }
-    
-    private void loadGrainSold(){
-    	/*
-    	// TODO FIX
-    	Integer x = 9/0;
-        for(AggregateResult ar: [SELECT SUM(Volume_Sold__c) vs FROM Sale__c]){
-        	if(ar.get('vs') != null && ar.get('Crop__c') != null){
-        		// convert the values
-        		Integer quantity = Integer.valueOf(ar.get('vs'));
-                String crop = String.valueOf(ar.get('Crop__c'));
+    	
+    	for(String cropType : saleCropTypes.keySet()){
+    		AggregateResult ar = Database.query('SELECT SUM(' + saleCropTypes.get(cropType) + ') vs FROM Sale__c');
+    		if(ar.get('vs') != null){
+    			// convert the values
+    			Integer quantity = Integer.valueOf(ar.get('vs'));
                 Integer tons = (quantity * 90) / 1000;
                 
                 // find the appropriate crop
-        		Boolean found = false;
-        		for(NameCount nc : grainCollected){
-        			if(nc.name == crop){
-        				nc.count2 = String.valueOf(tons);
-        				found = true;
-        			}
-        		}
-        		
-        		if(!found){
-        			grainCollected.add(new NameCount(crop, '0', String.valueOf(tons)));
-        		}
-        	}
-        }*/
-        grainCollected.add(new NameCount('fix', '0', 'fix'));
+                Boolean found = false;
+                for(NameCount nc : grainCollected){
+                    if(nc.name == cropType){
+                        nc.count2 = String.valueOf(tons);
+                        found = true;
+                    }
+                }
+                
+                if(!found){
+                    grainCollected.add(new NameCount(cropType, '0', String.valueOf(tons)));
+                }
+    		}
+    	}
+    	
+    	// when no data is found for crop add it with zero values
+    	for(String cropType : saleCropTypes.keySet()){
+    		Boolean found = false;
+            for(NameCount nc : grainCollected){
+                if(nc.name == cropType){
+                    found = true;
+                }
+            }
+            
+            if(!found){
+                grainCollected.add(new NameCount(cropType, '0', '0'));
+            }
+    	}
+    	
+    	system.debug('grainCollected=' + grainCollected);
+ 
     }
     
     private void loadFciInformation(){
@@ -542,6 +542,55 @@ public with sharing class EWarehouseMEDashboardController  {
             
         }
         
+        
+        
     }
     
+    public class PPIRating {
+        public Integer min { get; set; }
+        public Integer max { get; set; }
+        public Decimal below250Dollar { get; set; }
+        public Decimal below150Percent { get; set; }
+        public Decimal belowExtreme { get; set; }
+        public Integer farmerCount { get; set; }
+        
+        
+        public PPIRating(Integer min, Integer max, Decimal below250Dollar, Decimal below150Percent, Decimal belowExtreme){
+        	this.min = min;
+        	this.max = max;
+        	this.below250Dollar = below250Dollar;
+        	this.below150Percent = below150Percent;
+        	this.belowExtreme = belowExtreme;
+        }
+    }
+    
+    public List<PPIRating> getPpiRating(){
+    	Integer xx = 99;
+        return new List<PPIRating>{
+            new PPIRating(0, 4, 100.0, 100.0, 91.5),
+            new PPIRating(5, 9, 100.0, 100.0, 73.9),
+            new PPIRating(10, 14, 99.3, 96.5, 57.9),
+            new PPIRating(15, 19, 99.1, 95.7, 46.9),
+            new PPIRating(20, 24, 99.2, 93.2, 46.3),
+            
+            new PPIRating(25, 29, 96.2, 89.1, 36.5),
+            new PPIRating(30, 34, 95.4, 83.3, 27.6),
+            new PPIRating(35, 39, 91.0, 75.7, 16.8),
+            new PPIRating(40, 44, 82.7, 64.8, 15.4),
+            new PPIRating(45, 49, 75.5, 64.3, 7.4),
+            
+            new PPIRating(50, 54, 61.1, 49.4, 2.5),
+            new PPIRating(55, 59, 44.0, 41.8, 2.3),
+            new PPIRating(60, 64, 29.0, 32.3, 0.3),
+            new PPIRating(65, 69, 20.0, 20.4, 1.2),
+            new PPIRating(70, 74, 9.4, 11.1, 0.2),
+            
+            new PPIRating(75, 79, 6.0, 4.1, 0),
+            new PPIRating(80, 84, 2.2, 6.7, 0.4),
+            new PPIRating(85, 89, 4.1, 4.1, 0),
+            new PPIRating(90, 94, 0, 0, 0),
+            new PPIRating(95, 100, 0, 0, 0)
+        };
+        
+    }
 }

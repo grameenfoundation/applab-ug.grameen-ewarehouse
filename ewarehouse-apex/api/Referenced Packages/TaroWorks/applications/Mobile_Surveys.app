@@ -20,4 +20,6 @@
     <tab>e_Warehouse_Extra_Info__c</tab>
     <tab>Sale_Bank_Reference__c</tab>
     <tab>Payment_allocation_SMEP</tab>
+    <tab>PPI_Data__c</tab>
+    <tab>PPITable__c</tab>
 </CustomApplication>
