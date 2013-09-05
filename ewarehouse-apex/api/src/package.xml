@@ -32,5 +32,5 @@
         <members>e_Warehouse_Extra_Info__c</members>
         <name>CustomObject</name>
     </types>
-    <version>28.0</version>
+    <version>27.0</version>
 </Package>

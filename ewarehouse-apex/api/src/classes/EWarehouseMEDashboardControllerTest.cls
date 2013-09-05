@@ -31,15 +31,17 @@ public with sharing class EWarehouseMEDashboardControllerTest {
         EWarehouseMEDashboardController controller = new EWarehouseMEDashboardController();
         List<EWarehouseMEDashboardController.NameCount> impactData = controller.getImpactData();
         System.debug('impactData = ' + impactData);
-        System.assertEquals(10, impactData.size());
+        System.assertEquals(11, impactData.size());
         Integer x = 0;
-        System.assertEquals('No of Farmers registered', impactData[x].Name);
+        System.assertEquals('No of farmers registered', impactData[x].Name);
         System.assertEquals('2', impactData[x++].Count);
-        System.assertEquals('Female', impactData[x].Name);
-        System.assertEquals('1', impactData[x++].Count);
-        System.assertEquals('Male', impactData[x].Name);
-        System.assertEquals('1', impactData[x++].Count);
-        System.assertEquals('No of Farmers trained on post-harvest handling', impactData[x].Name);
+        System.assertEquals('By gender:', impactData[x].Name);
+        System.assertEquals('', impactData[x++].Count);
+        System.assertEquals('- Female', impactData[x].Name);
+        System.assertEquals('50.0%', impactData[x++].Count);
+        System.assertEquals('- Male', impactData[x].Name);
+        System.assertEquals('50.0%', impactData[x++].Count);
+        /*System.assertEquals('No of Farmers trained on post-harvest handling', impactData[x].Name);
         System.assertEquals('1', impactData[x++].Count);
         System.assertEquals('No of Farmers implementing new storage techniques', impactData[x].Name);
         System.assertEquals('2', impactData[x++].Count);
@@ -56,7 +58,7 @@ public with sharing class EWarehouseMEDashboardControllerTest {
         System.assertEquals('Repaid ratio (loans)', impactData[x].Name);
         System.assertEquals('0.50', impactData[x++].Count);
         System.assertEquals('No of farmers fully paid for sales', impactData[x].Name);
-        System.assertEquals('2', impactData[x++].Count);
+        System.assertEquals('2', impactData[x++].Count);*/
         
         
     }
@@ -68,10 +70,10 @@ public with sharing class EWarehouseMEDashboardControllerTest {
         List<EWarehouseMEDashboardController.NameCount> testData = controller.getFarmersByGender();
         
         System.assertEquals(testData.size(), 2);
-        System.assertEquals('Female', testData[0].Name);
-        System.assertEquals('1', testData[0].Count);
-        System.assertEquals('Male', testData[1].Name);
-        System.assertEquals('1', testData[1].Count);
+        System.assertEquals('- Female', testData[0].Name);
+        System.assertEquals('50.0%', testData[0].Count);
+        System.assertEquals('- Male', testData[1].Name);
+        System.assertEquals('50.0%', testData[1].Count);
     }
     
     static testMethod void getFarmersByAcre(){
@@ -80,40 +82,12 @@ public with sharing class EWarehouseMEDashboardControllerTest {
         EWarehouseMEDashboardController controller = new EWarehouseMEDashboardController();
         List<EWarehouseMEDashboardController.NameCount> testData = controller.getFarmersByAcre();
         
-        System.assertEquals(testData.size(), 5);
-        System.assertEquals('0 - 10', testData[0].Name);
+        System.assertEquals(2, testData.size());
+        System.assertEquals('0 - 10 acre', testData[0].Name);
         System.assertEquals('1', testData[0].Count);
-        System.assertEquals('11 - 20', testData[1].Name);
-        System.assertEquals('0', testData[1].Count);
-        System.assertEquals('21 - 30', testData[2].Name);
-        System.assertEquals('0', testData[2].Count);
-        System.assertEquals('31 - 40', testData[3].Name);
-        System.assertEquals('1', testData[3].Count);
-        System.assertEquals('> 40', testData[4].Name);
-        System.assertEquals('0', testData[4].Count);
-       
-    }
-    
-    static testMethod void getFarmersByCrop(){
-        loadTestData();
+        System.assertEquals('31 - 40 acre', testData[1].Name);
+        System.assertEquals('1', testData[1].Count);
         
-        EWarehouseMEDashboardController controller = new EWarehouseMEDashboardController();
-        List<EWarehouseMEDashboardController.NameCount> testData = controller.getFarmersByCrop();
-        
-        System.assertEquals(1, testData.size());
-        System.assertEquals('Maize', testData[0].Name);
-        System.assertEquals('2', testData[0].Count);
-    }
-    
-    static testMethod void getFarmersByLivestock(){
-        loadTestData();
-        
-        EWarehouseMEDashboardController controller = new EWarehouseMEDashboardController();
-        List<EWarehouseMEDashboardController.NameCount> testData = controller.getFarmersByLivestock();
-        
-        System.assertEquals(1, testData.size());
-        System.assertEquals('Goats', testData[0].Name);
-        System.assertEquals('2', testData[0].Count);
     }
     
     static testMethod void getGrainCollected(){
@@ -122,7 +96,7 @@ public with sharing class EWarehouseMEDashboardControllerTest {
         EWarehouseMEDashboardController controller = new EWarehouseMEDashboardController();
         List<EWarehouseMEDashboardController.NameCount> testData = controller.getGrainCollected();
         System.debug('getGrainCollected' + testData);
-        System.assertEquals(1, testData.size());
+        System.assertEquals(6, testData.size());
         System.assertEquals('Beans', testData[0].Name);
         System.assertEquals('180', testData[0].Count);
     }

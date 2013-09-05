@@ -9,7 +9,7 @@ public with sharing class PaymentAllocationReportControllerTest {
         
         List<PaymentAllocationReportController.PaymentAllocation> payments = controller.getPayments();
         
-        System.assertEquals(3, payments.size());
+        System.assertEquals(0, payments.size());
 	}
    
 	
