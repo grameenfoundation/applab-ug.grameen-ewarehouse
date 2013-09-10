@@ -11,6 +11,8 @@
         <members>FileUploaderTest</members>
         <members>HarvestAndLoanSurveyController</members>
         <members>HarvestAndLoanSurveyControllerTest</members>
+        <members>MetricMapController</members>
+        <members>MetricMapWrapper</members>
         <members>PaymentAllocationReportController</members>
         <members>PaymentAllocationReportControllerTest</members>
         <members>SalesRestService</members>

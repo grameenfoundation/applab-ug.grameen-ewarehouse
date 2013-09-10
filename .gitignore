@@ -5,3 +5,5 @@ ewarehouse-test/
 deploy/
 deploy-dev/
 ewarehouse-live/
+ewarehouse-apex/.metadata/.lock
+ewarehouse-deploy/

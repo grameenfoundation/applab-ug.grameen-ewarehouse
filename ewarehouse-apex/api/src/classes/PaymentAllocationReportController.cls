@@ -51,7 +51,7 @@ public with sharing class PaymentAllocationReportController {
     	
     	String query = 'SELECT Name, Person__r.First_Name__c, Person__r.Middle_Name__c, Person__r.Last_Name__c, Person__r.ID_Number__c, ' +
                        '(SELECT Name, Balance__c, Loan_Account_No__c, Saving_Account_No__c FROM Loans__r), ' +
-                       '(SELECT Name, Amount_Applied__c, Fee_Due__c, Sale__r.Name, Sale__r.Sale_Date__c, Farmer__r.Name FROM Sales_Farmers__r WHERE Sale__r.Sale_Date__c = ' + startDate.format('yyyy-MM-dd') + ') ' + 
+                       '(SELECT Name, Amount_Applied__c, Fee_Due__c, Sale__r.Name, Sale__r.Sale_Date__c, Farmer__r.Name FROM Sale_Farmer_Associations__r WHERE Sale__r.Sale_Date__c = ' + startDate.format('yyyy-MM-dd') + ') ' + 
                        'FROM Farmer__c ' +
                        'WHERE Id IN (SELECT Farmer__c FROM Sale_Farmer_Association__c WHERE Sale__r.Sale_Date__c = ' + startDate.format('yyyy-MM-dd') + ')  ';
         
@@ -70,7 +70,7 @@ public with sharing class PaymentAllocationReportController {
                 savingAccount = String.valueOf(f.Loans__r[0].Saving_Account_No__c);
             }
             
-            for(Sale_Farmer_Association__c sfa : f.Sales_Farmers__r){
+            for(Sale_Farmer_Association__c sfa : f.Sale_Farmer_Associations__r){
                 PaymentAllocation p = new PaymentAllocation();
                 p.Name = name;
                 p.SaleID = sfa.Sale__r.Name;

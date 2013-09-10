@@ -96,8 +96,8 @@
         <externalId>false</externalId>
         <label>Farmer</label>
         <referenceTo>Farmer__c</referenceTo>
-        <relationshipLabel>Sales Farmers Associations</relationshipLabel>
-        <relationshipName>Sales_Farmers</relationshipName>
+        <relationshipLabel>Sale Farmer Associations</relationshipLabel>
+        <relationshipName>Sale_Farmer_Associations</relationshipName>
         <relationshipOrder>1</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackHistory>false</trackHistory>

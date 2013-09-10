@@ -169,9 +169,9 @@ public class FileUploader {
         List<Loan__c> updateLoanList;
         try {
         	// get a list of all persons
-            updateList = EwarehouseServiceBase.dataSource.getPersonsBySet(updateIds, 'Name');
+            updateList = getPersonsBySet(updateIds, 'Name');
             // get a list of all loans
-            updateLoanList = EwarehouseServiceBase.dataSource.getLoansByFarmerNameSet(updateIds, updateLoanIds);
+            updateLoanList = getLoansByFarmerNameSet(updateIds, updateLoanIds);
             system.debug(LoggingLevel.Debug, 'updateList: ' + updateList);
             system.debug(LoggingLevel.Debug, 'updateLoanList: ' + updateLoanList);
             
@@ -451,6 +451,38 @@ public class FileUploader {
         if(errors == null)
            errors = new List<String>();
         errors.add(error);
+    }
+    
+    public List<Person__c> getPersonsBySet(Set<String> values, String columnName){
+        
+        String q = 'SELECT Name, First_Name__c, Middle_Name__c, Last_Name__c, Date_of_Birth__c, Mobile_Number__c, ' + 
+                   'ID_Number__c,  Village__c, District__r.Name, City__c, Picture_URL__c, Next_Of_Kin__c, ' +
+                   'Next_Of_Kin_Telephone__c, Country__r.Name, Gender__c, ' +
+                   '(SELECT Name, Group__r.Group_ID__c, Group__r.Name FROM PersonGroupAssociations__r),' +
+                   '(SELECT ID, Name, Sale_Status__c FROM Farmers__r)' +
+                   'FROM Person__c WHERE Id IN ' +
+                   '(SELECT Person__c FROM Farmer__c WHERE '+ columnName +' IN :values)';
+        return Database.query(q);
+    }
+    
+    public List<Loan__c> getLoansByFarmerNameSet(Set<String> farmers, Set<String> contracts){
+        return [SELECT 
+                    Id, 
+                    Name, 
+                    Amount_Applied_For__c,
+                    Amount_Approved__c,
+                    Balance__c,
+                    Application_Date__c,
+                    Currency__c,
+                    Decision_Date__c,
+                    Farmer__r.Name,
+                    Saving_Account_No__c,
+                    Loan_Account_No__c,
+                    Loan_Contract_No__c,
+                    Disburse_Date__c,
+                    Maturity_Date__c,
+                    Status__c
+                FROM Loan__c WHERE Farmer__r.Name IN :farmers];
     }
     
     public class UpdateSavingAccount {
